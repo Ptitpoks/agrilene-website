@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Eyebrow from '../components/ui/Eyebrow.astro';
 import Button from '../components/ui/Button.astro';
+import ImagePlaceholder from '../components/ui/ImagePlaceholder.astro';
 import BandeauCTA from '../components/sections/BandeauCTA.astro';
 import Icon from '../components/ui/Icon.astro';
 import { appLinks } from '../config/links';
@@ -151,7 +152,7 @@ const calcConfig = dosageModes.map((key) => ({
         </div>
 
         <div class="relative">
-          <img src="/images/lonoa-hero-accueil.png" alt="Pot en coupe avec LONOA — racines vigoureuses et eau bien retenue" class="w-full rounded-2xl object-cover" style="aspect-ratio: 4/3" loading="eager" decoding="async" />
+          <img src="/images/lonoa-hero-accueil.png" alt="Pot en coupe avec LONOA — racines vigoureuses et eau bien retenue" class="w-full rounded-2xl" loading="eager" decoding="async" />
           <div class="absolute bottom-4 left-4 bg-white/95 backdrop-blur-sm rounded-xl p-4 shadow-lg border border-blue/10 max-w-[190px]">
             <div class="flex items-center gap-2 mb-1">
               <Icon name="Droplet" size={15} style="color: var(--color-blue)" />
@@ -169,7 +170,7 @@ const calcConfig = dosageModes.map((key) => ({
     <div class="container">
       <div class="grid lg:grid-cols-2 gap-12 items-center">
         <div class="reveal">
-          <img src="/images/lonoa-hero-accueil.png" alt="LONOA — substrat avec matériaux minéraux pour des racines plus vigoureuses" class="w-full rounded-2xl object-cover" style="aspect-ratio: 3/2" loading="lazy" decoding="async" />
+          <ImagePlaceholder ratio="3/2" alt="Comparaison plante stressée vs plante vigoureuse avec LONOA" label="Visuel comparatif sans/avec LONOA" />
         </div>
 
         <div class="reveal">
