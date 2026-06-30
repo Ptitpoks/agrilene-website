@@ -2,7 +2,6 @@
 import Layout from '../../layouts/Layout.astro';
 import Eyebrow from '../../components/ui/Eyebrow.astro';
 import Tag from '../../components/ui/Tag.astro';
-import ImagePlaceholder from '../../components/ui/ImagePlaceholder.astro';
 import BandeauCTA from '../../components/sections/BandeauCTA.astro';
 import Icon from '../../components/ui/Icon.astro';
 
@@ -52,6 +51,7 @@ const products: Product[] = [
     conditionnements: [
       { format: 'Bag 100 L', unite: 'bag' },
     ],
+    img: '/images/produit-perlite.png',
   },
   {
     id: 'vermiculite',
@@ -65,6 +65,7 @@ const products: Product[] = [
     conditionnements: [
       { format: 'Bag 100 L', unite: 'bag' },
     ],
+    img: '/images/produit-vermiculite.png',
   },
   {
     id: 'florilene',
@@ -79,6 +80,7 @@ const products: Product[] = [
       { variante: 'Large flakes', format: 'Bag 80 L', unite: 'bag' },
       { variante: 'Mini flakes', format: 'Bag 80 L', unite: 'bag' },
     ],
+    img: '/images/produit-florilene.png',
   },
   {
     id: 'floricubes',
@@ -93,6 +95,7 @@ const products: Product[] = [
       { format: '2 kg bag', unite: 'bag' },
       { format: 'Big box', unite: 'box' },
     ],
+    img: '/images/produit-floricubes.png',
   },
   {
     id: 'floriroll',
@@ -121,6 +124,22 @@ const products: Product[] = [
     conditionnements: [
       { format: 'Bag 100 L', unite: 'bag' },
     ],
+    img: '/images/produit-miscanthus.png',
+  },
+  {
+    id: 'manaroche',
+    name: 'Manaroche',
+    tagline: 'The all-in-one balanced mineral blend',
+    what: 'Manaroche is a ready-to-use mineral blend, precisely dosed to combine the strengths of each component: perlite for aeration and drainage, vermiculite for water and nutrient retention, and rock wool for root support and consistent moisture. One product that replaces manually dosing several amendments.',
+    provides: ['Aeration and prevention of root suffocation (perlite fraction)', 'Water retention with gradual release to roots (vermiculite & rock wool fraction)', 'Improved CEC — nutrient redistribution (vermiculite fraction)', 'Supports root development and faster plant establishment', 'Ready to use: no need to dose multiple products separately', 'Inert, sterile and long-lasting'],
+    doesNot: 'Manaroche does not supply nutrients on its own (physical amendment, not fertiliser). It is incorporated into your existing potting mix or soil.',
+    uses: ['Universal amendment for all substrates and potting mixes', 'Container and in-ground planting mixes', 'Nursery production and young plant culture', 'Urban tree pits and mass beds', 'Any crop requiring both aeration and water retention'],
+    markets: ['Plant production', 'Landscaping', 'Local authorities'],
+    solutions: ['Water management', 'Rooting quality', 'Planting security'],
+    conditionnements: [
+      { format: 'Bag 100 L', unite: 'bag' },
+    ],
+    img: '/images/produit-manaroche.png',
   },
 ];
 
@@ -185,8 +204,11 @@ const marketHref: Record<string, string> = {
     <section id={p.id} class={`py-20 ${i % 2 === 0 ? 'bg-paper' : 'bg-cream'}`}>
       <div class="container">
         <div class={`grid lg:grid-cols-2 gap-14 items-start ${i % 2 !== 0 ? 'lg:grid-flow-dense' : ''}`}>
-          <div class={i % 2 !== 0 ? 'lg:col-start-2' : ''}>
-            <ImagePlaceholder ratio="4/3" alt={`${p.name} — ${p.tagline}`} label={`Product photo: ${p.name}`} />
+          <div class={`${i % 2 !== 0 ? 'lg:col-start-2' : ''} bg-cream rounded-2xl flex items-center justify-center p-8`}>
+            {p.img
+              ? <img src={p.img} alt={`${p.name} — ${p.tagline}`} class="w-full object-contain" style="max-height: 320px" loading="lazy" decoding="async" />
+              : <div class="w-full rounded-xl bg-sage/50 flex items-center justify-center text-muted text-sm italic p-12" style="aspect-ratio:4/3">{p.name} — photo coming soon</div>
+            }
           </div>
           <div class={i % 2 !== 0 ? 'lg:col-start-1 lg:row-start-1' : ''}>
             <h2 class="text-3xl md:text-4xl font-extrabold text-ink mb-1" style="font-family: var(--font-display)">{p.name}</h2>

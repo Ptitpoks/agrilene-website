@@ -19,6 +19,7 @@ export interface Produit {
   neFaitPas: string[];
   solutionsLiees: string[];
   imageAlt: string;
+  img?: string;
 }
 
 export const produits: Produit[] = [
@@ -55,6 +56,7 @@ export const produits: Produit[] = [
     ],
     solutionsLiees: ['enracinement', 'eau'],
     imageAlt: 'Granules de perlite blanches et légères pour aération des substrats',
+    img: '/images/produit-perlite.png',
   },
   {
     slug: 'vermiculite',
@@ -89,6 +91,7 @@ export const produits: Produit[] = [
     ],
     solutionsLiees: ['eau'],
     imageAlt: 'Lamelles dorées de vermiculite expansée pour la rétention d\'eau',
+    img: '/images/produit-vermiculite.png',
   },
   {
     slug: 'florilene',
@@ -124,6 +127,7 @@ export const produits: Produit[] = [
     ],
     solutionsLiees: ['eau', 'enracinement', 'securisation'],
     imageAlt: 'Flocons de laine de roche Florilène pour améliorer la rétention d\'eau du sol',
+    img: '/images/produit-florilene.png',
   },
   {
     slug: 'floricubes',
@@ -156,6 +160,7 @@ export const produits: Produit[] = [
     ],
     solutionsLiees: ['eau', 'enracinement', 'securisation'],
     imageAlt: 'Cubes Floricubes en laine de roche pour réserve d\'eau sous la motte',
+    img: '/images/produit-floricubes.png',
   },
   {
     slug: 'floriroll',
@@ -236,5 +241,40 @@ export const produits: Produit[] = [
     ],
     solutionsLiees: ['securisation', 'eau'],
     imageAlt: 'Paillage de miscanthus pour la protection et la réduction de l\'entretien des sols',
+    img: '/images/produit-miscanthus.png',
+  },
+  {
+    slug: 'manaroche',
+    nom: 'Manaroche',
+    sousTitre: 'Mélange minéral équilibré',
+    nature: 'Amendement tout-en-un — aération, rétention et structure',
+    marches: ['Production végétale', 'Paysagisme', 'Collectivités'],
+    conditionnements: [
+      { description: 'Sacs de 100 L' },
+    ],
+    usages: [
+      'Amendement universel pour tous types de substrats et terreaux',
+      'Mélanges de plantation en pot, bac ou pleine terre',
+      'Substrats de pépinière et production de jeunes plants',
+      'Fosses d\'arbres et massifs en milieu urbain',
+      'Toute culture nécessitant à la fois aération et rétention d\'eau',
+    ],
+    ceQueCest:
+      'Manaroche est un mélange minéral prêt à l\'emploi, dosé avec précision pour cumuler les atouts de chaque composant : la perlite pour l\'aération et le drainage, la vermiculite pour la rétention d\'eau et des nutriments, et la laine de roche pour le soutien racinaire et l\'humidité régulière. Un seul produit qui remplace le dosage manuel de plusieurs amendements.',
+    apporte: [
+      'Aère le substrat et prévient l\'asphyxie racinaire (fraction perlite)',
+      'Retient l\'eau et la restitue progressivement aux racines (fraction vermiculite et laine de roche)',
+      'Améliore la CEC — redistribution des nutriments (fraction vermiculite)',
+      'Soutient le développement racinaire et favorise une reprise rapide',
+      'Formule prête à l\'emploi : plus besoin de doser plusieurs produits séparément',
+      'Inerte, stérile et durable dans le temps',
+    ],
+    neFaitPas: [
+      'N\'apporte pas de nutriments par lui-même (amendement physique, pas fertilisant)',
+      'Ne remplace pas un substrat complet : s\'incorpore à votre terreau ou terre existante',
+    ],
+    solutionsLiees: ['eau', 'enracinement', 'securisation'],
+    imageAlt: 'Manaroche — mélange minéral équilibré perlite, vermiculite et laine de roche AGRILENE',
+    img: '/images/produit-manaroche.png',
   },
 ];
