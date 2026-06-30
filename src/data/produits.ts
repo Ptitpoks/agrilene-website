@@ -29,7 +29,7 @@ export const produits: Produit[] = [
     nature: 'Aération et drainage',
     marches: ['Production végétale', 'Paysagisme', 'Collectivités'],
     conditionnements: [
-      { description: 'Conditionnement à confirmer' },
+      { description: 'Sacs de 100 L' },
     ],
     usages: [
       'Allègement et aération des substrats et terreaux',
@@ -63,7 +63,7 @@ export const produits: Produit[] = [
     nature: 'Rétention d\'eau et régularité d\'humidité',
     marches: ['Production végétale', 'Paysagisme', 'Collectivités'],
     conditionnements: [
-      { description: 'Conditionnement à confirmer' },
+      { description: 'Sacs de 100 L' },
     ],
     usages: [
       'Semis et germination',
@@ -132,7 +132,8 @@ export const produits: Produit[] = [
     nature: 'Réserve d\'eau et enracinement au cœur de la motte',
     marches: ['Production végétale', 'Paysagisme'],
     conditionnements: [
-      { description: 'Cartons de 24 sachets' },
+      { description: 'Sacs de 2 kg' },
+      { description: 'Big box' },
     ],
     usages: [
       'Se placent au fond du pot ou du trou de plantation pour constituer une réserve d\'eau',
@@ -208,7 +209,7 @@ export const produits: Produit[] = [
     nature: 'Paillage et protection des sols',
     marches: ['Paysagisme', 'Collectivités'],
     conditionnements: [
-      { description: 'Conditionnement à confirmer' },
+      { description: 'Sacs de 100 L' },
     ],
     usages: [
       'Paillage des massifs, pieds d\'arbres et haies',
