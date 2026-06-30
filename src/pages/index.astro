@@ -2,7 +2,6 @@
 import Layout from '../layouts/Layout.astro';
 import Button from '../components/ui/Button.astro';
 import Eyebrow from '../components/ui/Eyebrow.astro';
-import ImagePlaceholder from '../components/ui/ImagePlaceholder.astro';
 import BandeauCTA from '../components/sections/BandeauCTA.astro';
 import Icon from '../components/ui/Icon.astro';
 import { stats } from '../data/stats';
@@ -70,19 +69,22 @@ const solutionsCards = [
     titre: "Rétention et disponibilité de l'eau",
     texte: "Nos matériaux retiennent l'eau et la restituent progressivement aux racines, réduisant le stress hydrique et les besoins en arrosage.",
     href: '/solutions#eau',
-    alt: "Schéma illustrant la rétention d'eau dans les substrats Florilène et Floricubes",
+    alt: "Rétention d'eau dans les substrats Florilène et Floricubes",
+    img: '/images/solution-eau.jpg',
   },
   {
     titre: 'Structure et aération du sol',
     texte: "Ils améliorent la structure du substrat, favorisant un enracinement profond et une meilleure circulation de l'air et de l'eau.",
     href: '/solutions#enracinement',
     alt: 'Racines développées grâce à la perlite et aux supports de culture AGRILENE',
+    img: '/images/solution-enracinement.jpg',
   },
   {
     titre: 'Protection des plantations',
     texte: "En optimisant les conditions de reprise, ils réduisent les pertes et assurent une meilleure résilience des végétaux.",
     href: '/solutions#securisation',
     alt: 'Plantation sécurisée avec Floricubes et Florilène pour réduire les pertes',
+    img: '/images/solution-protection.jpg',
   },
 ];
 
@@ -92,18 +94,21 @@ const domaines = [
     description: "Substrats, semis, bouturage et culture de jeunes plants en pépinière",
     href: '/marches/production-vegetale',
     alt: "Production végétale — semis et pépinière",
+    img: '/images/domaine-production-vegetale.jpg',
   },
   {
     nom: 'Paysagisme',
     description: "Plantation d'arbres, massifs, jardinières et aménagements durables",
     href: '/marches/paysagisme',
     alt: "Paysagisme professionnel — plantation d'arbres et massifs",
+    img: '/images/domaine-paysagisme.jpg',
   },
   {
     nom: 'Collectivités',
     description: "Espaces verts publics, fosses d'arbres urbains et économie d'eau",
     href: '/marches/collectivites',
     alt: "Collectivités — espaces verts publics et végétalisation urbaine",
+    img: '/images/domaine-collectivites.jpg',
   },
 ];
 
@@ -178,10 +183,13 @@ const heroTrusts = [
         </div>
 
         <div class="relative">
-          <ImagePlaceholder
-            ratio="4/3"
+          <img
+            src="/images/hero-accueil.jpg"
             alt="Pot en coupe montrant le système racinaire sans et avec substrats AGRILENE — racines vigoureuses et eau retenue"
-            label="Visuel à venir : pot/motte en coupe sans/avec"
+            class="w-full rounded-2xl object-cover"
+            style="aspect-ratio: 4/3"
+            loading="eager"
+            decoding="async"
           />
           <div class="absolute bottom-4 left-4 bg-white/95 backdrop-blur-sm rounded-xl p-4 shadow-lg border border-ink/8 max-w-[180px]">
             <div class="flex items-center gap-2 mb-1">
@@ -271,7 +279,7 @@ const heroTrusts = [
       <div class="grid md:grid-cols-3 gap-6">
         {solutionsCards.map((s) => (
           <article class="bg-paper rounded-2xl overflow-hidden card-lift reveal">
-            <ImagePlaceholder ratio="4/3" alt={s.alt} />
+            <img src={s.img} alt={s.alt} class="w-full object-cover" style="aspect-ratio: 4/3" loading="lazy" decoding="async" />
             <div class="p-6">
               <h3 class="font-bold text-ink mb-2 text-lg" style="font-family: var(--font-display)">{s.titre}</h3>
               <p class="text-sm text-muted mb-4">{s.texte}</p>
@@ -329,9 +337,7 @@ const heroTrusts = [
       <div class="grid md:grid-cols-3 gap-6">
         {domaines.map((d) => (
           <a href={d.href} class="relative group block rounded-2xl overflow-hidden card-lift reveal" style="aspect-ratio: 4/3">
-            <div class="absolute inset-0 bg-gradient-to-br from-sage to-cream flex items-center justify-center">
-              <p class="text-xs text-muted/50 italic px-6 text-center">{d.alt}</p>
-            </div>
+            <img src={d.img} alt={d.alt} class="absolute inset-0 w-full h-full object-cover" loading="lazy" decoding="async" />
             <div class="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/20 to-transparent">
               <div class="absolute bottom-0 left-0 p-6 text-white">
                 <h3 class="text-xl font-bold mb-1" style="font-family: var(--font-display)">{d.nom}</h3>
