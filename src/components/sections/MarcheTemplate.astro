@@ -3,7 +3,6 @@ import Layout from '../../layouts/Layout.astro';
 import Eyebrow from '../ui/Eyebrow.astro';
 import Button from '../ui/Button.astro';
 import Tag from '../ui/Tag.astro';
-import ImagePlaceholder from '../ui/ImagePlaceholder.astro';
 import BandeauCTA from './BandeauCTA.astro';
 import Icon from '../ui/Icon.astro';
 import type { Marche } from '../../data/marches';
@@ -26,6 +25,12 @@ const seoDescriptions: Record<string, string> = {
   'collectivites': "Floriroll, Florilène, perlite, miscanthus : des solutions éprouvées pour végétaliser durablement les espaces publics et réduire les coûts d'entretien.",
 };
 
+const marcheImg: Record<string, string> = {
+  'production-vegetale': '/images/domaine-production-vegetale.jpg',
+  'paysagisme': '/images/domaine-paysagisme.jpg',
+  'collectivites': '/images/domaine-collectivites.jpg',
+};
+
 const produitHref: Record<string, string> = {
   'Perlite': '/produits#perlite',
   'Vermiculite': '/produits#vermiculite',
@@ -43,11 +48,13 @@ const produitHref: Record<string, string> = {
 
   <!-- HERO -->
   <section class="relative bg-ink text-white py-24 md:py-32 overflow-hidden">
-    <div class="absolute inset-0 opacity-20" aria-hidden="true">
-      <ImagePlaceholder
-        ratio="16/9"
+    <div class="absolute inset-0" aria-hidden="true">
+      <img
+        src={marcheImg[marche.slug]}
         alt={marche.imageAlt}
-        class="w-full h-full rounded-none border-0"
+        class="w-full h-full object-cover opacity-30"
+        loading="eager"
+        decoding="async"
       />
     </div>
     <div class="container relative">
@@ -133,10 +140,13 @@ const produitHref: Record<string, string> = {
         </div>
 
         <div class="reveal">
-          <ImagePlaceholder
-            ratio="4/3"
-            alt={`Bénéfices des solutions AGRILENE pour le marché ${marche.nom}`}
-            label="Image à venir"
+          <img
+            src={marcheImg[marche.slug]}
+            alt={`Solutions AGRILENE pour le marché ${marche.nom}`}
+            class="w-full rounded-2xl object-cover"
+            style="aspect-ratio: 4/3"
+            loading="lazy"
+            decoding="async"
           />
         </div>
       </div>
