@@ -43,10 +43,48 @@ const benefices = [
 ];
 
 const gamme = [
-  { nom: 'LONOA Rempotage', usage: 'Rempotage et culture en pot', benefice: "Régule l'humidité au cœur de la motte" },
-  { nom: 'LONOA Semis', usage: 'Semis et jeunes plants', benefice: "Germination homogène, moins de stress" },
-  { nom: 'LONOA Gazon', usage: 'Gazon et engazonnement', benefice: "Pelouse plus résiliente, arrosage espacé" },
-  { nom: 'LONOA Plantation', usage: 'Plantation en pleine terre', benefice: "Meilleure reprise, moins de pertes" },
+  {
+    nom: 'Florilène',
+    sousTitre: 'Gros flocons de laine de roche',
+    benefice: 'Rétention d\'eau maximale — jusqu\'à +62 % dans le substrat',
+    img: '/images/produit-florilene.png',
+    href: '/produits#florilene',
+  },
+  {
+    nom: 'Florilène Mini',
+    sousTitre: 'Mini flocons de laine de roche',
+    benefice: 'Idéal pour les petits pots et les semis',
+    img: '/images/produit-florilene-mini.png',
+    href: '/produits#florilene',
+  },
+  {
+    nom: 'Perlite',
+    sousTitre: 'Minéral volcanique expansé',
+    benefice: 'Aération du substrat et drainage',
+    img: '/images/produit-perlite.png',
+    href: '/produits#perlite',
+  },
+  {
+    nom: 'Vermiculite',
+    sousTitre: 'Minéral expansé en lamelles',
+    benefice: 'Rétention d\'eau et régularité d\'humidité',
+    img: '/images/produit-vermiculite.png',
+    href: '/produits#vermiculite',
+  },
+  {
+    nom: 'Manaroche',
+    sousTitre: 'Mélange minéral prêt à l\'emploi',
+    benefice: 'Aération + rétention + structure en un seul produit',
+    img: '/images/produit-manaroche.png',
+    href: '/produits#manaroche',
+  },
+  {
+    nom: 'Floricubes',
+    sousTitre: 'Cubes de laine de roche',
+    benefice: 'Réserve d\'eau localisée au cœur de la motte',
+    img: '/images/produit-floricubes.png',
+    href: '/produits#floricubes',
+  },
 ];
 
 const calcConfig = dosageModes.map((key) => ({
@@ -203,17 +241,23 @@ const calcConfig = dosageModes.map((key) => ({
         <h2 class="text-3xl md:text-4xl font-bold text-ink mb-4" style="font-family: var(--font-display)">
           La gamme LONOA
         </h2>
-        <p class="text-muted max-w-xl mx-auto">Un produit adapté à chaque usage.</p>
+        <p class="text-muted max-w-xl mx-auto">Les mêmes matériaux professionnels AGRILENE, conditionnés en <strong class="text-ink">5 L et 20 L</strong> pour les particuliers.</p>
       </div>
 
-      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
         {gamme.map((s) => (
           <article class="bg-paper rounded-2xl overflow-hidden card-lift reveal">
-            <ImagePlaceholder ratio="1/1" alt={`Sac ${s.nom}`} label="Visuel sac à venir" />
+            <div class="bg-cream flex items-center justify-center p-6" style="aspect-ratio: 4/3">
+              <img src={s.img} alt={`LONOA ${s.nom}`} class="w-full h-full object-contain" loading="lazy" decoding="async" />
+            </div>
             <div class="p-5">
-              <h3 class="font-bold text-ink mb-1" style="font-family: var(--font-display)">{s.nom}</h3>
-              <p class="text-xs text-muted mb-2">{s.usage}</p>
-              <p class="text-sm font-medium" style="color: var(--color-blue)">{s.benefice}</p>
+              <h3 class="font-bold text-ink mb-0.5" style="font-family: var(--font-display)">{s.nom}</h3>
+              <p class="text-xs text-muted mb-2">{s.sousTitre}</p>
+              <p class="text-sm font-medium mb-3" style="color: var(--color-blue)">{s.benefice}</p>
+              <div class="flex gap-2">
+                <span class="text-xs font-semibold px-2.5 py-1 rounded-full" style="background-color: var(--color-blue); color: white">5 L</span>
+                <span class="text-xs font-semibold px-2.5 py-1 rounded-full" style="background-color: var(--color-blue); color: white">20 L</span>
+              </div>
             </div>
           </article>
         ))}
