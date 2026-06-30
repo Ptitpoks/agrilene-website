@@ -80,7 +80,7 @@ const products: Product[] = [
       { variante: 'Large flakes', format: 'Bag 80 L', unite: 'bag' },
       { variante: 'Mini flakes', format: 'Bag 80 L', unite: 'bag' },
     ],
-    img: '/images/produit-florilene.png',
+    imgs: ['/images/produit-florilene.png', '/images/produit-florilene-mini.png'],
   },
   {
     id: 'floricubes',
@@ -205,10 +205,14 @@ const marketHref: Record<string, string> = {
     <section id={p.id} class={`py-20 ${i % 2 === 0 ? 'bg-paper' : 'bg-cream'}`}>
       <div class="container">
         <div class={`grid lg:grid-cols-2 gap-14 items-start ${i % 2 !== 0 ? 'lg:grid-flow-dense' : ''}`}>
-          <div class={`${i % 2 !== 0 ? 'lg:col-start-2' : ''} bg-cream rounded-2xl flex items-center justify-center p-8`}>
-            {p.img
-              ? <img src={p.img} alt={`${p.name} — ${p.tagline}`} class="w-full object-contain" style="max-height: 320px" loading="lazy" decoding="async" />
-              : <div class="w-full rounded-xl bg-sage/50 flex items-center justify-center text-muted text-sm italic p-12" style="aspect-ratio:4/3">{p.name} — photo coming soon</div>
+          <div class={`${i % 2 !== 0 ? 'lg:col-start-2' : ''} bg-cream rounded-2xl flex items-center justify-center p-8 gap-4`}>
+            {p.imgs
+              ? p.imgs.map((src: string) => (
+                  <img src={src} alt={`${p.name} — ${p.tagline}`} class="w-1/2 object-contain" style="max-height: 280px" loading="lazy" decoding="async" />
+                ))
+              : p.img
+                ? <img src={p.img} alt={`${p.name} — ${p.tagline}`} class="w-full object-contain" style="max-height: 320px" loading="lazy" decoding="async" />
+                : <div class="w-full rounded-xl bg-sage/50 flex items-center justify-center text-muted text-sm italic p-12" style="aspect-ratio:4/3">{p.name} — photo coming soon</div>
             }
           </div>
           <div class={i % 2 !== 0 ? 'lg:col-start-1 lg:row-start-1' : ''}>

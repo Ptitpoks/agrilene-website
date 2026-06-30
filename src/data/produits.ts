@@ -20,6 +20,7 @@ export interface Produit {
   solutionsLiees: string[];
   imageAlt: string;
   img?: string;
+  imgs?: string[];
 }
 
 export const produits: Produit[] = [
@@ -127,7 +128,7 @@ export const produits: Produit[] = [
     ],
     solutionsLiees: ['eau', 'enracinement', 'securisation'],
     imageAlt: 'Flocons de laine de roche Florilène pour améliorer la rétention d\'eau du sol',
-    img: '/images/produit-florilene.png',
+    imgs: ['/images/produit-florilene.png', '/images/produit-florilene-mini.png'],
   },
   {
     slug: 'floricubes',
