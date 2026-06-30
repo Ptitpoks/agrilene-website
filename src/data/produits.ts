@@ -1,3 +1,10 @@
+export interface Conditionnement {
+  variante?: string;
+  description: string;
+  dimensions?: string;
+  surface?: string;
+}
+
 export interface Produit {
   slug: string;
   nom: string;
@@ -5,6 +12,7 @@ export interface Produit {
   nature: string;
   marches: string[];
   variantes?: string[];
+  conditionnements: Conditionnement[];
   usages: string[];
   ceQueCest: string;
   apporte: string[];
@@ -20,6 +28,9 @@ export const produits: Produit[] = [
     sousTitre: 'Minéral expansé',
     nature: 'Aération et drainage',
     marches: ['Production végétale', 'Paysagisme', 'Collectivités'],
+    conditionnements: [
+      { description: 'Conditionnement à confirmer' },
+    ],
     usages: [
       'Allègement et aération des substrats et terreaux',
       'Mélanges de plantation (arbres, arbustes, massifs)',
@@ -51,6 +62,9 @@ export const produits: Produit[] = [
     sousTitre: 'Minéral expansé',
     nature: 'Rétention d\'eau et régularité d\'humidité',
     marches: ['Production végétale', 'Paysagisme', 'Collectivités'],
+    conditionnements: [
+      { description: 'Conditionnement à confirmer' },
+    ],
     usages: [
       'Semis et germination',
       'Jeunes plants et repiquage',
@@ -83,6 +97,10 @@ export const produits: Produit[] = [
     nature: 'Amendement à mélanger au sol',
     marches: ['Production végétale', 'Paysagisme', 'Collectivités'],
     variantes: ['Gros flocons', 'Mini flocons'],
+    conditionnements: [
+      { variante: 'Gros flocons', description: 'Sacs de 80 L' },
+      { variante: 'Mini flocons', description: 'Sacs de 80 L' },
+    ],
     usages: [
       'Se mélange directement à la terre ou au terreau pour améliorer la rétention d\'eau',
       'Fosses d\'arbres, pelouses et engazonnements',
@@ -97,7 +115,7 @@ export const produits: Produit[] = [
       'Réduit le stress hydrique et les besoins en arrosage',
       'Améliore durablement le sol (inerte, ne se décompose pas) tout en l\'allégeant',
       'Stérile : aucun risque fongique, bactérien ou d\'insectes',
-      'Bien adaptée aux fosses d\'arbres, pelouses, plantations et production de plants',
+      'Compatible agriculture biologique',
     ],
     neFaitPas: [
       'N\'apporte pas de nutriments par elle-même',
@@ -113,6 +131,9 @@ export const produits: Produit[] = [
     sousTitre: 'Cubes de laine de roche',
     nature: 'Réserve d\'eau et enracinement au cœur de la motte',
     marches: ['Production végétale', 'Paysagisme'],
+    conditionnements: [
+      { description: 'Cartons de 24 sachets' },
+    ],
     usages: [
       'Se placent au fond du pot ou du trou de plantation pour constituer une réserve d\'eau',
       'Mise en pot, rempotage',
@@ -142,12 +163,26 @@ export const produits: Produit[] = [
     nature: 'Rétention d\'eau pour grandes surfaces végétalisées',
     marches: ['Paysagisme', 'Collectivités'],
     variantes: ['Épaisseur 2 cm', 'Épaisseur 4 cm'],
+    conditionnements: [
+      {
+        variante: 'Épaisseur 2 cm',
+        description: 'Rouleau 20 × 1 000 × 6 000 mm',
+        dimensions: '20 × 1 000 × 6 000 mm',
+        surface: '6 m²/rouleau',
+      },
+      {
+        variante: 'Épaisseur 4 cm',
+        description: 'Rouleau 40 × 1 000 × 3 000 mm',
+        dimensions: '40 × 1 000 × 3 000 mm',
+        surface: '3 m²/rouleau',
+      },
+    ],
     usages: [
       'Toitures végétalisées',
       'Murs végétalisés',
       'Espaces verts, greens et terrains de golf',
       'Pelouses et engazonnements',
-      'Posé en nappe sous ou dans le système de culture sur de grandes surfaces',
+      'Pose en nappe sous ou dans le système de culture sur de grandes surfaces',
     ],
     ceQueCest:
       'Laine de roche conditionnée en rouleaux ou plaques, pour une mise en œuvre rapide en nappe continue sur de grandes surfaces.',
@@ -172,25 +207,33 @@ export const produits: Produit[] = [
     sousTitre: 'Fibre végétale',
     nature: 'Paillage et protection des sols',
     marches: ['Paysagisme', 'Collectivités'],
+    conditionnements: [
+      { description: 'Conditionnement à confirmer' },
+    ],
     usages: [
-      'Paillage des massifs et pieds d\'arbres',
-      'Protection et isolation des sols',
-      'Limitation de l\'évaporation',
-      'Réduction de l\'entretien',
+      'Paillage des massifs, pieds d\'arbres et haies',
+      'Potager et plantations ornementales',
+      'Protection et isolation thermique des sols',
+      'Limitation de l\'évaporation et de l\'arrosage',
+      'Réduction de l\'entretien (désherbage)',
     ],
     ceQueCest:
-      'Le miscanthus est une graminée pérenne dont les fibres, une fois transformées, constituent un paillage naturel, léger et durable. Contenu complet à compléter.',
+      'Le miscanthus (Miscanthus × giganteus) est une graminée pérenne récoltée puis broyée en fibres. Issu de cultures dédiées à faible intrant, sans traitement chimique, il constitue un paillage végétal naturel, léger et durable. Posé en couverture de surface, il se décompose lentement en enrichissant progressivement le sol en matière organique.',
     apporte: [
       'Limite l\'évaporation et maintient l\'humidité du sol',
-      'Réduit la pousse des mauvaises herbes',
-      'Protège les racines des variations thermiques',
-      'Améliore l\'aspect esthétique des massifs',
+      'Freine la levée des adventices (barrière physique à la lumière)',
+      'Protège les racines des chocs thermiques (canicule comme gel)',
+      'Se décompose lentement → apport progressif de matière organique et amélioration de la structure',
+      'Léger et facile à épandre, aspect esthétique homogène',
+      'Culture pérenne peu gourmande en intrants (argument durable)',
     ],
     neFaitPas: [
-      'N\'apporte pas de nutriments minéraux',
-      'Ne remplace pas un substrat de culture',
+      'N\'apporte pas (ou très peu) de nutriments minéraux directement',
+      'Ne remplace pas un substrat de culture : c\'est une couverture de surface, pas un amendement incorporé',
+      'Sur paillage épais, peut induire une légère faim d\'azote en surface la première année',
+      'Matériau organique : à renouveler périodiquement (contrairement aux minéraux inertes)',
     ],
-    solutionsLiees: ['securisation'],
-    imageAlt: 'Paillage de miscanthus pour la protection et l\'entretien des sols',
+    solutionsLiees: ['securisation', 'eau'],
+    imageAlt: 'Paillage de miscanthus pour la protection et la réduction de l\'entretien des sols',
   },
 ];

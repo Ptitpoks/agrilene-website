@@ -4,6 +4,9 @@ import Eyebrow from '../components/ui/Eyebrow.astro';
 import Button from '../components/ui/Button.astro';
 import ImagePlaceholder from '../components/ui/ImagePlaceholder.astro';
 import BandeauCTA from '../components/sections/BandeauCTA.astro';
+import Icon from '../components/ui/Icon.astro';
+import { appLinks } from '../config/links';
+import { dosageConfig, dosageModes } from '../config/dosage';
 
 const jsonLd = [
   {
@@ -12,13 +15,6 @@ const jsonLd = [
     name: 'LONOA',
     description: "Marque grand public d'AGRILENE — amendements minéraux pour réguler l'eau dans les substrats des particuliers.",
     url: 'https://www.agrilene.fr/lonoa',
-  },
-  {
-    '@context': 'https://schema.org',
-    '@type': 'MobileApplication',
-    name: 'Mana',
-    description: "Application mobile de diagnostic des plantes — reconnaissance par photo, diagnostic de santé, conseils et produits LONOA.",
-    operatingSystem: 'iOS, Android',
   },
 ];
 
@@ -41,9 +37,9 @@ const etapes = [
 ];
 
 const benefices = [
-  { texte: "L'eau reste disponible plus longtemps", icon: '💧' },
-  { texte: "Meilleures conditions racinaires", icon: '🌱' },
-  { texte: "Moins de pression d'entretien", icon: '✅' },
+  { texte: "L'eau reste disponible plus longtemps", icon: 'Droplet' as const },
+  { texte: "Meilleures conditions racinaires", icon: 'Sprout' as const },
+  { texte: "Moins de pression d'entretien", icon: 'CheckCircle' as const },
 ];
 
 const gamme = [
@@ -52,11 +48,16 @@ const gamme = [
   { nom: 'LONOA Gazon', usage: 'Gazon et engazonnement', benefice: "Pelouse plus résiliente, arrosage espacé" },
   { nom: 'LONOA Plantation', usage: 'Plantation en pleine terre', benefice: "Meilleure reprise, moins de pertes" },
 ];
+
+const calcConfig = dosageModes.map((key) => ({
+  key,
+  ...dosageConfig[key],
+}));
 ---
 
 <Layout
   title="LONOA — Des plantes qui tiennent, même quand vous n'y pensez pas"
-  description="LONOA se mélange à votre terreau pour stocker l'eau et la redonner à vos plantes au bon moment. Moins d'arrosage, des racines plus fortes. Application mobile Mana pour diagnostiquer vos plantes."
+  description="LONOA se mélange à votre terreau pour stocker l'eau et la redonner à vos plantes au bon moment. Moins d'arrosage, des racines plus fortes."
   jsonLd={jsonLd}
 >
 
@@ -83,7 +84,7 @@ const gamme = [
             LONOA — Par AGRILENE
           </div>
           <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-ink mb-6 leading-tight" style="font-family: var(--font-display)">
-            La façon la plus simple de garder vos plantes <span style="color: var(--color-blue)">bien hydratées</span>
+            Des plantes qui tiennent, même quand vous n'y pensez pas
           </h1>
           <p class="text-lg text-muted mb-8 leading-relaxed max-w-xl">
             LONOA se mélange à votre terreau pour stocker l'eau et la redonner à vos plantes au bon moment — moins d'arrosage, des racines plus fortes.
@@ -100,12 +101,12 @@ const gamme = [
 
           <div class="flex flex-col sm:flex-row gap-4">
             {[
-              { icon: '🏆', label: "Minéraux de qualité pro" },
-              { icon: '📅', label: "40+ ans d'expertise" },
-              { icon: '🌍', label: "Éprouvé en conditions extrêmes" },
+              { icon: 'Award' as const, label: "Minéraux de qualité pro" },
+              { icon: 'Calendar' as const, label: "40+ ans d'expertise" },
+              { icon: 'Globe' as const, label: "Éprouvé en conditions extrêmes" },
             ].map((item) => (
               <div class="flex items-center gap-2 text-sm text-muted">
-                <span class="text-base" aria-hidden="true">{item.icon}</span>
+                <Icon name={item.icon} size={15} style="color: var(--color-blue)" />
                 <span>{item.label}</span>
               </div>
             ))}
@@ -120,7 +121,7 @@ const gamme = [
           />
           <div class="absolute bottom-4 left-4 bg-white/95 backdrop-blur-sm rounded-xl p-4 shadow-lg border border-blue/10 max-w-[190px]">
             <div class="flex items-center gap-2 mb-1">
-              <span class="text-lg">💧</span>
+              <Icon name="Droplet" size={15} style="color: var(--color-blue)" />
               <span class="text-xs font-bold" style="color: var(--color-blue); font-family: var(--font-display)">LONOA</span>
             </div>
             <p class="text-xs text-muted leading-tight">Un sol plus malin. Des racines plus fortes. Moins d'approximation.</p>
@@ -150,7 +151,9 @@ const gamme = [
           <div class="space-y-4">
             {benefices.map((b) => (
               <div class="flex gap-4 items-start">
-                <div class="text-2xl shrink-0" aria-hidden="true">{b.icon}</div>
+                <div class="shrink-0" aria-hidden="true">
+                  <Icon name={b.icon} size={22} style="color: var(--color-blue)" />
+                </div>
                 <p class="text-ink font-medium">{b.texte}</p>
               </div>
             ))}
@@ -231,25 +234,33 @@ const gamme = [
             Prenez votre plante en photo : <strong class="text-ink">Mana</strong> la reconnaît, établit un <strong class="text-ink">diagnostic de santé</strong> et propose des <strong class="text-ink">solutions à court terme</strong> et des <strong class="text-ink">conseils d'entretien</strong> — avec le bon produit LONOA si besoin.
           </p>
 
-          <div class="flex flex-wrap gap-3">
-            <a
-              href="#"
-              aria-label="Télécharger Mana sur l'App Store (lien à venir)"
-              class="inline-flex items-center gap-2 bg-ink text-white text-sm font-semibold px-5 py-3 rounded-xl hover:opacity-90 transition-opacity"
-            >
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M13.5 9a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0z" fill="white" opacity="0.3"/><path d="M9 2v14M2 9h14" stroke="white" stroke-width="1.5"/></svg>
-              App Store
-            </a>
-            <a
-              href="#"
-              aria-label="Télécharger Mana sur Google Play (lien à venir)"
-              class="inline-flex items-center gap-2 bg-ink text-white text-sm font-semibold px-5 py-3 rounded-xl hover:opacity-90 transition-opacity"
-            >
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M13.5 9a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0z" fill="white" opacity="0.3"/><path d="M9 2v14M2 9h14" stroke="white" stroke-width="1.5"/></svg>
-              Google Play
-            </a>
+          <div class="inline-flex items-center gap-3 bg-blue/5 border border-blue/20 rounded-xl px-5 py-4">
+            <Icon name="FlaskConical" size={20} style="color: var(--color-blue)" />
+            <p class="text-sm font-medium" style="color: var(--color-blue)">
+              {appLinks.manaStatus}
+            </p>
           </div>
-          <p class="text-xs text-muted mt-3 italic">Liens de téléchargement à venir</p>
+
+          {(appLinks.manaAppStore || appLinks.manaGooglePlay) && (
+            <div class="flex flex-wrap gap-3 mt-4">
+              {appLinks.manaAppStore && (
+                <a
+                  href={appLinks.manaAppStore}
+                  class="inline-flex items-center gap-2 bg-ink text-white text-sm font-semibold px-5 py-3 rounded-xl hover:opacity-90 transition-opacity"
+                >
+                  App Store
+                </a>
+              )}
+              {appLinks.manaGooglePlay && (
+                <a
+                  href={appLinks.manaGooglePlay}
+                  class="inline-flex items-center gap-2 bg-ink text-white text-sm font-semibold px-5 py-3 rounded-xl hover:opacity-90 transition-opacity"
+                >
+                  Google Play
+                </a>
+              )}
+            </div>
+          )}
         </div>
 
         <div class="reveal">
@@ -259,41 +270,78 @@ const gamme = [
     </div>
   </section>
 
-  <!-- CALCULATEUR -->
+  <!-- CALCULATEUR 4 MODES -->
   <section class="py-20 bg-sage">
     <div class="container max-w-2xl">
       <div class="text-center mb-8 reveal">
         <Eyebrow color="blue" class="mb-3">Dosage</Eyebrow>
         <h2 class="text-3xl font-bold text-ink mb-3" style="font-family: var(--font-display)">
-          Quel dosage pour votre pot ?
+          Calculateur de dosage
         </h2>
-        <p class="text-muted">Estimez la quantité de LONOA selon le volume de votre pot.</p>
+        <p class="text-muted">Estimez la quantité de LONOA selon votre usage.</p>
       </div>
 
       <div class="bg-paper rounded-2xl p-6 reveal" id="calc-lonoa">
+        <!-- Mode selector -->
+        <div class="mb-5">
+          <label class="block text-sm font-medium text-ink mb-2">Usage</label>
+          <div class="grid grid-cols-2 gap-2" role="radiogroup" aria-label="Mode de dosage">
+            {calcConfig.map((m, i) => (
+              <label class="cursor-pointer">
+                <input
+                  type="radio"
+                  name="calc-mode"
+                  value={m.key}
+                  class="sr-only"
+                  checked={i === 0}
+                  data-label={m.label}
+                  data-input-label={m.inputLabel}
+                  data-unit={m.inputUnit}
+                  data-default-pct={m.defaultPct}
+                  data-depth-cm={m.depthCm ?? ''}
+                  data-bag-volume={m.bagVolume}
+                  data-show-bags={m.showBags ? '1' : '0'}
+                  data-hint={m.hint ?? ''}
+                  data-options={JSON.stringify(m.options)}
+                />
+                <span class="mode-btn block text-center text-xs font-semibold px-3 py-2.5 rounded-xl border-2 transition-all hover:border-blue/50" style="border-color: var(--color-ink); color: var(--color-ink);">
+                  {m.label}
+                </span>
+              </label>
+            ))}
+          </div>
+        </div>
+
+        <!-- Inputs -->
         <div class="grid sm:grid-cols-2 gap-4 mb-5">
           <div>
-            <label for="vol-pot" class="block text-sm font-medium text-ink mb-1.5">Volume du pot (litres)</label>
-            <input
-              type="number"
-              id="vol-pot"
-              min="1"
-              max="500"
-              value="10"
-              class="w-full border border-ink/20 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2"
-              style="--tw-ring-color: var(--color-blue)"
-            />
+            <label for="calc-input" id="calc-input-label" class="block text-sm font-medium text-ink mb-1.5">
+              {calcConfig[0].inputLabel}
+            </label>
+            <div class="flex items-center gap-2">
+              <input
+                type="number"
+                id="calc-input"
+                min="0.1"
+                max="10000"
+                value="10"
+                step="0.5"
+                class="w-full border border-ink/20 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2"
+                style="--tw-ring-color: var(--color-blue)"
+              />
+              <span id="calc-unit" class="text-sm text-muted shrink-0 min-w-[24px]">L</span>
+            </div>
           </div>
           <div>
-            <label for="mix-taux" class="block text-sm font-medium text-ink mb-1.5">Intensité du mélange</label>
+            <label for="calc-taux" class="block text-sm font-medium text-ink mb-1.5">Taux de mélange</label>
             <select
-              id="mix-taux"
+              id="calc-taux"
               class="w-full border border-ink/20 rounded-xl px-4 py-2.5 text-sm bg-white focus:outline-none focus:ring-2"
               style="--tw-ring-color: var(--color-blue)"
             >
-              <option value="10">10 % — Léger (entretien courant)</option>
-              <option value="20" selected>20 % — Standard (recommandé)</option>
-              <option value="25">25 % — Haute résilience (zones sèches)</option>
+              {calcConfig[0].options.map((o) => (
+                <option value={o.pct} selected={o.pct === calcConfig[0].defaultPct}>{o.label}</option>
+              ))}
             </select>
           </div>
         </div>
@@ -301,8 +349,11 @@ const gamme = [
         <div class="bg-blue/10 rounded-xl p-5 text-center">
           <p class="text-sm text-muted mb-1">Quantité de LONOA conseillée</p>
           <p id="calc-result" class="text-3xl font-extrabold" style="font-family: var(--font-display); color: var(--color-blue)">2 L</p>
-          <p class="text-xs text-muted mt-1">soit 20 % du volume du pot</p>
+          <p id="calc-detail" class="text-xs text-muted mt-1"></p>
+          <p id="calc-bags" class="text-xs text-muted mt-0.5 hidden"></p>
         </div>
+
+        <p id="calc-hint" class="text-xs text-muted mt-3 italic hidden"></p>
       </div>
     </div>
   </section>
@@ -312,12 +363,9 @@ const gamme = [
     <div class="container text-center reveal">
       <Eyebrow color="blue" class="mb-4">Distribution</Eyebrow>
       <h2 class="text-3xl font-bold text-ink mb-4" style="font-family: var(--font-display)">Où trouver LONOA</h2>
-      <p class="text-muted mb-8 max-w-xl mx-auto">
-        LONOA est disponible dans les jardineries, pépinières et enseignes spécialisées partenaires. Boutique en ligne à venir.
+      <p class="text-muted max-w-xl mx-auto">
+        Bientôt disponible en ligne (Amazon et autres plateformes). Réseau de revendeurs en cours de développement.
       </p>
-      <div class="inline-block bg-sage rounded-xl px-8 py-4 text-muted text-sm italic">
-        Liste des points de vente et boutique en ligne à compléter
-      </div>
     </div>
   </section>
 
@@ -358,21 +406,114 @@ const gamme = [
 </Layout>
 
 <script>
-  const volInput = document.getElementById('vol-pot') as HTMLInputElement | null;
-  const tauxSelect = document.getElementById('mix-taux') as HTMLSelectElement | null;
-  const result = document.getElementById('calc-result');
+  interface ModeOption { pct: number; label: string; }
 
-  function calcLonoa() {
-    if (!volInput || !tauxSelect || !result) return;
-    const vol = parseFloat(volInput.value) || 0;
-    const taux = parseFloat(tauxSelect.value) || 20;
-    const qty = Math.round(vol * (taux / 100) * 10) / 10;
-    result.textContent = `${qty} L`;
-    const note = result.nextElementSibling;
-    if (note) note.textContent = `soit ${taux} % du volume du pot`;
+  const calcInput = document.getElementById('calc-input') as HTMLInputElement | null;
+  const calcTaux = document.getElementById('calc-taux') as HTMLSelectElement | null;
+  const calcResult = document.getElementById('calc-result');
+  const calcDetail = document.getElementById('calc-detail');
+  const calcBags = document.getElementById('calc-bags');
+  const calcHint = document.getElementById('calc-hint');
+  const calcInputLabel = document.getElementById('calc-input-label');
+  const calcUnit = document.getElementById('calc-unit');
+
+  const modeBtns = document.querySelectorAll<HTMLElement>('.mode-btn');
+  const modeRadios = document.querySelectorAll<HTMLInputElement>('input[name="calc-mode"]');
+
+  function formatL(v: number): string {
+    return v < 1 ? `${(v * 1000).toFixed(0)} mL` : `${v.toFixed(1).replace('.0', '')} L`;
   }
 
-  volInput?.addEventListener('input', calcLonoa);
-  tauxSelect?.addEventListener('change', calcLonoa);
-  calcLonoa();
+  function updateCalc() {
+    const activeRadio = document.querySelector<HTMLInputElement>('input[name="calc-mode"]:checked');
+    if (!activeRadio || !calcInput || !calcTaux || !calcResult) return;
+
+    const inputVal = parseFloat(calcInput.value) || 0;
+    const taux = parseFloat(calcTaux.value) || 20;
+    const depthCm = parseFloat(activeRadio.dataset.depthCm || '0');
+    const bagVolume = parseFloat(activeRadio.dataset.bagVolume || '80');
+    const showBags = activeRadio.dataset.showBags === '1';
+    const hint = activeRadio.dataset.hint || '';
+
+    let volLonoa: number;
+    let detailText: string;
+
+    if (depthCm > 0) {
+      // Surface mode (gazon): volume = surface × depth × taux
+      const depthM = depthCm / 100;
+      const totalVol = inputVal * depthM * 1000; // in L
+      volLonoa = Math.round((totalVol * (taux / 100)) * 10) / 10;
+      detailText = `${taux} % × ${inputVal} m² × ${depthCm} cm de profondeur`;
+    } else {
+      // Volume mode: volume × taux
+      volLonoa = Math.round(inputVal * (taux / 100) * 10) / 10;
+      detailText = `${taux} % du volume de ${inputVal} ${activeRadio.dataset.unit}`;
+    }
+
+    calcResult.textContent = formatL(volLonoa);
+    if (calcDetail) calcDetail.textContent = detailText;
+
+    if (calcBags) {
+      if (showBags && volLonoa > 0) {
+        const bags = Math.ceil(volLonoa / bagVolume);
+        calcBags.textContent = `≈ ${bags} sac${bags > 1 ? 's' : ''} de ${bagVolume} L`;
+        calcBags.classList.remove('hidden');
+      } else {
+        calcBags.classList.add('hidden');
+      }
+    }
+
+    if (calcHint) {
+      if (hint) {
+        calcHint.textContent = hint;
+        calcHint.classList.remove('hidden');
+      } else {
+        calcHint.classList.add('hidden');
+      }
+    }
+  }
+
+  function activateMode(radio: HTMLInputElement) {
+    // Update labels
+    if (calcInputLabel) calcInputLabel.textContent = radio.dataset.inputLabel ?? '';
+    if (calcUnit) calcUnit.textContent = radio.dataset.unit ?? '';
+
+    // Update options in select
+    if (calcTaux) {
+      try {
+        const options: ModeOption[] = JSON.parse(radio.dataset.options || '[]');
+        const defaultPct = parseInt(radio.dataset.defaultPct || '20');
+        calcTaux.innerHTML = options
+          .map((o) => `<option value="${o.pct}"${o.pct === defaultPct ? ' selected' : ''}>${o.label}</option>`)
+          .join('');
+      } catch {}
+    }
+
+    // Update mode button styles
+    modeBtns.forEach((btn) => {
+      btn.style.borderColor = 'var(--color-ink)';
+      btn.style.color = 'var(--color-ink)';
+      btn.style.backgroundColor = '';
+    });
+    const activeBtn = radio.nextElementSibling as HTMLElement | null;
+    if (activeBtn) {
+      activeBtn.style.borderColor = 'var(--color-blue)';
+      activeBtn.style.color = 'var(--color-blue)';
+      activeBtn.style.backgroundColor = 'var(--color-blue)';
+      activeBtn.style.color = 'white';
+    }
+
+    updateCalc();
+  }
+
+  modeRadios.forEach((radio) => {
+    radio.addEventListener('change', () => activateMode(radio));
+  });
+
+  calcInput?.addEventListener('input', updateCalc);
+  calcTaux?.addEventListener('change', updateCalc);
+
+  // Init with first mode
+  const firstRadio = document.querySelector<HTMLInputElement>('input[name="calc-mode"]');
+  if (firstRadio) activateMode(firstRadio);
 </script>

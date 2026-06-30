@@ -1,0 +1,260 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Button from '../../components/ui/Button.astro';
+import Eyebrow from '../../components/ui/Eyebrow.astro';
+import ImagePlaceholder from '../../components/ui/ImagePlaceholder.astro';
+import BandeauCTA from '../../components/sections/BandeauCTA.astro';
+import Icon from '../../components/ui/Icon.astro';
+import { stats } from '../../data/stats';
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': ['Organization', 'LocalBusiness'],
+    name: 'AGRILENE',
+    url: 'https://www.agrilene.fr',
+    logo: 'https://www.agrilene.fr/favicon.svg',
+    description:
+      'Family business since 1980, AGRILENE provides substrates and growing media (perlite, vermiculite, rock wool, miscanthus) to horticultural professionals.',
+    foundingDate: '1980',
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Maule',
+      postalCode: '78580',
+      addressRegion: 'Île-de-France',
+      addressCountry: 'FR',
+    },
+    telephone: '+33682077693',
+    email: 'contact@agrilene.fr',
+  },
+];
+
+const issues = [
+  { icon: 'Droplet' as const, bg: 'bg-blue/10', iconColor: 'var(--color-blue)', title: 'Water management', text: 'Soils that drain too fast or compact too much, water stress and frequent irrigation' },
+  { icon: 'Sprout' as const, bg: 'bg-sage', iconColor: 'var(--color-green)', title: 'Poor rooting', text: 'Suffocated roots, limited growth, difficult establishment of young plants' },
+  { icon: 'ShieldCheck' as const, bg: 'bg-orange/10', iconColor: 'var(--color-orange)', title: 'Plant losses', text: 'High mortality, replacement costs, growth delays after planting' },
+  { icon: 'TreePine' as const, bg: 'bg-sage', iconColor: 'var(--color-green)', title: 'Durability', text: 'Fragile plantings vulnerable to climatic and urban constraints' },
+];
+
+const solutionCards = [
+  { title: 'Water retention & availability', text: 'Our materials retain water and release it gradually to roots, reducing water stress and irrigation needs.', href: '/en/solutions#eau' },
+  { title: 'Soil structure & aeration', text: 'They improve substrate structure, promoting deep rooting and better air and water circulation.', href: '/en/solutions#enracinement' },
+  { title: 'Plant protection', text: 'By optimising establishment conditions, they reduce losses and ensure better resilience.', href: '/en/solutions#securisation' },
+];
+
+const markets = [
+  { name: 'Plant production', desc: 'Substrates, seeding, cuttings and young plant production', href: '/en/marches/production-vegetale', alt: 'Professional plant production — seeding and nursery' },
+  { name: 'Landscaping', desc: 'Tree planting, mass beds, planters and sustainable landscaping', href: '/en/marches/paysagisme', alt: 'Professional landscaping — tree planting and beds' },
+  { name: 'Local authorities', desc: 'Public green spaces, urban tree pits and water savings', href: '/en/marches/collectivites', alt: 'Local authorities — public green spaces and urban greening' },
+];
+---
+
+<Layout
+  title="AGRILENE — Growing substrates & media to optimise your plantings"
+  description="Perlite, vermiculite, rock wool (Florilène, Floricubes, Floriroll) and miscanthus to improve water retention, rooting and plant establishment. Horticultural professionals since 1980."
+  jsonLd={jsonLd}
+>
+
+  <!-- HERO -->
+  <section class="relative overflow-hidden bg-paper pt-16 pb-20 md:pt-24 md:pb-28">
+    <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
+      <svg class="particle particle-1 absolute top-16 left-[8%] opacity-[0.06]" width="40" height="40" viewBox="0 0 40 40" fill="none">
+        <circle cx="20" cy="20" r="18" fill="#3C8A3E"/><circle cx="13" cy="14" r="3" fill="#79B83F"/><circle cx="27" cy="12" r="2" fill="#79B83F"/><circle cx="20" cy="28" r="4" fill="#79B83F"/>
+      </svg>
+      <svg class="particle particle-2 absolute top-32 right-[10%] opacity-[0.05]" width="32" height="42" viewBox="0 0 32 42" fill="none">
+        <ellipse cx="16" cy="10" rx="10" ry="10" fill="#3E9BC0"/><path d="M16 20 L10 42 M16 20 L22 42" stroke="#3E9BC0" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </div>
+
+    <div class="container relative">
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div>
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-ink mb-6 leading-tight" style="font-family: var(--font-display)">
+            Growing media to
+            <span style="color: var(--color-green-bright)"> optimise your plantings</span>
+          </h1>
+          <p class="text-lg text-muted mb-8 leading-relaxed max-w-xl">
+            Since 1980, AGRILENE has supported horticultural professionals with proven solutions to improve water retention, rooting and plant establishment.
+          </p>
+          <div class="flex flex-wrap gap-3 mb-10">
+            <Button href="/en/solutions" variant="primary" size="lg" arrow>Discover our solutions</Button>
+            <Button href="/en/contact" variant="outline" size="lg">Contact us</Button>
+          </div>
+          <div class="flex flex-col sm:flex-row gap-4 sm:gap-6">
+            {[
+              { icon: 'Award' as const, label: 'Professional-grade minerals' },
+              { icon: 'Calendar' as const, label: '40+ years of expertise (since 1980)' },
+              { icon: 'Globe' as const, label: 'Proven in extreme conditions' },
+            ].map((item) => (
+              <div class="flex items-center gap-2 text-sm text-muted">
+                <Icon name={item.icon} size={16} style="color: var(--color-green)" />
+                <span>{item.label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div class="relative">
+          <ImagePlaceholder ratio="4/3" alt="Cross-section pot showing root system without and with AGRILENE substrates" label="Visual coming soon" />
+          <div class="absolute bottom-4 left-4 bg-white/95 backdrop-blur-sm rounded-xl p-4 shadow-lg border border-ink/8 max-w-[180px]">
+            <div class="flex items-center gap-2 mb-1">
+              <Icon name="Sprout" size={16} style="color: var(--color-green)" />
+              <span class="text-xs font-bold text-ink" style="font-family: var(--font-display)">AGRILENE</span>
+            </div>
+            <p class="text-xs text-muted leading-tight">Proven substrates. Stronger roots.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TWO AUDIENCES -->
+  <section class="py-16 bg-cream">
+    <div class="container">
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-paper rounded-2xl p-8 card-lift reveal">
+          <Eyebrow color="green" class="mb-3">Professionals</Eyebrow>
+          <h2 class="text-2xl font-bold text-ink mb-3" style="font-family: var(--font-display)">
+            Professional solutions to improve planting performance
+          </h2>
+          <p class="text-muted mb-6">Proven substrates and growing media for growers, landscapers and local authorities.</p>
+          <Button href="/en/solutions" variant="primary" arrow>Discover solutions</Button>
+        </div>
+        <div class="bg-paper rounded-2xl p-8 card-lift reveal">
+          <Eyebrow color="blue" class="mb-3">Home gardeners</Eyebrow>
+          <h2 class="text-2xl font-bold text-ink mb-3" style="font-family: var(--font-display)">
+            Plants that thrive, even when you forget to water
+          </h2>
+          <p class="text-muted mb-6">Less watering, less maintenance, plants that last longer.</p>
+          <a href="/en/lonoa" class="inline-flex items-center gap-2 text-sm font-semibold px-6 py-3 rounded-full text-white transition-opacity hover:opacity-90" style="background-color: var(--color-blue)">
+            Discover LONOA →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHALLENGES -->
+  <section class="py-20 bg-paper">
+    <div class="container">
+      <div class="text-center mb-12 reveal">
+        <h2 class="text-3xl md:text-4xl font-bold text-ink mb-4" style="font-family: var(--font-display)">What our clients face on the ground</h2>
+        <p class="text-muted max-w-2xl mx-auto">Horticultural professionals face concrete challenges. Our substrates and growing media address them.</p>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        {issues.map((p) => (
+          <div class={`${p.bg} rounded-2xl p-6 reveal card-lift`}>
+            <div class="mb-3" aria-hidden="true"><Icon name={p.icon} size={28} style={`color: ${p.iconColor}`} /></div>
+            <h3 class="font-bold text-ink mb-2" style="font-family: var(--font-display)">{p.title}</h3>
+            <p class="text-sm text-muted">{p.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- PROVEN SOLUTIONS -->
+  <section class="py-20 bg-cream">
+    <div class="container">
+      <div class="text-center mb-12 reveal">
+        <h2 class="text-3xl md:text-4xl font-bold text-ink mb-4" style="font-family: var(--font-display)">
+          Technically <span style="color: var(--color-orange)">proven</span> solutions
+        </h2>
+        <p class="text-muted max-w-2xl mx-auto">After more than 40 years working with growers, landscapers and local authorities, we select highly effective natural materials.</p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6">
+        {solutionCards.map((s) => (
+          <article class="bg-paper rounded-2xl overflow-hidden card-lift reveal">
+            <ImagePlaceholder ratio="4/3" alt={s.title} />
+            <div class="p-6">
+              <h3 class="font-bold text-ink mb-2 text-lg" style="font-family: var(--font-display)">{s.title}</h3>
+              <p class="text-sm text-muted mb-4">{s.text}</p>
+              <a href={s.href} class="text-sm font-semibold hover:opacity-80 transition-opacity" style="color: var(--color-green)">Learn more →</a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FIELD RESULTS -->
+  <section class="py-20 bg-paper">
+    <div class="container">
+      <div class="text-center mb-12 reveal">
+        <Eyebrow color="green" class="mb-3">Field trials</Eyebrow>
+        <h2 class="text-3xl md:text-4xl font-bold text-ink mb-4" style="font-family: var(--font-display)">Results proven in the field</h2>
+        <p class="text-muted max-w-2xl mx-auto">Real-world trials and independent scientific studies demonstrate concrete effectiveness.</p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6 mb-10">
+        {stats.slice(0, 3).map((s) => (
+          <div class="text-center bg-sage rounded-2xl p-8 reveal card-lift">
+            <div class="text-5xl font-extrabold mb-2" style="font-family: var(--font-display); color: var(--color-green)">{s.value}</div>
+            <div class="font-semibold text-ink mb-1">{s.labelEn}</div>
+            <div class="text-xs text-muted">{s.source}</div>
+          </div>
+        ))}
+      </div>
+      <div class="text-center">
+        <Button href="/en/essais" variant="outline" arrow>See field trials</Button>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARKETS -->
+  <section class="py-20 bg-cream">
+    <div class="container">
+      <div class="text-center mb-12 reveal">
+        <h2 class="text-3xl md:text-4xl font-bold text-ink mb-4" style="font-family: var(--font-display)">Our markets</h2>
+        <p class="text-muted max-w-xl mx-auto">Solutions tailored to each trade and use case.</p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6">
+        {markets.map((d) => (
+          <a href={d.href} class="relative group block rounded-2xl overflow-hidden card-lift reveal" style="aspect-ratio: 4/3">
+            <div class="absolute inset-0 bg-gradient-to-br from-sage to-cream flex items-center justify-center">
+              <p class="text-xs text-muted/50 italic px-6 text-center">{d.alt}</p>
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/20 to-transparent">
+              <div class="absolute bottom-0 left-0 p-6 text-white">
+                <h3 class="text-xl font-bold mb-1" style="font-family: var(--font-display)">{d.name}</h3>
+                <p class="text-sm text-white/80">{d.desc}</p>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAMILY HISTORY -->
+  <section class="py-20 bg-paper">
+    <div class="container">
+      <div class="max-w-3xl mx-auto text-center reveal">
+        <Eyebrow color="green" class="mb-4">Since 1980</Eyebrow>
+        <h2 class="text-3xl md:text-4xl font-bold text-ink mb-6" style="font-family: var(--font-display)">A family business serving horticulture</h2>
+        <p class="text-muted text-lg leading-relaxed mb-8">
+          AGRILENE was founded in 1980. A family-run company, it was gradually taken over by the second generation from 2000. Since 2018, the third generation has ensured continuity while driving innovation, staying attentive to new practices and market expectations.
+        </p>
+        <div class="flex justify-center gap-12 mb-8">
+          <div class="text-center">
+            <div class="text-4xl font-extrabold" style="font-family: var(--font-display); color: var(--color-green)">3</div>
+            <div class="text-sm text-muted mt-1">generations</div>
+          </div>
+          <div class="text-center">
+            <div class="text-4xl font-extrabold" style="font-family: var(--font-display); color: var(--color-green)">40+</div>
+            <div class="text-sm text-muted mt-1">years of expertise</div>
+          </div>
+        </div>
+        <Button href="/en/a-propos" variant="outline" arrow>Learn more</Button>
+      </div>
+    </div>
+  </section>
+
+  <BandeauCTA
+    titre="Need technical or commercial information?"
+    sousTitre="Our team is available to advise you on the right materials for your project."
+    ctaLabel="Contact us"
+    ctaHref="/en/contact"
+    ctaVariant="orange"
+  />
+
+</Layout>

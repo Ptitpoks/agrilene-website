@@ -4,13 +4,8 @@ import Eyebrow from '../components/ui/Eyebrow.astro';
 import Button from '../components/ui/Button.astro';
 import ImagePlaceholder from '../components/ui/ImagePlaceholder.astro';
 import BandeauCTA from '../components/sections/BandeauCTA.astro';
-
-const chiffres = [
-  { valeur: '−40 %', detail: "d'eau d'irrigation", note: 'Essai terrain, Koweït' },
-  { valeur: '×3', detail: 'système racinaire', note: 'Université de Ljubljana' },
-  { valeur: '+50 %', detail: 'de croissance des pousses', note: 'Étude 2019' },
-  { valeur: '5 ans', detail: 'sans perte de performance', note: 'Durabilité des matériaux' },
-];
+import Icon from '../components/ui/Icon.astro';
+import { stats } from '../data/stats';
 
 const essais = [
   {
@@ -25,6 +20,7 @@ const essais = [
     ],
     visuelNote: "Graphique : consommation d'eau cumulée (gallons/m²) — Floriroll (104 et 85) vs témoin (140)",
     visuelAlt: "Graphique Sum Gallon/M2 — comparaison Floriroll 2cm, Floriroll 4cm et parcelle témoin, essai Koweït",
+    legende: "Valeurs cumulées sur 4 semaines de test.",
     encart: null,
   },
   {
@@ -39,6 +35,7 @@ const essais = [
     ],
     visuelNote: "Photos : parcelle témoin / avec Floriroll",
     visuelAlt: "Photos avant/après de la pépinière TDIC Abu Dhabi avec et sans Floriroll — gazon vert en milieu désertique",
+    legende: null,
     encart: null,
   },
   {
@@ -54,7 +51,38 @@ const essais = [
     ],
     visuelNote: "Photos : systèmes racinaires (témoin / 25 % / 50 % flocons) et pots comparés",
     visuelAlt: "Comparaison systèmes racinaires pélargoniums avec 0 %, 25 % et 50 % de Florilène — étude Université de Ljubljana 2019",
+    legende: null,
     encart: "Dosage recommandé : jusqu'à 25 % de flocons Florilène en volume dans le substrat.",
+  },
+  {
+    eyebrow: 'Étude sur le matériau · Maribor (2014)',
+    eyebrowColor: 'green' as const,
+    titre: "Essai pastèques, Maribor 2014 — laine de roche aiguilletée",
+    description: "Étude portant sur la culture de pastèques en substrat amendé à la laine de roche aiguilletée. Les résultats montrent une amélioration significative de la croissance et de la qualité des fruits comparé à un substrat standard.",
+    resultats: [
+      "Meilleure rétention hydrique dans le substrat",
+      "Croissance végétative améliorée",
+      "Qualité et calibre des fruits supérieurs",
+    ],
+    visuelNote: "Étude sur le matériau (laine de roche aiguilletée) — Maribor, 2014",
+    visuelAlt: "Résultats étude culture de pastèques avec laine de roche aiguilletée, Maribor 2014",
+    legende: "Étude réalisée sur le matériau laine de roche aiguilletée.",
+    encart: null,
+  },
+  {
+    eyebrow: 'Étude sur le matériau · CitiesAlive (2016)',
+    eyebrowColor: 'green' as const,
+    titre: "Toitures végétalisées, CitiesAlive 2016 — laine de roche aiguilletée",
+    description: "Étude présentée au congrès CitiesAlive 2016 sur les performances de la laine de roche aiguilletée dans les systèmes de toitures végétalisées intensives et extensives en milieu urbain.",
+    resultats: [
+      "Rétention d'eau optimale pour les substrats de toitures légères",
+      "Stabilité des performances sur plusieurs années",
+      "Compatibilité prouvée avec les systèmes extensifs et intensifs",
+    ],
+    visuelNote: "Étude sur le matériau (laine de roche aiguilletée) — CitiesAlive, 2016",
+    visuelAlt: "Résultats étude laine de roche aiguilletée pour toitures végétalisées, CitiesAlive 2016",
+    legende: "Étude réalisée sur le matériau laine de roche aiguilletée.",
+    encart: null,
   },
 ];
 ---
@@ -70,7 +98,7 @@ const essais = [
       <div class="max-w-3xl">
         <div class="flex items-center gap-3 mb-4">
           <Eyebrow color="green">Tests terrain</Eyebrow>
-          <span class="text-xl" aria-hidden="true">🧪</span>
+          <Icon name="FlaskConical" size={20} style="color: var(--color-green)" />
         </div>
         <h1 class="text-4xl md:text-5xl font-extrabold text-ink mb-6" style="font-family: var(--font-display)">
           Des résultats validés sur le terrain
@@ -86,11 +114,11 @@ const essais = [
   <section class="py-16 bg-cream">
     <div class="container">
       <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-        {chiffres.map((c) => (
+        {stats.map((s) => (
           <div class="text-center bg-paper rounded-2xl p-8 reveal card-lift">
-            <div class="text-5xl font-extrabold mb-2" style="font-family: var(--font-display); color: var(--color-green)">{c.valeur}</div>
-            <div class="font-semibold text-ink mb-1">{c.detail}</div>
-            <div class="text-xs text-muted">{c.note}</div>
+            <div class="text-5xl font-extrabold mb-2" style="font-family: var(--font-display); color: var(--color-green)">{s.value}</div>
+            <div class="font-semibold text-ink mb-1">{s.label}</div>
+            <div class="text-xs text-muted">{s.source}</div>
           </div>
         ))}
       </div>
@@ -110,6 +138,9 @@ const essais = [
               alt={e.visuelAlt}
               label={e.visuelNote}
             />
+            {e.legende && (
+              <p class="text-xs text-muted mt-2 italic text-center">{e.legende}</p>
+            )}
           </div>
 
           <!-- Texte -->
@@ -124,15 +155,18 @@ const essais = [
             <ul class="space-y-2 mb-5">
               {e.resultats.map((r) => (
                 <li class="flex gap-3 text-sm text-ink">
-                  <span class="shrink-0 w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold text-white mt-0.5" style="background-color: var(--color-green)">✓</span>
+                  <span class="shrink-0 w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold text-white mt-0.5" style="background-color: var(--color-green)">
+                    <Icon name="Check" size={10} aria-hidden="true" />
+                  </span>
                   {r}
                 </li>
               ))}
             </ul>
 
             {e.encart && (
-              <div class="bg-sage rounded-xl p-4 text-sm text-ink">
-                <span class="font-semibold">💡 </span>{e.encart}
+              <div class="bg-sage rounded-xl p-4 text-sm text-ink flex gap-2 items-start">
+                <Icon name="Lightbulb" size={16} class="shrink-0 mt-0.5" style="color: var(--color-green)" />
+                <span>{e.encart}</span>
               </div>
             )}
           </div>

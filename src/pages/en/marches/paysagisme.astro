@@ -1,0 +1,106 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Eyebrow from '../../../components/ui/Eyebrow.astro';
+import Button from '../../../components/ui/Button.astro';
+import Tag from '../../../components/ui/Tag.astro';
+import ImagePlaceholder from '../../../components/ui/ImagePlaceholder.astro';
+import BandeauCTA from '../../../components/sections/BandeauCTA.astro';
+import Icon from '../../../components/ui/Icon.astro';
+
+const challenges = [
+  { iconName: 'CheckCircle', title: 'Guaranteed establishment', desc: 'Reduce losses and avoid costly replacements' },
+  { iconName: 'Droplet', title: 'Water autonomy', desc: 'Limit post-planting watering for your clients' },
+  { iconName: 'TreeDeciduous', title: 'Lasting aesthetics', desc: 'Plantings that thrive over the long term' },
+];
+
+const useCases = [
+  { title: 'Tree & shrub planting', desc: 'Improvement of planting pits for optimal establishment', products: ['Perlite', 'Vermiculite', 'Florilène'] },
+  { title: 'Mass beds & planters', desc: 'Balanced substrates for durable and aesthetic plantings', products: ['Perlite', 'Vermiculite', 'Miscanthus'] },
+  { title: 'Green roofs & walls', desc: 'Lightweight supports and water retention for weight and irrigation constraints', products: ['Floriroll', 'Perlite'] },
+  { title: 'Sustainable landscaping', desc: 'Mulching to limit maintenance and preserve water', products: ['Miscanthus'] },
+];
+
+const benefits = [
+  'Significantly improved establishment rates', 'Reduced post-project interventions',
+  'Satisfied clients over the long term', 'Enhanced professional reputation',
+  'Differentiating argument in tenders', 'Managed warranty costs',
+];
+
+const produitHref: Record<string, string> = {
+  'Perlite': '/en/produits#perlite', 'Vermiculite': '/en/produits#vermiculite',
+  'Florilène': '/en/produits#florilene', 'Floricubes': '/en/produits#floricubes',
+  'Floriroll': '/en/produits#floriroll', 'Miscanthus': '/en/produits#miscanthus',
+};
+---
+
+<Layout
+  title="Landscaping — Materials to guarantee plant establishment and reduce maintenance | AGRILENE"
+  description="Florilène, Floriroll, perlite: materials to guarantee plant establishment, reduce maintenance and secure landscaping projects."
+>
+
+  <section class="relative bg-ink text-white py-24 md:py-32 overflow-hidden">
+    <div class="container relative">
+      <Eyebrow color="orange" class="mb-4">Market</Eyebrow>
+      <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-tight" style="font-family: var(--font-display)">Landscaping</h1>
+      <p class="text-lg text-white/75 max-w-2xl">Materials to guarantee plant establishment and reduce maintenance. Optimise your projects and ensure the durability of your landscaping works.</p>
+    </div>
+  </section>
+
+  <section class="py-20 bg-paper">
+    <div class="container">
+      <div class="text-center mb-12 reveal">
+        <h2 class="text-3xl md:text-4xl font-bold text-ink mb-4" style="font-family: var(--font-display)">Your project constraints</h2>
+        <p class="text-muted max-w-2xl mx-auto">Professional landscaping means delivering results in sometimes difficult conditions: fill soils, tight schedules, limited maintenance budgets.</p>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        {challenges.map((e) => (
+          <div class="bg-sage rounded-2xl p-6 reveal card-lift">
+            <div class="mb-3" aria-hidden="true"><Icon name={e.iconName as any} size={28} style="color: var(--color-green)" /></div>
+            <h3 class="font-bold text-ink mb-2" style="font-family: var(--font-display)">{e.title}</h3>
+            <p class="text-sm text-muted">{e.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 bg-cream">
+    <div class="container">
+      <div class="text-center mb-12 reveal">
+        <h2 class="text-3xl md:text-4xl font-bold text-ink mb-4" style="font-family: var(--font-display)">Concrete use cases</h2>
+        <p class="text-muted max-w-2xl mx-auto">Integrate our materials into your practice for visible, durable results.</p>
+      </div>
+      <div class="grid sm:grid-cols-2 gap-5">
+        {useCases.map((c) => (
+          <article class="bg-paper rounded-2xl p-6 reveal card-lift">
+            <h3 class="font-bold text-ink mb-2" style="font-family: var(--font-display)">{c.title}</h3>
+            <p class="text-sm text-muted mb-4">{c.desc}</p>
+            <div class="flex flex-wrap gap-2">{c.products.map((p) => <Tag href={produitHref[p] ?? '/en/produits'} color="orange">{p}</Tag>)}</div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 bg-paper">
+    <div class="container">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div class="reveal">
+          <h2 class="text-3xl md:text-4xl font-bold text-ink mb-8" style="font-family: var(--font-display)">Benefits for your projects</h2>
+          <div class="grid sm:grid-cols-2 gap-3">
+            {benefits.map((b) => (
+              <div class="flex gap-3 text-sm text-ink items-start">
+                <span class="shrink-0 w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold text-white mt-0.5" style="background-color: var(--color-green)">✓</span>
+                {b}
+              </div>
+            ))}
+          </div>
+          <div class="mt-8"><Button href="/en/produits" variant="primary" arrow>See our products</Button></div>
+        </div>
+        <div class="reveal"><ImagePlaceholder ratio="4/3" alt="Professional landscaping — AGRILENE materials" label="Coming soon" /></div>
+      </div>
+    </div>
+  </section>
+
+  <BandeauCTA titre="A landscaping project?" sousTitre="Our team supports you and shares technical studies relevant to your application." ctaLabel="Contact us" ctaHref="/en/contact" ctaVariant="orange" />
+</Layout>

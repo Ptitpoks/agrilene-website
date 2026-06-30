@@ -1,26 +1,39 @@
 ---
+import { getLangFromUrl, getAlternateUrl } from '../../i18n/utils';
+import { fr } from '../../i18n/fr';
+import { en } from '../../i18n/en';
+
+const lang = getLangFromUrl(Astro.url);
+const t = lang === 'en' ? en.nav : fr.nav;
+const prefix = lang === 'en' ? '/en' : '';
+const altUrl = getAlternateUrl(Astro.url, lang === 'en' ? 'fr' : 'en');
+
 const nav = [
-  { label: 'Accueil', href: '/' },
-  { label: 'Solutions', href: '/solutions' },
-  { label: 'Produits', href: '/produits' },
+  { label: t.home, href: `${prefix}/` },
+  { label: t.solutions, href: `${prefix}/solutions` },
+  { label: t.products, href: `${prefix}/produits` },
   {
-    label: 'Marchés',
-    href: '/marches',
+    label: t.markets,
+    href: `${prefix}/marches`,
     children: [
-      { label: 'Production végétale', href: '/marches/production-vegetale' },
-      { label: 'Paysagisme', href: '/marches/paysagisme' },
-      { label: 'Collectivités', href: '/marches/collectivites' },
+      { label: t.marketProd, href: `${prefix}/marches/production-vegetale` },
+      { label: t.marketLand, href: `${prefix}/marches/paysagisme` },
+      { label: t.marketCity, href: `${prefix}/marches/collectivites` },
     ],
   },
-  { label: 'LONOA', href: '/lonoa' },
-  { label: 'Essais', href: '/essais' },
-  { label: 'À propos', href: '/a-propos' },
-  { label: 'Contact', href: '/contact' },
+  { label: t.lonoa, href: `${prefix}/lonoa` },
+  { label: t.trials, href: `${prefix}/essais` },
+  { label: t.about, href: `${prefix}/a-propos` },
+  { label: t.contact, href: `${prefix}/contact` },
 ];
 
 const pathname = Astro.url.pathname;
-const isActive = (href: string) =>
-  href === '/' ? pathname === '/' : pathname.startsWith(href);
+const isActive = (href: string) => {
+  const cleanHref = href.replace(/\/$/, '');
+  const cleanPath = pathname.replace(/\/$/, '');
+  if (cleanHref === '' || cleanHref === '/en') return cleanPath === cleanHref;
+  return cleanPath === cleanHref || cleanPath.startsWith(cleanHref + '/');
+};
 ---
 
 <header
@@ -30,7 +43,7 @@ const isActive = (href: string) =>
   <div class="container">
     <div class="flex items-center justify-between h-16 md:h-18">
       <!-- Logo -->
-      <a href="/" class="flex items-center gap-2 shrink-0" aria-label="AGRILENE — Retour à l'accueil">
+      <a href={`${prefix}/`} class="flex items-center gap-2 shrink-0" aria-label="AGRILENE — Retour à l'accueil">
         <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
           <circle cx="16" cy="16" r="15" fill="#EAF1E5" stroke="#3C8A3E" stroke-width="1.5"/>
           <path d="M16 26 C16 26 16 12 16 8 M16 8 C16 5 13 3 10 3 M16 8 C16 5 19 3 22 3 M16 14 C14 13 11 15 10 17 M16 20 C18 19 21 21 22 23" stroke="#3C8A3E" stroke-width="1.5" stroke-linecap="round"/>
@@ -80,14 +93,18 @@ const isActive = (href: string) =>
 
       <!-- Right side: lang + CTA -->
       <div class="hidden lg:flex items-center gap-3">
-        <span class="text-xs font-medium text-muted border border-ink/20 rounded px-2 py-1">
-          FR | <span class="text-muted/50">EN</span>
-        </span>
         <a
-          href="/contact"
+          href={altUrl}
+          class="text-xs font-medium text-muted border border-ink/20 rounded px-2 py-1 hover:border-ink/40 hover:text-ink transition-colors"
+          aria-label={lang === 'fr' ? 'Switch to English' : 'Passer en français'}
+        >
+          {t.langOther}
+        </a>
+        <a
+          href={`${prefix}/contact`}
           class="inline-flex items-center gap-1.5 bg-green text-white text-sm font-semibold px-4 py-2 rounded-full hover:bg-green-dark transition-colors"
         >
-          Nous contacter
+          {t.contactCta}
         </a>
       </div>
 
@@ -95,7 +112,7 @@ const isActive = (href: string) =>
       <button
         id="burger-btn"
         class="lg:hidden p-2 rounded-lg text-ink hover:bg-sage transition-colors"
-        aria-label="Ouvrir le menu"
+        aria-label={lang === 'fr' ? 'Ouvrir le menu' : 'Open menu'}
         aria-expanded="false"
         aria-controls="mobile-menu"
       >
@@ -113,7 +130,7 @@ const isActive = (href: string) =>
   <div
     id="mobile-menu"
     class="lg:hidden hidden border-t border-ink/8 bg-paper"
-    aria-label="Menu mobile"
+    aria-label={lang === 'fr' ? 'Menu mobile' : 'Mobile menu'}
   >
     <nav class="container py-4 flex flex-col gap-1">
       {nav.map((item) => (
@@ -143,12 +160,18 @@ const isActive = (href: string) =>
           </a>
         )
       ))}
-      <div class="mt-4 pt-4 border-t border-ink/8">
+      <div class="mt-3 pt-3 border-t border-ink/8 flex gap-2">
         <a
-          href="/contact"
-          class="flex items-center justify-center gap-1.5 bg-green text-white text-sm font-semibold px-4 py-3 rounded-full hover:bg-green-dark transition-colors"
+          href={altUrl}
+          class="flex-1 flex items-center justify-center text-xs font-medium text-muted border border-ink/20 rounded-lg px-3 py-2.5 hover:border-ink/40 hover:text-ink transition-colors"
         >
-          Nous contacter
+          {t.langOther}
+        </a>
+        <a
+          href={`${prefix}/contact`}
+          class="flex-[3] flex items-center justify-center gap-1.5 bg-green text-white text-sm font-semibold px-4 py-2.5 rounded-lg hover:bg-green-dark transition-colors"
+        >
+          {t.contactCta}
         </a>
       </div>
     </nav>
@@ -170,7 +193,6 @@ const isActive = (href: string) =>
     iconClose?.classList.toggle('hidden');
   });
 
-  // Shadow on scroll
   window.addEventListener('scroll', () => {
     if (window.scrollY > 8) {
       header?.classList.add('shadow-sm');

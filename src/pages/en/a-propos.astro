@@ -1,0 +1,131 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Eyebrow from '../../components/ui/Eyebrow.astro';
+import Button from '../../components/ui/Button.astro';
+import BandeauCTA from '../../components/sections/BandeauCTA.astro';
+import Icon from '../../components/ui/Icon.astro';
+
+const timeline = [
+  { year: '1980', title: 'AGRILENE founded', text: "Foundation of the family business, specialising in substrates and growing media for horticulture." },
+  { year: '1990', title: 'National expansion', text: "Extension of activity across France, with an established professional distribution network." },
+  { year: '2000', title: 'Second generation', text: "Family handover and modernisation of the product range with new lines adapted to market changes." },
+  { year: '2018', title: 'Third generation', text: "New generation takes over with a stronger commitment to sustainability and resource efficiency." },
+  { year: '2025', title: 'LONOA launch', text: "Launch of the consumer brand, distributed through specialist retail channels." },
+];
+
+const values = [
+  { iconName: 'Handshake', iconColor: 'var(--color-green)', title: 'Field proximity', text: "We work hand in hand with our clients to understand their real-world needs and tailor our solutions." },
+  { iconName: 'FlaskConical', iconColor: 'var(--color-blue)', title: 'Technical rigour', text: "Every material is selected, tested and validated before being offered. No promises — results." },
+  { iconName: 'Leaf', iconColor: 'var(--color-green)', title: 'Sustainability', text: "We favour long-lasting materials and solutions that reduce the environmental footprint of plantings." },
+  { iconName: 'Landmark', iconColor: 'var(--color-brown)', title: 'Long-term vision', text: "As a family business, we build lasting relationships with our clients and partners." },
+];
+
+const team = [
+  { first: 'Théo', last: 'KARM', role: 'Managing Director' },
+  { first: 'Sidonie', last: 'KARM', role: 'Head of Operations' },
+  { first: 'Sandrine', last: 'GAYRAL', role: 'Business Development' },
+  { first: 'Maël', last: 'KARM', role: 'Business Development' },
+  { first: 'Stéphane', last: 'KARM', role: 'International Development' },
+  { first: 'Ophélie', last: 'KARM', role: 'Geologist' },
+];
+---
+
+<Layout
+  title="About — A family business serving horticulture since 1980 | AGRILENE"
+  description="AGRILENE, a family business founded in 1980, has supported horticultural professionals for three generations with proven substrates and growing media."
+>
+
+  <section class="bg-paper py-16 md:py-24">
+    <div class="container">
+      <div class="max-w-3xl">
+        <Eyebrow color="green" class="mb-4">Since 1980</Eyebrow>
+        <h1 class="text-4xl md:text-5xl font-extrabold text-ink mb-6" style="font-family: var(--font-display)">
+          A family business serving horticulture
+        </h1>
+        <p class="text-lg text-muted max-w-2xl">
+          Three generations united by the same passion: supporting horticultural professionals with substrates and growing media that make a real difference on the ground.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIMELINE -->
+  <section class="py-20 bg-cream">
+    <div class="container">
+      <h2 class="text-3xl md:text-4xl font-bold text-ink mb-12 text-center reveal" style="font-family: var(--font-display)">Our history</h2>
+      <div class="relative max-w-3xl mx-auto">
+        <div class="absolute left-6 md:left-1/2 top-0 bottom-0 w-px bg-green/20 -translate-x-px" aria-hidden="true"></div>
+        <div class="space-y-10">
+          {timeline.map((t, i) => (
+            <div class={`relative flex gap-8 reveal ${i % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
+              <div class="relative flex items-start md:w-1/2 md:justify-end">
+                <div class="absolute left-6 md:left-auto md:right-[-1.25rem] w-5 h-5 rounded-full border-2 border-white z-10 shrink-0 mt-1" style="background-color: var(--color-green)"></div>
+                <div class={`pl-16 md:pl-0 ${i % 2 === 0 ? 'md:pr-10 md:text-right' : 'md:pl-10 md:text-left md:order-2'}`}>
+                  <div class="text-2xl font-extrabold mb-1" style="font-family: var(--font-display); color: var(--color-green-bright)">{t.year}</div>
+                  <h3 class="font-bold text-ink mb-1" style="font-family: var(--font-display)">{t.title}</h3>
+                  <p class="text-sm text-muted">{t.text}</p>
+                </div>
+              </div>
+              <div class="hidden md:block md:w-1/2"></div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALUES -->
+  <section class="py-20 bg-paper">
+    <div class="container">
+      <div class="text-center mb-12 reveal">
+        <h2 class="text-3xl md:text-4xl font-bold text-ink mb-4" style="font-family: var(--font-display)">Our values</h2>
+        <p class="text-muted max-w-2xl mx-auto">The principles that guide our daily actions and underpin our client relationships.</p>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        {values.map((v) => (
+          <div class="bg-sage rounded-2xl p-6 reveal card-lift">
+            <div class="mb-3" aria-hidden="true"><Icon name={v.iconName as any} size={28} style={`color: ${v.iconColor}`} /></div>
+            <h3 class="font-bold text-ink mb-2" style="font-family: var(--font-display)">{v.title}</h3>
+            <p class="text-sm text-muted">{v.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section class="py-20 bg-cream">
+    <div class="container">
+      <div class="text-center mb-12 reveal">
+        <h2 class="text-3xl md:text-4xl font-bold text-ink mb-4" style="font-family: var(--font-display)">Our team</h2>
+        <p class="text-muted max-w-2xl mx-auto">A passionate team dedicated to plants and our professional clients.</p>
+      </div>
+      <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-5">
+        {team.map((m) => (
+          <article class="bg-paper rounded-2xl p-6 flex items-center gap-4 reveal card-lift">
+            <div class="w-14 h-14 rounded-full flex items-center justify-center text-xl font-bold text-white shrink-0" style="background-color: var(--color-green)" aria-hidden="true">
+              {m.first[0]}{m.last[0]}
+            </div>
+            <div>
+              <div class="font-bold text-ink" style="font-family: var(--font-display)">{m.first} {m.last}</div>
+              <div class="text-sm text-muted">{m.role}</div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- POSITIONING -->
+  <section class="py-20 bg-paper">
+    <div class="container max-w-3xl reveal">
+      <h2 class="text-3xl md:text-4xl font-bold text-ink mb-6 text-center" style="font-family: var(--font-display)">Our positioning</h2>
+      <div class="space-y-5 text-muted leading-relaxed">
+        <p>Our strength lies in our field experience. Since 1980, we have supported plant growers, landscapers and local authorities. This proximity allows us to understand real-world needs and propose adapted solutions — without empty promises.</p>
+        <p>We believe in simplicity and effectiveness. A good material, used correctly, often achieves more than a sophisticated product that isn't the right fit. This is the philosophy that guides our daily work.</p>
+      </div>
+    </div>
+  </section>
+
+  <BandeauCTA titre="Let's work together" sousTitre="A project, a question, or want to know more? Our team is here to help." ctaLabel="Contact us" ctaHref="/en/contact" ctaVariant="orange" />
+</Layout>

@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import Eyebrow from '../components/ui/Eyebrow.astro';
 import Button from '../components/ui/Button.astro';
 import BandeauCTA from '../components/sections/BandeauCTA.astro';
+import Icon from '../components/ui/Icon.astro';
 
 const timeline = [
   {
@@ -34,22 +35,26 @@ const timeline = [
 
 const valeurs = [
   {
-    icone: '🤝',
+    iconName: 'Handshake',
+    iconColor: 'var(--color-green)',
     titre: 'Proximité terrain',
     texte: "Nous travaillons main dans la main avec nos clients pour comprendre leurs besoins réels et adapter nos solutions.",
   },
   {
-    icone: '🔬',
+    iconName: 'FlaskConical',
+    iconColor: 'var(--color-blue)',
     titre: 'Rigueur technique',
     texte: "Chaque matériau est sélectionné, testé et validé avant d'être proposé. Pas de promesses, des résultats.",
   },
   {
-    icone: '🌿',
+    iconName: 'Leaf',
+    iconColor: 'var(--color-green)',
     titre: 'Engagement durable',
     texte: "Nous privilégions des matériaux pérennes et des solutions qui réduisent l'impact environnemental des plantations.",
   },
   {
-    icone: '🏛️',
+    iconName: 'Landmark',
+    iconColor: 'var(--color-brown)',
     titre: 'Vision long terme',
     texte: "Entreprise familiale, nous construisons des relations durables avec nos clients et partenaires.",
   },
@@ -131,7 +136,9 @@ const equipe = [
       <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
         {valeurs.map((v) => (
           <div class="bg-sage rounded-2xl p-6 reveal card-lift">
-            <div class="text-3xl mb-3" aria-hidden="true">{v.icone}</div>
+            <div class="mb-3" aria-hidden="true">
+              <Icon name={v.iconName as any} size={28} style={`color: ${v.iconColor}`} />
+            </div>
             <h3 class="font-bold text-ink mb-2" style="font-family: var(--font-display)">{v.titre}</h3>
             <p class="text-sm text-muted">{v.texte}</p>
           </div>

@@ -1,7 +1,7 @@
 export interface Solution {
   id: string;
   titre: string;
-  icone: string;
+  iconName: string;
   couleurIcone: string;
   bgIcone: string;
   problematiques: string[];
@@ -15,9 +15,9 @@ export const solutions: Solution[] = [
   {
     id: 'eau',
     titre: 'Gestion et disponibilité de l\'eau',
-    icone: '💧',
-    couleurIcone: 'text-blue-600',
-    bgIcone: 'bg-blue-50',
+    iconName: 'Droplet',
+    couleurIcone: 'var(--color-blue)',
+    bgIcone: 'bg-blue/10',
     problematiques: [
       'Sols trop drainants qui ne retiennent pas l\'eau',
       'Sols compacts qui empêchent l\'infiltration',
@@ -38,8 +38,8 @@ export const solutions: Solution[] = [
   {
     id: 'enracinement',
     titre: 'Qualité de l\'enracinement',
-    icone: '🌱',
-    couleurIcone: 'text-green-700',
+    iconName: 'Sprout',
+    couleurIcone: 'var(--color-green)',
     bgIcone: 'bg-sage',
     problematiques: [
       'Racines asphyxiées par des substrats trop denses',
@@ -61,9 +61,9 @@ export const solutions: Solution[] = [
   {
     id: 'securisation',
     titre: 'Sécurisation des plantations',
-    icone: '🛡️',
-    couleurIcone: 'text-orange-600',
-    bgIcone: 'bg-orange-50',
+    iconName: 'ShieldCheck',
+    couleurIcone: 'var(--color-orange)',
+    bgIcone: 'bg-orange/10',
     problematiques: [
       'Mortalité élevée des jeunes plants',
       'Pertes économiques à la plantation',

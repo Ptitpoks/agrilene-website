@@ -1,0 +1,122 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Eyebrow from '../../components/ui/Eyebrow.astro';
+import Tag from '../../components/ui/Tag.astro';
+import ImagePlaceholder from '../../components/ui/ImagePlaceholder.astro';
+import BandeauCTA from '../../components/sections/BandeauCTA.astro';
+import Icon from '../../components/ui/Icon.astro';
+
+const solutions = [
+  {
+    id: 'eau',
+    title: 'Water management & availability',
+    iconName: 'Droplet',
+    iconColor: 'var(--color-blue)',
+    bg: 'bg-blue/10',
+    issues: ['Soils that drain too fast and don\'t retain water', 'Compacted soils preventing infiltration', 'Recurring plant water stress', 'High irrigation costs'],
+    role: 'Our materials (perlite, vermiculite, rock wool) act as microscopic reservoirs. They absorb water during irrigation and release it gradually to roots according to their needs.',
+    benefits: ['Reduced water stress', 'Lower irrigation frequency', 'Greater planting autonomy', 'Significant water savings'],
+    markets: [{ label: 'Plant production', href: '/en/marches/production-vegetale' }, { label: 'Landscaping', href: '/en/marches/paysagisme' }, { label: 'Local authorities', href: '/en/marches/collectivites' }],
+    products: [{ label: 'Florilène', href: '/en/produits#florilene' }, { label: 'Floricubes', href: '/en/produits#floricubes' }, { label: 'Floriroll', href: '/en/produits#floriroll' }, { label: 'Vermiculite', href: '/en/produits#vermiculite' }, { label: 'Miscanthus', href: '/en/produits#miscanthus' }],
+  },
+  {
+    id: 'enracinement',
+    title: 'Rooting quality',
+    iconName: 'Sprout',
+    iconColor: 'var(--color-green)',
+    bg: 'bg-sage',
+    issues: ['Roots suffocated by dense substrates', 'Soil compaction preventing root development', 'Difficult establishment after planting', 'Limited growth of young plants'],
+    role: 'By aerating substrate structure, our materials create porous spaces that allow roots to breathe, spread and access nutrients.',
+    benefits: ['Optimal root development', 'Better root oxygenation', 'Faster establishment after planting', 'Vigorous and lasting growth'],
+    markets: [{ label: 'Plant production', href: '/en/marches/production-vegetale' }, { label: 'Landscaping', href: '/en/marches/paysagisme' }, { label: 'Local authorities', href: '/en/marches/collectivites' }],
+    products: [{ label: 'Perlite', href: '/en/produits#perlite' }, { label: 'Florilène', href: '/en/produits#florilene' }, { label: 'Floricubes', href: '/en/produits#floricubes' }],
+  },
+  {
+    id: 'securisation',
+    title: 'Planting security',
+    iconName: 'ShieldCheck',
+    iconColor: 'var(--color-orange)',
+    bg: 'bg-orange/10',
+    issues: ['High mortality of young plants', 'Economic losses at planting', 'Vulnerability to climatic conditions', 'High replacement costs'],
+    role: 'By optimising the root environment from planting, our materials reduce transplant shock and strengthen plants\' ability to adapt to their new environment.',
+    benefits: ['Significant reduction in losses', 'Better climate resilience', 'Savings on replacements', 'More durable plantings'],
+    markets: [{ label: 'Plant production', href: '/en/marches/production-vegetale' }, { label: 'Landscaping', href: '/en/marches/paysagisme' }, { label: 'Local authorities', href: '/en/marches/collectivites' }],
+    products: [{ label: 'Florilène', href: '/en/produits#florilene' }, { label: 'Floricubes', href: '/en/produits#floricubes' }, { label: 'Floriroll', href: '/en/produits#floriroll' }, { label: 'Vermiculite', href: '/en/produits#vermiculite' }],
+  },
+];
+---
+
+<Layout
+  title="Solutions — Water management, rooting and planting protection | AGRILENE"
+  description="Our solutions by agronomic function: water management, rooting quality, planting security. Perlite, vermiculite, Florilène, Floricubes, Floriroll."
+>
+
+  <section class="bg-paper py-16 md:py-24">
+    <div class="container">
+      <div class="max-w-3xl">
+        <Eyebrow color="green" class="mb-4">Solutions</Eyebrow>
+        <h1 class="text-4xl md:text-5xl font-extrabold text-ink mb-6" style="font-family: var(--font-display)">Our solutions</h1>
+        <p class="text-lg text-muted max-w-2xl">Technical answers to concrete challenges. We approach solutions through their <strong class="text-ink">agronomic functions</strong>, not just through product names.</p>
+      </div>
+    </div>
+  </section>
+
+  {solutions.map((sol, i) => (
+    <section id={sol.id} class={`py-20 ${i % 2 === 0 ? 'bg-paper' : 'bg-cream'}`}>
+      <div class="container">
+        <div class={`grid lg:grid-cols-2 gap-14 items-start ${i % 2 !== 0 ? 'lg:grid-flow-dense' : ''}`}>
+          <div class={i % 2 !== 0 ? 'lg:col-start-2' : ''}>
+            <ImagePlaceholder ratio="4/3" alt={`${sol.title} — AGRILENE materials`} label={`Illustration: ${sol.title}`} />
+          </div>
+          <div class={i % 2 !== 0 ? 'lg:col-start-1 lg:row-start-1' : ''}>
+            <div class="flex items-center gap-4 mb-6">
+              <div class={`w-14 h-14 rounded-2xl flex items-center justify-center ${sol.bg}`} aria-hidden="true">
+                <Icon name={sol.iconName as any} size={28} style={`color: ${sol.iconColor}`} />
+              </div>
+              <h2 class="text-2xl md:text-3xl font-bold text-ink" style="font-family: var(--font-display)">{sol.title}</h2>
+            </div>
+            <div class="mb-6">
+              <Eyebrow color="orange" class="mb-3">Common challenges</Eyebrow>
+              <ul class="space-y-2">
+                {sol.issues.map((p) => (
+                  <li class="flex gap-2 text-sm text-muted">
+                    <span class="mt-1 w-4 h-4 shrink-0 rounded-full flex items-center justify-center text-[10px]" style="background-color: var(--color-orange); color: white">•</span>
+                    {p}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div class="bg-sage rounded-xl p-5 mb-6">
+              <Eyebrow color="green" class="mb-2">Role of the materials</Eyebrow>
+              <p class="text-sm text-ink leading-relaxed">{sol.role}</p>
+            </div>
+            <div class="mb-6">
+              <Eyebrow color="green" class="mb-3">Concrete benefits</Eyebrow>
+              <div class="grid sm:grid-cols-2 gap-2">
+                {sol.benefits.map((b) => (
+                  <div class="flex gap-2 text-sm text-ink">
+                    <span class="shrink-0 font-bold" style="color: var(--color-green)">✓</span>{b}
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div class="mb-5">
+              <Eyebrow color="green" class="mb-3">Target markets</Eyebrow>
+              <div class="flex flex-wrap gap-2">
+                {sol.markets.map((m) => <Tag href={m.href} color="green">{m.label}</Tag>)}
+              </div>
+            </div>
+            <div>
+              <Eyebrow color="orange" class="mb-3">Recommended products</Eyebrow>
+              <div class="flex flex-wrap gap-2">
+                {sol.products.map((p) => <Tag href={p.href} color="orange">{p.label}</Tag>)}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <BandeauCTA titre="A project to validate?" sousTitre="Our team advises you on the right materials for your needs." ctaLabel="Contact us" ctaHref="/en/contact" ctaVariant="orange" />
+</Layout>

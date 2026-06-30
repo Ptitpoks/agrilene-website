@@ -1,5 +1,5 @@
 export interface Enjeu {
-  icone: string;
+  iconName: string;
   titre: string;
   description: string;
 }
@@ -35,17 +35,17 @@ export const marches: Marche[] = [
       'En tant que producteur, vous cherchez à optimiser chaque étape du cycle de production pour garantir des plants de qualité, réduire les pertes et maîtriser vos coûts.',
     enjeux: [
       {
-        icone: '🌿',
+        iconName: 'Leaf',
         titre: 'Qualité des plants',
         description: 'Développement racinaire optimal, plants vigoureux et homogènes',
       },
       {
-        icone: '💧',
+        iconName: 'Droplet',
         titre: 'Maîtrise de l\'eau',
         description: 'Substrats équilibrés entre rétention et drainage',
       },
       {
-        icone: '📈',
+        iconName: 'TrendingUp',
         titre: 'Productivité',
         description: 'Taux de réussite élevé, cycles de production optimisés',
       },
@@ -94,17 +94,17 @@ export const marches: Marche[] = [
       'Le paysagisme professionnel implique de garantir le résultat dans des conditions parfois difficiles : sols de remblai, calendrier serré, budget maintenance limité.',
     enjeux: [
       {
-        icone: '✅',
+        iconName: 'CheckCircle',
         titre: 'Reprise garantie',
         description: 'Réduire les pertes et éviter les remplacements coûteux',
       },
       {
-        icone: '💧',
+        iconName: 'Droplet',
         titre: 'Autonomie hydrique',
         description: 'Limiter les arrosages post-plantation pour vos clients',
       },
       {
-        icone: '🌳',
+        iconName: 'TreeDeciduous',
         titre: 'Esthétique durable',
         description: 'Des plantations qui s\'épanouissent sur le long terme',
       },
@@ -153,22 +153,22 @@ export const marches: Marche[] = [
       'Les collectivités font face à des contraintes budgétaires, environnementales et climatiques qui exigent des solutions efficaces et durables.',
     enjeux: [
       {
-        icone: '💧',
+        iconName: 'Droplet',
         titre: 'Économie d\'eau',
         description: 'Réduire la consommation et les coûts d\'arrosage',
       },
       {
-        icone: '🌱',
+        iconName: 'Sprout',
         titre: 'Durabilité',
         description: 'Plantations résilientes face au changement climatique',
       },
       {
-        icone: '💰',
+        iconName: 'Coins',
         titre: 'Maîtrise des coûts',
         description: 'Limiter les remplacements et l\'entretien',
       },
       {
-        icone: '🌳',
+        iconName: 'TreeDeciduous',
         titre: 'Cadre de vie',
         description: 'Espaces verts attractifs et fonctionnels',
       },

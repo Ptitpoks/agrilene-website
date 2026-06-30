@@ -4,6 +4,7 @@ import Eyebrow from '../components/ui/Eyebrow.astro';
 import Tag from '../components/ui/Tag.astro';
 import ImagePlaceholder from '../components/ui/ImagePlaceholder.astro';
 import BandeauCTA from '../components/sections/BandeauCTA.astro';
+import Icon from '../components/ui/Icon.astro';
 import { produits } from '../data/produits';
 
 const marcheHref: Record<string, string> = {
@@ -23,6 +24,16 @@ const solutionLabel: Record<string, string> = {
   enracinement: "Enracinement",
   securisation: "Sécurisation",
 };
+
+const certifications = [
+  { label: '100 % roche naturelle', detail: 'Basalte et dolérite — sans additif chimique' },
+  { label: '85 % de rétention d\'eau', detail: 'Mesurée en laboratoire selon NF EN ISO 22047' },
+  { label: '5 ans sans perte de performance', detail: 'Données terrain et matériau' },
+  { label: 'CE / EUCEB / RAL', detail: 'Marquages et certifications européennes' },
+  { label: 'ISO 9001', detail: 'Système de management de la qualité' },
+  { label: 'ISO 14001', detail: 'Management environnemental' },
+  { label: 'ISO 45001', detail: 'Santé et sécurité au travail' },
+];
 
 const jsonLd = produits.map((p) => ({
   '@context': 'https://schema.org',
@@ -50,6 +61,35 @@ const jsonLd = produits.map((p) => ({
         <p class="text-lg text-muted max-w-2xl">
           Des matériaux sélectionnés pour leur efficacité agronomique, disponibles en plusieurs conditionnements adaptés à chaque usage professionnel.
         </p>
+        <p class="text-sm text-muted mt-4">
+          Fiches techniques (TDS) et fiches de données de sécurité (FDS) disponibles sur demande —
+          <a href="/contact" class="text-green hover:underline font-medium">nous contacter</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CERTIFICATIONS (A3) -->
+  <section class="py-12 bg-cream">
+    <div class="container">
+      <div class="mb-8 reveal">
+        <Eyebrow color="green" class="mb-3">Qualité & certifications</Eyebrow>
+        <h2 class="text-2xl font-bold text-ink" style="font-family: var(--font-display)">
+          Des matériaux certifiés et éprouvés
+        </h2>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 reveal">
+        {certifications.map((c) => (
+          <div class="bg-paper rounded-xl p-4 flex gap-3 items-start border border-ink/5">
+            <span class="shrink-0 w-5 h-5 rounded-full flex items-center justify-center text-white mt-0.5" style="background-color: var(--color-green)">
+              <Icon name="Check" size={10} aria-hidden="true" />
+            </span>
+            <div>
+              <div class="text-sm font-semibold text-ink">{c.label}</div>
+              <div class="text-xs text-muted mt-0.5">{c.detail}</div>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   </section>
@@ -97,6 +137,29 @@ const jsonLd = produits.map((p) => ({
                     ))}
                   </div>
                 </div>
+
+                <!-- Conditionnements (A2) -->
+                {p.conditionnements && p.conditionnements.length > 0 && (
+                  <div class="mb-5 p-3 bg-cream rounded-xl">
+                    <Eyebrow color="orange" class="mb-2">Conditionnements</Eyebrow>
+                    <ul class="space-y-1">
+                      {p.conditionnements.map((c) => (
+                        <li class="text-sm text-ink flex gap-2 items-baseline">
+                          {c.variante && <span class="font-medium shrink-0">{c.variante} :</span>}
+                          <span class="text-muted">
+                            {c.description}
+                            {c.dimensions && ` (${c.dimensions})`}
+                            {c.surface && ` — ${c.surface}`}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                    <p class="text-xs text-muted mt-2">
+                      TDS/FDS sur demande —
+                      <a href="/contact" class="text-green hover:underline">nous contacter</a>
+                    </p>
+                  </div>
+                )}
 
                 <!-- Usages -->
                 <div class="mb-5">

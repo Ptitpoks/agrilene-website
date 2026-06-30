@@ -1,0 +1,62 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Eyebrow from '../../../components/ui/Eyebrow.astro';
+import ImagePlaceholder from '../../../components/ui/ImagePlaceholder.astro';
+import BandeauCTA from '../../../components/sections/BandeauCTA.astro';
+
+const markets = [
+  {
+    name: 'Plant production',
+    desc: 'Growers, nurseries, market gardeners. Substrates, seeding, cutting propagation and young plant culture.',
+    href: '/en/marches/production-vegetale',
+    alt: 'Professional plant production — seeding and nursery young plants',
+  },
+  {
+    name: 'Landscaping',
+    desc: 'Landscaping companies. Tree planting, mass beds, planters, green roofs and sustainable landscaping.',
+    href: '/en/marches/paysagisme',
+    alt: 'Professional landscaping — tree planting and beds',
+  },
+  {
+    name: 'Local authorities',
+    desc: 'Municipalities and public bodies. Public green spaces, urban tree pits, water savings and durable plantings.',
+    href: '/en/marches/collectivites',
+    alt: 'Local authorities — public green spaces and urban greening',
+  },
+];
+---
+
+<Layout
+  title="Markets — Plant production, landscaping and local authorities | AGRILENE"
+  description="AGRILENE solutions for three markets: plant growers and nurseries, landscaping professionals, and local authorities."
+>
+
+  <section class="bg-paper py-16 md:py-24">
+    <div class="container">
+      <div class="max-w-3xl">
+        <Eyebrow color="green" class="mb-4">Markets</Eyebrow>
+        <h1 class="text-4xl md:text-5xl font-extrabold text-ink mb-6" style="font-family: var(--font-display)">Our markets</h1>
+        <p class="text-lg text-muted max-w-2xl">Concrete solutions tailored to each trade. Select your market to discover the relevant applications and recommended products.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 bg-cream">
+    <div class="container">
+      <div class="grid md:grid-cols-3 gap-6">
+        {markets.map((m) => (
+          <a href={m.href} class="group block bg-paper rounded-2xl overflow-hidden card-lift reveal">
+            <ImagePlaceholder ratio="4/3" alt={m.alt} />
+            <div class="p-6">
+              <h2 class="text-xl font-bold text-ink mb-2 group-hover:text-green transition-colors" style="font-family: var(--font-display)">{m.name}</h2>
+              <p class="text-sm text-muted mb-4">{m.desc}</p>
+              <span class="text-sm font-semibold" style="color: var(--color-green)">Explore →</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <BandeauCTA titre="Can't find your use case?" sousTitre="Our team advises you on the right materials for your project." ctaLabel="Contact us" ctaHref="/en/contact" ctaVariant="orange" />
+</Layout>

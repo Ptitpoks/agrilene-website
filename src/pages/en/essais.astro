@@ -1,0 +1,137 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Eyebrow from '../../components/ui/Eyebrow.astro';
+import Button from '../../components/ui/Button.astro';
+import ImagePlaceholder from '../../components/ui/ImagePlaceholder.astro';
+import BandeauCTA from '../../components/sections/BandeauCTA.astro';
+import Icon from '../../components/ui/Icon.astro';
+import { stats } from '../../data/stats';
+
+const trials = [
+  {
+    eyebrow: 'Field trial · Kuwait',
+    color: 'orange' as const,
+    title: "Highway #40 — Kuwait: up to 40% water savings",
+    desc: "One-year comparison of landscaped plots with Floriroll versus a control plot (50 cm of soil). Rock wool rolls retain water near the roots and significantly reduce irrigation frequency.",
+    results: ['Control: daily irrigation, 1,825 gallons/m²/year', 'Floriroll 2 cm: weekly irrigation, 20–30% water savings', 'Floriroll 4 cm: up to 40% water savings'],
+    imgNote: 'Chart: cumulative water use (gallons/m²) — Floriroll (104 and 85) vs control (140)',
+    imgAlt: 'Sum Gallon/M2 chart — Floriroll 2cm, 4cm vs control, Kuwait trial',
+    legend: 'Cumulative values over 4 weeks of testing.',
+    tip: null,
+  },
+  {
+    eyebrow: 'Field trial · Abu Dhabi',
+    color: 'orange' as const,
+    title: "TDIC Nursery, Abu Dhabi: green lawn with less water",
+    desc: "In a desert environment, Floriroll instantly absorbs irrigation water with no evaporation or sand drainage losses. Very high and stable retention and re-absorption capacity.",
+    results: ['Up to 30% water savings', 'Zero water loss by evaporation or drainage', 'Stable long-term performance'],
+    imgNote: 'Photos: control plot / with Floriroll',
+    imgAlt: 'Before/after photos of TDIC nursery Abu Dhabi with and without Floriroll',
+    legend: null,
+    tip: null,
+  },
+  {
+    eyebrow: 'Scientific study · University of Ljubljana (2019)',
+    color: 'green' as const,
+    title: "Florilène at university: more vigorous plants",
+    desc: "Culture trials by the Biotechnical Faculty of the University of Ljubljana over 8 weeks (pelargoniums), adding rock wool flakes to the substrate (0%, 25%, 50%) with identical watering.",
+    results: ['Up to +50% shoot growth', 'Root system up to 3× heavier', 'Earlier flowering, more vigorous plants', 'Substrate water retention capacity up to +62%'],
+    imgNote: 'Photos: root systems (control / 25% / 50% flakes) and pot comparisons',
+    imgAlt: 'Pelargonium root comparison with 0%, 25% and 50% Florilène — Ljubljana 2019',
+    legend: null,
+    tip: 'Recommended dose: up to 25% Florilène flakes by volume in the substrate.',
+  },
+  {
+    eyebrow: 'Material study · Maribor (2014)',
+    color: 'green' as const,
+    title: "Watermelon trial, Maribor 2014 — needled rock wool",
+    desc: "Study on watermelon culture in a substrate amended with needled rock wool. Results show significant improvement in growth and fruit quality compared to standard substrate.",
+    results: ['Better substrate water retention', 'Improved vegetative growth', 'Superior fruit quality and calibre'],
+    imgNote: 'Material study (needled rock wool) — Maribor, 2014',
+    imgAlt: 'Results of watermelon culture study with needled rock wool, Maribor 2014',
+    legend: 'Study conducted on needled rock wool material.',
+    tip: null,
+  },
+  {
+    eyebrow: 'Material study · CitiesAlive (2016)',
+    color: 'green' as const,
+    title: "Green roofs, CitiesAlive 2016 — needled rock wool",
+    desc: "Study presented at the CitiesAlive 2016 congress on the performance of needled rock wool in intensive and extensive urban green roof systems.",
+    results: ['Optimal water retention for lightweight roof substrates', 'Performance stability over several years', 'Proven compatibility with extensive and intensive systems'],
+    imgNote: 'Material study (needled rock wool) — CitiesAlive, 2016',
+    imgAlt: 'Results of needled rock wool study for green roofs, CitiesAlive 2016',
+    legend: 'Study conducted on needled rock wool material.',
+    tip: null,
+  },
+];
+---
+
+<Layout
+  title="Field trials & studies — Validated results | AGRILENE"
+  description="Field trials in Kuwait and Abu Dhabi, scientific study at the University of Ljubljana: discover the measured results of AGRILENE substrates and growing media."
+>
+
+  <section class="bg-paper py-16 md:py-24">
+    <div class="container">
+      <div class="max-w-3xl">
+        <div class="flex items-center gap-3 mb-4">
+          <Eyebrow color="green">Field trials</Eyebrow>
+          <Icon name="FlaskConical" size={20} style="color: var(--color-green)" />
+        </div>
+        <h1 class="text-4xl md:text-5xl font-extrabold text-ink mb-6" style="font-family: var(--font-display)">Results validated in the field</h1>
+        <p class="text-lg text-muted max-w-2xl">Our products are validated by real-world trials and independent scientific studies. Here is a selection of concrete results.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 bg-cream">
+    <div class="container">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        {stats.map((s) => (
+          <div class="text-center bg-paper rounded-2xl p-8 reveal card-lift">
+            <div class="text-5xl font-extrabold mb-2" style="font-family: var(--font-display); color: var(--color-green)">{s.value}</div>
+            <div class="font-semibold text-ink mb-1">{s.labelEn}</div>
+            <div class="text-xs text-muted">{s.source}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {trials.map((e, i) => (
+    <section class={`py-20 ${i % 2 === 0 ? 'bg-paper' : 'bg-cream'}`}>
+      <div class="container">
+        <div class={`grid lg:grid-cols-2 gap-12 items-start ${i % 2 !== 0 ? 'lg:grid-flow-dense' : ''}`}>
+          <div class={`reveal ${i % 2 !== 0 ? 'lg:col-start-2' : ''}`}>
+            <ImagePlaceholder ratio="4/3" alt={e.imgAlt} label={e.imgNote} />
+            {e.legend && <p class="text-xs text-muted mt-2 italic text-center">{e.legend}</p>}
+          </div>
+          <div class={`reveal ${i % 2 !== 0 ? 'lg:col-start-1 lg:row-start-1' : ''}`}>
+            <Eyebrow color={e.color} class="mb-3">{e.eyebrow}</Eyebrow>
+            <h2 class="text-2xl md:text-3xl font-bold text-ink mb-4" style="font-family: var(--font-display)">{e.title}</h2>
+            <p class="text-muted mb-5 leading-relaxed">{e.desc}</p>
+            <h3 class="font-semibold text-ink mb-3 text-sm uppercase tracking-wide">Results</h3>
+            <ul class="space-y-2 mb-5">
+              {e.results.map((r) => (
+                <li class="flex gap-3 text-sm text-ink">
+                  <span class="shrink-0 w-5 h-5 rounded-full flex items-center justify-center text-white mt-0.5" style="background-color: var(--color-green)">
+                    <Icon name="Check" size={10} aria-hidden="true" />
+                  </span>
+                  {r}
+                </li>
+              ))}
+            </ul>
+            {e.tip && (
+              <div class="bg-sage rounded-xl p-4 text-sm text-ink flex gap-2 items-start">
+                <Icon name="Lightbulb" size={16} class="shrink-0 mt-0.5" style="color: var(--color-green)" />
+                <span>{e.tip}</span>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <BandeauCTA titre="Test on your site" sousTitre="A project to validate? Our teams support you and share detailed studies matching your application." ctaLabel="Contact us" ctaHref="/en/contact" ctaVariant="orange" />
+</Layout>

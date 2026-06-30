@@ -1,0 +1,258 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Eyebrow from '../../components/ui/Eyebrow.astro';
+import Tag from '../../components/ui/Tag.astro';
+import ImagePlaceholder from '../../components/ui/ImagePlaceholder.astro';
+import BandeauCTA from '../../components/sections/BandeauCTA.astro';
+import Icon from '../../components/ui/Icon.astro';
+
+interface Conditionnement {
+  variante?: string;
+  format: string;
+  unite: string;
+  dimensions?: string;
+  surface?: string;
+  note?: string;
+}
+
+interface Product {
+  id: string;
+  name: string;
+  tagline: string;
+  what: string;
+  provides: string[];
+  doesNot?: string;
+  uses: string[];
+  markets: string[];
+  solutions: string[];
+  conditionnements?: Conditionnement[];
+}
+
+const certifications = [
+  { label: '100% natural rock', detail: 'Basalt and dolerite — no chemical additives' },
+  { label: '85% water retention', detail: 'Lab-measured per NF EN ISO 22047' },
+  { label: '5 years with no performance loss', detail: 'Field and material data' },
+  { label: 'CE / EUCEB / RAL', detail: 'European certifications and markings' },
+  { label: 'ISO 9001', detail: 'Quality management system' },
+  { label: 'ISO 14001', detail: 'Environmental management' },
+  { label: 'ISO 45001', detail: 'Occupational health & safety' },
+];
+
+const products: Product[] = [
+  {
+    id: 'perlite',
+    name: 'Perlite',
+    tagline: 'The universal substrate amendment',
+    what: 'Perlite is a mineral of volcanic origin, expanded by heat treatment. Chemically inert, very lightweight, it improves the physical structure of any substrate.',
+    provides: ['Excellent drainage and aeration', 'Root oxygenation', 'Reduced soil compaction', 'Sterile, pH-neutral substrate'],
+    doesNot: 'Perlite does not retain water — it drains. Pair it with vermiculite or rock wool for water retention.',
+    uses: ['Potting mixes', 'Seed starting and cuttings', 'Tree pit preparation', 'Root drainage'],
+    markets: ['Plant production', 'Landscaping', 'Local authorities'],
+    solutions: ['Rooting quality', 'Planting security'],
+    conditionnements: [
+      { format: 'Big bag 1 m³', unite: 'bulk' },
+      { format: 'Bag 100 L', unite: 'bag' },
+    ],
+  },
+  {
+    id: 'vermiculite',
+    name: 'Vermiculite',
+    tagline: 'Water retention & micronutrient reserve',
+    what: 'Vermiculite is a laminated mineral, expanded by heat. It combines water and nutrient retention with substrate aeration — complementary to perlite.',
+    provides: ['Water and nutrient retention', 'CEC (Cation Exchange Capacity)', 'Good aeration', 'Lightweight and easy to handle'],
+    uses: ['Seed starting and germination', 'Cuttings and young plant production', 'Potting mixes', 'Sensitive crop culture'],
+    markets: ['Plant production', 'Landscaping', 'Local authorities'],
+    solutions: ['Water management', 'Rooting quality'],
+    conditionnements: [
+      { format: 'Big bag 1 m³', unite: 'bulk' },
+      { format: 'Bag 100 L', unite: 'bag' },
+    ],
+  },
+  {
+    id: 'florilene',
+    name: 'Florilène',
+    tagline: 'Rock wool flakes for more vigorous plants',
+    what: 'Florilène is a substrate amendment made from needled rock wool flakes. Mixed into your substrate at 10–50% by volume, it significantly improves water retention and root quality.',
+    provides: ['Up to +62% substrate water retention', 'Root system up to 3× heavier', 'Up to +50% shoot growth', 'Long-term structural stability (5+ years)'],
+    uses: ['Professional potting mixes', 'Greenhouses and nurseries', 'Seeding and germination', 'Substrate improvement'],
+    markets: ['Plant production', 'Landscaping', 'Local authorities'],
+    solutions: ['Water management', 'Rooting quality'],
+    conditionnements: [
+      { variante: 'Large flakes', format: 'Bag 80 L', unite: 'bag' },
+      { variante: 'Mini flakes', format: 'Bag 80 L', unite: 'bag' },
+    ],
+  },
+  {
+    id: 'floricubes',
+    name: 'Floricubes',
+    tagline: 'Rock wool cubes for professional propagation',
+    what: 'Floricubes are rock wool growing cubes designed for cutting and young plant propagation. They combine high water retention with ideal aeration for fast, healthy rooting.',
+    provides: ['Optimal water/air balance', 'Rapid and homogeneous rooting', 'Easy transplanting without root disturbance', 'No substrate compaction'],
+    uses: ['Cutting propagation', 'Young plant production', 'Seeding and germination', 'Professional propagation'],
+    markets: ['Plant production'],
+    solutions: ['Rooting quality', 'Planting security'],
+    conditionnements: [
+      { format: 'Box of 24 sachets', unite: 'box' },
+    ],
+  },
+  {
+    id: 'floriroll',
+    name: 'Floriroll',
+    tagline: 'Rock wool rolls for lawn and planting',
+    what: 'Floriroll is a needled rock wool roll placed below turf or at the bottom of planting pits. Proven in extreme climates (Kuwait, Abu Dhabi), it reduces irrigation by up to 40%.',
+    provides: ['Up to 40% water savings vs control', 'Instant absorption without evaporation or drainage loss', 'Long-term performance stability', 'Proven results in desert climates'],
+    uses: ['Turf and lawns', 'Golf greens', 'Tree planting pits', 'Urban green roofs'],
+    markets: ['Landscaping', 'Local authorities'],
+    solutions: ['Water management', 'Planting security'],
+    conditionnements: [
+      { variante: '2 cm thickness', format: '20×1000×6000 mm', unite: 'roll', surface: '6 m²/roll' },
+      { variante: '4 cm thickness', format: '40×1000×3000 mm', unite: 'roll', surface: '3 m²/roll' },
+    ],
+  },
+  {
+    id: 'miscanthus',
+    name: 'Miscanthus',
+    tagline: 'Natural plant-based mulch',
+    what: 'Miscanthus × giganteus (Elephant grass) is a perennial plant with very fast growth. Our miscanthus mulch is a natural, biodegradable alternative to wood mulch — lighter, more stable, and better at reducing evaporation.',
+    provides: ['Reduces soil surface evaporation', 'Limits weed growth', 'Lightweight and easy to spread', 'Natural and biodegradable'],
+    doesNot: 'Miscanthus does not retain water in the substrate — it reduces evaporation at the surface. For deep water storage, pair it with Floriroll or Florilène.',
+    uses: ['Ornamental mulching', 'Ground cover for beds', 'Urban tree pits', 'Landscaping projects'],
+    markets: ['Landscaping', 'Local authorities'],
+    solutions: ['Planting security', 'Water management'],
+    conditionnements: [
+      { format: 'Big bag 1 m³', unite: 'bulk' },
+    ],
+  },
+];
+
+const solutionHref: Record<string, string> = {
+  'Water management': '/en/solutions#eau',
+  'Rooting quality': '/en/solutions#enracinement',
+  'Planting security': '/en/solutions#securisation',
+};
+
+const marketHref: Record<string, string> = {
+  'Plant production': '/en/marches/production-vegetale',
+  'Landscaping': '/en/marches/paysagisme',
+  'Local authorities': '/en/marches/collectivites',
+};
+---
+
+<Layout
+  title="Products — Perlite, vermiculite, Florilène, Floricubes, Floriroll & miscanthus | AGRILENE"
+  description="Discover the full AGRILENE range: perlite, vermiculite, Florilène (rock wool flakes), Floricubes, Floriroll (rolls) and miscanthus to improve your substrates."
+>
+
+  <!-- HERO -->
+  <section class="bg-paper py-16 md:py-24">
+    <div class="container">
+      <div class="max-w-3xl">
+        <Eyebrow color="green" class="mb-4">Products</Eyebrow>
+        <h1 class="text-4xl md:text-5xl font-extrabold text-ink mb-6" style="font-family: var(--font-display)">Our products</h1>
+        <p class="text-lg text-muted max-w-2xl">Selected for their agronomic effectiveness, available in several pack sizes for every professional application.</p>
+        <p class="text-sm text-muted mt-4">
+          Technical data sheets (TDS) and safety data sheets (SDS) available on request —
+          <a href="/en/contact" class="text-green hover:underline font-medium">contact us</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CERTIFICATIONS -->
+  <section class="py-12 bg-cream">
+    <div class="container">
+      <div class="mb-8 reveal">
+        <Eyebrow color="green" class="mb-3">Quality & certifications</Eyebrow>
+        <h2 class="text-2xl font-bold text-ink" style="font-family: var(--font-display)">Certified and proven materials</h2>
+      </div>
+      <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        {certifications.map((c) => (
+          <div class="bg-paper rounded-xl p-4 flex gap-3 items-start reveal">
+            <span class="shrink-0 w-5 h-5 rounded-full flex items-center justify-center text-white text-xs font-bold mt-0.5" style="background-color: var(--color-green)">
+              <Icon name="Check" size={10} aria-hidden="true" />
+            </span>
+            <div>
+              <div class="font-semibold text-ink text-sm">{c.label}</div>
+              <div class="text-xs text-muted mt-0.5">{c.detail}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCTS -->
+  {products.map((p, i) => (
+    <section id={p.id} class={`py-20 ${i % 2 === 0 ? 'bg-paper' : 'bg-cream'}`}>
+      <div class="container">
+        <div class={`grid lg:grid-cols-2 gap-14 items-start ${i % 2 !== 0 ? 'lg:grid-flow-dense' : ''}`}>
+          <div class={i % 2 !== 0 ? 'lg:col-start-2' : ''}>
+            <ImagePlaceholder ratio="4/3" alt={`${p.name} — ${p.tagline}`} label={`Product photo: ${p.name}`} />
+          </div>
+          <div class={i % 2 !== 0 ? 'lg:col-start-1 lg:row-start-1' : ''}>
+            <h2 class="text-3xl md:text-4xl font-extrabold text-ink mb-1" style="font-family: var(--font-display)">{p.name}</h2>
+            <p class="text-muted text-lg mb-5 font-medium">{p.tagline}</p>
+            <p class="text-muted mb-6 leading-relaxed">{p.what}</p>
+
+            <div class="mb-5">
+              <Eyebrow color="green" class="mb-3">What it provides</Eyebrow>
+              <div class="grid sm:grid-cols-2 gap-2">
+                {p.provides.map((b) => (
+                  <div class="flex gap-2 text-sm text-ink items-start">
+                    <span class="shrink-0 w-5 h-5 rounded-full flex items-center justify-center text-white mt-0.5 text-xs" style="background-color: var(--color-green)">
+                      <Icon name="Check" size={10} aria-hidden="true" />
+                    </span>
+                    {b}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {p.doesNot && (
+              <div class="bg-orange/10 rounded-xl p-4 mb-5 text-sm text-ink">
+                <strong class="font-semibold" style="color: var(--color-orange)">Note: </strong>{p.doesNot}
+              </div>
+            )}
+
+            {p.conditionnements && (
+              <div class="bg-cream rounded-xl p-4 mb-5">
+                <Eyebrow color="green" class="mb-3">Pack sizes</Eyebrow>
+                <div class="space-y-2">
+                  {p.conditionnements.map((c) => (
+                    <div class="text-sm text-ink">
+                      {c.variante && <span class="font-semibold">{c.variante} — </span>}
+                      {c.format}
+                      {c.surface && <span class="text-muted ml-2">({c.surface})</span>}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            <div class="mb-5">
+              <Eyebrow color="orange" class="mb-3">Main uses</Eyebrow>
+              <div class="flex flex-wrap gap-2">
+                {p.uses.map((u) => <span class="px-3 py-1 rounded-full text-sm border" style="border-color: var(--color-orange); color: var(--color-orange)">{u}</span>)}
+              </div>
+            </div>
+
+            <div class="mb-4">
+              <Eyebrow color="green" class="mb-3">Markets</Eyebrow>
+              <div class="flex flex-wrap gap-2">
+                {p.markets.map((m) => <Tag href={marketHref[m]} color="green">{m}</Tag>)}
+              </div>
+            </div>
+            <div>
+              <Eyebrow color="green" class="mb-3">Solutions</Eyebrow>
+              <div class="flex flex-wrap gap-2">
+                {p.solutions.map((s) => <Tag href={solutionHref[s]} color="green">{s}</Tag>)}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <BandeauCTA titre="Need a quote or technical info?" sousTitre="TDS/SDS sheets and commercial information available on request." ctaLabel="Contact us" ctaHref="/en/contact" ctaVariant="orange" />
+</Layout>

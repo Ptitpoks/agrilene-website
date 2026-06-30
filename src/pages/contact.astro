@@ -1,6 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Eyebrow from '../components/ui/Eyebrow.astro';
+import Icon from '../components/ui/Icon.astro';
+import { contactLinks } from '../config/links';
 ---
 
 <Layout
@@ -32,7 +34,9 @@ import Eyebrow from '../components/ui/Eyebrow.astro';
 
           <address class="not-italic space-y-6">
             <div class="flex gap-4">
-              <div class="w-10 h-10 rounded-xl bg-sage flex items-center justify-center shrink-0 text-lg" aria-hidden="true">📍</div>
+              <div class="w-10 h-10 rounded-xl bg-sage flex items-center justify-center shrink-0" aria-hidden="true">
+                <Icon name="MapPin" size={18} style="color: var(--color-green)" />
+              </div>
               <div>
                 <div class="font-semibold text-ink text-sm mb-0.5">Adresse</div>
                 <p class="text-sm text-muted">
@@ -44,24 +48,31 @@ import Eyebrow from '../components/ui/Eyebrow.astro';
             </div>
 
             <div class="flex gap-4">
-              <div class="w-10 h-10 rounded-xl bg-sage flex items-center justify-center shrink-0 text-lg" aria-hidden="true">📞</div>
+              <div class="w-10 h-10 rounded-xl bg-sage flex items-center justify-center shrink-0" aria-hidden="true">
+                <Icon name="Phone" size={18} style="color: var(--color-green)" />
+              </div>
               <div>
                 <div class="font-semibold text-ink text-sm mb-0.5">Téléphone</div>
-                <a href="tel:+33682077693" class="text-sm text-muted hover:text-green transition-colors">+33 6 82 07 76 93</a>
+                <a href={`tel:${contactLinks.phone}`} class="text-sm text-muted hover:text-green transition-colors">{contactLinks.phoneDisplay}</a>
               </div>
             </div>
 
             <div class="flex gap-4">
-              <div class="w-10 h-10 rounded-xl bg-sage flex items-center justify-center shrink-0 text-lg" aria-hidden="true">✉️</div>
+              <div class="w-10 h-10 rounded-xl bg-sage flex items-center justify-center shrink-0" aria-hidden="true">
+                <Icon name="Mail" size={18} style="color: var(--color-green)" />
+              </div>
               <div>
                 <div class="font-semibold text-ink text-sm mb-0.5">Email</div>
-                <a href="mailto:contact@agrilene.fr" class="text-sm text-muted hover:text-green transition-colors">contact@agrilene.fr</a>
+                <a href={`mailto:${contactLinks.emailPublic}`} class="text-sm text-muted hover:text-green transition-colors">{contactLinks.emailPublic}</a>
               </div>
             </div>
           </address>
 
           <div class="mt-8 p-5 bg-cream rounded-xl">
-            <div class="font-semibold text-ink text-sm mb-2">⏰ Horaires</div>
+            <div class="flex items-center gap-2 font-semibold text-ink text-sm mb-2">
+              <Icon name="Clock" size={15} style="color: var(--color-green)" />
+              Horaires
+            </div>
             <p class="text-sm text-muted">Du lundi au vendredi</p>
             <p class="text-sm text-ink font-medium">8h30–12h00 / 14h00–17h30</p>
           </div>
@@ -78,10 +89,12 @@ import Eyebrow from '../components/ui/Eyebrow.astro';
             class="space-y-5"
             novalidate
           >
-            <!-- Web3Forms access key — remplacer par la vraie clé liée à contact@agrilene.fr -->
             <input type="hidden" name="access_key" value="VOTRE-CLE-WEB3FORMS" />
             <input type="hidden" name="subject" value="Nouveau message depuis agrilene.fr" />
             <input type="hidden" name="from_name" value="Site AGRILENE" />
+            <input type="hidden" name="redirect" value="false" />
+            <!-- Destinataire interne — non affiché publiquement -->
+            <input type="hidden" name="to" value={contactLinks.emailInternal} />
             <!-- Honeypot anti-spam -->
             <input type="checkbox" name="botcheck" class="hidden" style="display:none" tabindex="-1" aria-hidden="true" />
 
@@ -199,10 +212,10 @@ import Eyebrow from '../components/ui/Eyebrow.astro';
 
             <!-- Messages état -->
             <div id="form-success" class="hidden p-4 bg-sage rounded-xl text-sm text-green-dark font-medium" role="status">
-              ✅ Message envoyé avec succès ! Nous vous répondrons dans les plus brefs délais.
+              Message envoyé avec succès — nous vous répondrons dans les plus brefs délais.
             </div>
             <div id="form-error" class="hidden p-4 bg-orange/10 rounded-xl text-sm text-orange font-medium" role="alert">
-              Une erreur est survenue. Veuillez réessayer ou nous contacter directement à <a href="mailto:contact@agrilene.fr" class="underline">contact@agrilene.fr</a>.
+              Une erreur est survenue. Veuillez réessayer ou nous contacter directement à <a href={`mailto:${contactLinks.emailPublic}`} class="underline">{contactLinks.emailPublic}</a>.
             </div>
           </form>
         </div>
@@ -240,7 +253,6 @@ import Eyebrow from '../components/ui/Eyebrow.astro';
     e.preventDefault();
     if (!form) return;
 
-    // Basic validation
     const required = form.querySelectorAll('[required]');
     let valid = true;
     required.forEach((el) => {
@@ -253,7 +265,6 @@ import Eyebrow from '../components/ui/Eyebrow.astro';
       return;
     }
 
-    // Submit
     if (submitBtn) submitBtn.disabled = true;
     btnLabel?.classList.add('hidden');
     btnSpinner?.classList.remove('hidden');

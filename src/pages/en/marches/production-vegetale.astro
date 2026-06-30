@@ -1,0 +1,106 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Eyebrow from '../../../components/ui/Eyebrow.astro';
+import Button from '../../../components/ui/Button.astro';
+import Tag from '../../../components/ui/Tag.astro';
+import ImagePlaceholder from '../../../components/ui/ImagePlaceholder.astro';
+import BandeauCTA from '../../../components/sections/BandeauCTA.astro';
+import Icon from '../../../components/ui/Icon.astro';
+
+const challenges = [
+  { iconName: 'Leaf', title: 'Plant quality', desc: 'Optimal root development, vigorous and uniform young plants' },
+  { iconName: 'Droplet', title: 'Water management', desc: 'Substrates balanced between retention and drainage' },
+  { iconName: 'TrendingUp', title: 'Productivity', desc: 'High success rates, optimised production cycles' },
+];
+
+const useCases = [
+  { title: 'Growing substrates', desc: 'Technical mixes for pots, plug trays and containers', products: ['Perlite', 'Vermiculite', 'Florilène'] },
+  { title: 'Seeding & germination', desc: 'Optimal conditions for seed germination and seedling development', products: ['Vermiculite', 'Floricubes'] },
+  { title: 'Cuttings & propagation', desc: 'Fast and healthy rooting of cuttings', products: ['Perlite', 'Floricubes'] },
+  { title: 'Water-stressed crops', desc: 'Water management in production at risk of stress', products: ['Vermiculite', 'Florilène'] },
+];
+
+const benefits = [
+  'Homogeneous, reproducible substrates', 'Better rooting of young plants',
+  'Reduced losses during propagation', 'Optimised water consumption',
+  'More resilient plants at transplanting', 'Improved marketable quality',
+];
+
+const produitHref: Record<string, string> = {
+  'Perlite': '/en/produits#perlite', 'Vermiculite': '/en/produits#vermiculite',
+  'Florilène': '/en/produits#florilene', 'Floricubes': '/en/produits#floricubes',
+  'Floriroll': '/en/produits#floriroll', 'Miscanthus': '/en/produits#miscanthus',
+};
+---
+
+<Layout
+  title="Plant production — Substrates for growers and nurseries | AGRILENE"
+  description="Perlite, vermiculite, Florilène, Floricubes: substrates and growing media for plant growers, nurseries and market gardeners."
+>
+
+  <section class="relative bg-ink text-white py-24 md:py-32 overflow-hidden">
+    <div class="container relative">
+      <Eyebrow color="orange" class="mb-4">Market</Eyebrow>
+      <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-tight" style="font-family: var(--font-display)">Plant production</h1>
+      <p class="text-lg text-white/75 max-w-2xl">Substrates and growing media for growers, nurseries and market gardeners. Optimise your mixes, improve rooting and secure your crops.</p>
+    </div>
+  </section>
+
+  <section class="py-20 bg-paper">
+    <div class="container">
+      <div class="text-center mb-12 reveal">
+        <h2 class="text-3xl md:text-4xl font-bold text-ink mb-4" style="font-family: var(--font-display)">Your production objectives</h2>
+        <p class="text-muted max-w-2xl mx-auto">As a grower, you need to optimise every stage of the production cycle to guarantee plant quality, reduce losses and control costs.</p>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        {challenges.map((e) => (
+          <div class="bg-sage rounded-2xl p-6 reveal card-lift">
+            <div class="mb-3" aria-hidden="true"><Icon name={e.iconName as any} size={28} style="color: var(--color-green)" /></div>
+            <h3 class="font-bold text-ink mb-2" style="font-family: var(--font-display)">{e.title}</h3>
+            <p class="text-sm text-muted">{e.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 bg-cream">
+    <div class="container">
+      <div class="text-center mb-12 reveal">
+        <h2 class="text-3xl md:text-4xl font-bold text-ink mb-4" style="font-family: var(--font-display)">Concrete use cases</h2>
+        <p class="text-muted max-w-2xl mx-auto">Discover how our materials integrate with your production practices.</p>
+      </div>
+      <div class="grid sm:grid-cols-2 gap-5">
+        {useCases.map((c) => (
+          <article class="bg-paper rounded-2xl p-6 reveal card-lift">
+            <h3 class="font-bold text-ink mb-2" style="font-family: var(--font-display)">{c.title}</h3>
+            <p class="text-sm text-muted mb-4">{c.desc}</p>
+            <div class="flex flex-wrap gap-2">{c.products.map((p) => <Tag href={produitHref[p] ?? '/en/produits'} color="orange">{p}</Tag>)}</div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 bg-paper">
+    <div class="container">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div class="reveal">
+          <h2 class="text-3xl md:text-4xl font-bold text-ink mb-8" style="font-family: var(--font-display)">Benefits for your production</h2>
+          <div class="grid sm:grid-cols-2 gap-3">
+            {benefits.map((b) => (
+              <div class="flex gap-3 text-sm text-ink items-start">
+                <span class="shrink-0 w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold text-white mt-0.5" style="background-color: var(--color-green)">✓</span>
+                {b}
+              </div>
+            ))}
+          </div>
+          <div class="mt-8"><Button href="/en/produits" variant="primary" arrow>See our products</Button></div>
+        </div>
+        <div class="reveal"><ImagePlaceholder ratio="4/3" alt="Professional plant production — AGRILENE substrates" label="Coming soon" /></div>
+      </div>
+    </div>
+  </section>
+
+  <BandeauCTA titre="A plant production project?" sousTitre="Our team supports you and shares technical studies relevant to your application." ctaLabel="Contact us" ctaHref="/en/contact" ctaVariant="orange" />
+</Layout>

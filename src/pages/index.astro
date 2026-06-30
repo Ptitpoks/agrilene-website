@@ -4,6 +4,8 @@ import Button from '../components/ui/Button.astro';
 import Eyebrow from '../components/ui/Eyebrow.astro';
 import ImagePlaceholder from '../components/ui/ImagePlaceholder.astro';
 import BandeauCTA from '../components/sections/BandeauCTA.astro';
+import Icon from '../components/ui/Icon.astro';
+import { stats } from '../data/stats';
 
 const jsonLd = [
   {
@@ -30,28 +32,36 @@ const jsonLd = [
 
 const problemes = [
   {
-    icone: '💧',
+    icon: 'Droplet' as const,
+    couleur: 'blue' as const,
     titre: "Gestion de l'eau",
     texte: "Sols trop drainants ou trop compacts, stress hydrique et arrosages fréquents",
-    couleur: 'bg-blue/10',
+    bg: 'bg-blue/10',
+    iconColor: 'var(--color-blue)',
   },
   {
-    icone: '🌱',
+    icon: 'Sprout' as const,
+    couleur: 'green' as const,
     titre: 'Enracinement difficile',
     texte: 'Racines asphyxiées, croissance limitée, reprise laborieuse des jeunes plants',
-    couleur: 'bg-sage',
+    bg: 'bg-sage',
+    iconColor: 'var(--color-green)',
   },
   {
-    icone: '🛡️',
+    icon: 'ShieldCheck' as const,
+    couleur: 'orange' as const,
     titre: 'Pertes à la plantation',
     texte: 'Mortalité élevée des plants, coûts de remplacement, retards de croissance',
-    couleur: 'bg-orange/10',
+    bg: 'bg-orange/10',
+    iconColor: 'var(--color-orange)',
   },
   {
-    icone: '🌲',
+    icon: 'TreePine' as const,
+    couleur: 'green' as const,
     titre: 'Durabilité',
     texte: 'Plantations fragiles face aux contraintes climatiques et urbaines',
-    couleur: 'bg-sage',
+    bg: 'bg-sage',
+    iconColor: 'var(--color-green)',
   },
 ];
 
@@ -76,12 +86,6 @@ const solutionsCards = [
   },
 ];
 
-const chiffres = [
-  { valeur: '−40 %', detail: "d'eau d'irrigation", note: 'Essai terrain, Koweït' },
-  { valeur: '×3', detail: 'système racinaire', note: 'Université de Ljubljana' },
-  { valeur: '+50 %', detail: 'de croissance des pousses', note: 'Étude indépendante 2019' },
-];
-
 const domaines = [
   {
     nom: 'Production végétale',
@@ -101,6 +105,12 @@ const domaines = [
     href: '/marches/collectivites',
     alt: "Collectivités — espaces verts publics et végétalisation urbaine",
   },
+];
+
+const heroTrusts = [
+  { icon: 'Award' as const, label: "Minéraux de qualité professionnelle" },
+  { icon: 'Calendar' as const, label: "40+ ans d'expertise (depuis 1980)" },
+  { icon: 'Globe' as const, label: "Éprouvé en conditions extrêmes" },
 ];
 ---
 
@@ -158,13 +168,9 @@ const domaines = [
           </div>
 
           <div class="flex flex-col sm:flex-row gap-4 sm:gap-6">
-            {[
-              { icon: '🏆', label: "Minéraux de qualité professionnelle" },
-              { icon: '📅', label: "40+ ans d'expertise (depuis 1980)" },
-              { icon: '🌍', label: "Éprouvé en conditions extrêmes" },
-            ].map((item) => (
+            {heroTrusts.map((item) => (
               <div class="flex items-center gap-2 text-sm text-muted">
-                <span class="text-base" aria-hidden="true">{item.icon}</span>
+                <Icon name={item.icon} size={16} class="shrink-0" style={`color: var(--color-green)`} />
                 <span>{item.label}</span>
               </div>
             ))}
@@ -179,7 +185,7 @@ const domaines = [
           />
           <div class="absolute bottom-4 left-4 bg-white/95 backdrop-blur-sm rounded-xl p-4 shadow-lg border border-ink/8 max-w-[180px]">
             <div class="flex items-center gap-2 mb-1">
-              <span class="text-lg">🌱</span>
+              <Icon name="Sprout" size={16} style="color: var(--color-green)" />
               <span class="text-xs font-bold text-ink" style="font-family: var(--font-display)">AGRILENE</span>
             </div>
             <p class="text-xs text-muted leading-tight">Substrats éprouvés. Racines plus fortes.</p>
@@ -238,8 +244,10 @@ const domaines = [
 
       <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
         {problemes.map((p) => (
-          <div class={`${p.couleur} rounded-2xl p-6 reveal card-lift`}>
-            <div class="text-3xl mb-3" aria-hidden="true">{p.icone}</div>
+          <div class={`${p.bg} rounded-2xl p-6 reveal card-lift`}>
+            <div class="mb-3" aria-hidden="true">
+              <Icon name={p.icon} size={28} style={`color: ${p.iconColor}`} />
+            </div>
             <h3 class="font-bold text-ink mb-2" style="font-family: var(--font-display)">{p.titre}</h3>
             <p class="text-sm text-muted">{p.texte}</p>
           </div>
@@ -291,11 +299,11 @@ const domaines = [
       </div>
 
       <div class="grid md:grid-cols-3 gap-6 mb-10">
-        {chiffres.map((c) => (
+        {stats.slice(0, 3).map((s) => (
           <div class="text-center bg-sage rounded-2xl p-8 reveal card-lift">
-            <div class="text-5xl font-extrabold mb-2" style="font-family: var(--font-display); color: var(--color-green)">{c.valeur}</div>
-            <div class="font-semibold text-ink mb-1">{c.detail}</div>
-            <div class="text-xs text-muted">{c.note}</div>
+            <div class="text-5xl font-extrabold mb-2" style="font-family: var(--font-display); color: var(--color-green)">{s.value}</div>
+            <div class="font-semibold text-ink mb-1">{s.label}</div>
+            <div class="text-xs text-muted">{s.source}</div>
           </div>
         ))}
       </div>

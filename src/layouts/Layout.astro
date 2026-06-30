@@ -2,6 +2,7 @@
 import Header from '../components/layout/Header.astro';
 import Footer from '../components/layout/Footer.astro';
 import '../styles/global.css';
+import { getLangFromUrl } from '../i18n/utils';
 
 interface Props {
   title: string;
@@ -24,15 +25,18 @@ const {
 const siteUrl = 'https://www.agrilene.fr';
 const canonicalUrl = canonical ?? siteUrl + Astro.url.pathname;
 const fullTitle = title.includes('AGRILENE') ? title : `${title} | AGRILENE`;
+const lang = getLangFromUrl(Astro.url);
+const isPreview = import.meta.env.PUBLIC_SITE_ENV === 'preview';
+const ogLocale = lang === 'en' ? 'en_US' : 'fr_FR';
 ---
 
 <!doctype html>
-<html lang="fr">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
-    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    {(noindex || isPreview) && <meta name="robots" content="noindex, nofollow" />}
 
     <title>{fullTitle}</title>
     <link rel="canonical" href={canonicalUrl} />
@@ -43,7 +47,7 @@ const fullTitle = title.includes('AGRILENE') ? title : `${title} | AGRILENE`;
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={siteUrl + ogImage} />
-    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:locale" content={ogLocale} />
     <meta property="og:site_name" content="AGRILENE" />
 
     <!-- Twitter Card -->

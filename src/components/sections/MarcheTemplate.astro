@@ -5,6 +5,7 @@ import Button from '../ui/Button.astro';
 import Tag from '../ui/Tag.astro';
 import ImagePlaceholder from '../ui/ImagePlaceholder.astro';
 import BandeauCTA from './BandeauCTA.astro';
+import Icon from '../ui/Icon.astro';
 import type { Marche } from '../../data/marches';
 
 interface Props {
@@ -73,7 +74,9 @@ const produitHref: Record<string, string> = {
       <div class={`grid sm:grid-cols-2 ${marche.enjeux.length === 4 ? 'lg:grid-cols-4' : 'lg:grid-cols-3'} gap-5`}>
         {marche.enjeux.map((e) => (
           <div class="bg-sage rounded-2xl p-6 reveal card-lift">
-            <div class="text-3xl mb-3" aria-hidden="true">{e.icone}</div>
+            <div class="mb-3" aria-hidden="true">
+              <Icon name={e.iconName as any} size={28} style="color: var(--color-green)" />
+            </div>
             <h3 class="font-bold text-ink mb-2" style="font-family: var(--font-display)">{e.titre}</h3>
             <p class="text-sm text-muted">{e.description}</p>
           </div>
