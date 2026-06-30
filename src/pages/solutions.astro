@@ -3,10 +3,15 @@ import Layout from '../layouts/Layout.astro';
 import Eyebrow from '../components/ui/Eyebrow.astro';
 import Button from '../components/ui/Button.astro';
 import Tag from '../components/ui/Tag.astro';
-import ImagePlaceholder from '../components/ui/ImagePlaceholder.astro';
 import BandeauCTA from '../components/sections/BandeauCTA.astro';
 import Icon from '../components/ui/Icon.astro';
 import { solutions } from '../data/solutions';
+
+const solutionImg: Record<string, string> = {
+  eau: '/images/solution-eau.jpg',
+  enracinement: '/images/solution-enracinement.jpg',
+  securisation: '/images/solution-protection.jpg',
+};
 
 const marcheHref: Record<string, string> = {
   'Production végétale': '/marches/production-vegetale',
@@ -52,10 +57,13 @@ const produitHref: Record<string, string> = {
 
           <!-- Visual -->
           <div class={i % 2 !== 0 ? 'lg:col-start-2' : ''}>
-            <ImagePlaceholder
-              ratio="4/3"
+            <img
+              src={solutionImg[sol.id]}
               alt={`Illustration de la solution "${sol.titre}" — matériaux AGRILENE`}
-              label={`Illustration : ${sol.titre}`}
+              class="w-full rounded-2xl object-cover"
+              style="aspect-ratio: 4/3"
+              loading="lazy"
+              decoding="async"
             />
           </div>
 

@@ -2,9 +2,14 @@
 import Layout from '../../layouts/Layout.astro';
 import Eyebrow from '../../components/ui/Eyebrow.astro';
 import Tag from '../../components/ui/Tag.astro';
-import ImagePlaceholder from '../../components/ui/ImagePlaceholder.astro';
 import BandeauCTA from '../../components/sections/BandeauCTA.astro';
 import Icon from '../../components/ui/Icon.astro';
+
+const solutionImg: Record<string, string> = {
+  eau: '/images/solution-eau.jpg',
+  enracinement: '/images/solution-enracinement.jpg',
+  securisation: '/images/solution-protection.jpg',
+};
 
 const solutions = [
   {
@@ -66,7 +71,14 @@ const solutions = [
       <div class="container">
         <div class={`grid lg:grid-cols-2 gap-14 items-start ${i % 2 !== 0 ? 'lg:grid-flow-dense' : ''}`}>
           <div class={i % 2 !== 0 ? 'lg:col-start-2' : ''}>
-            <ImagePlaceholder ratio="4/3" alt={`${sol.title} — AGRILENE materials`} label={`Illustration: ${sol.title}`} />
+            <img
+              src={solutionImg[sol.id]}
+              alt={`${sol.title} — AGRILENE materials`}
+              class="w-full rounded-2xl object-cover"
+              style="aspect-ratio: 4/3"
+              loading="lazy"
+              decoding="async"
+            />
           </div>
           <div class={i % 2 !== 0 ? 'lg:col-start-1 lg:row-start-1' : ''}>
             <div class="flex items-center gap-4 mb-6">
