@@ -206,6 +206,7 @@ export const produits: Produit[] = [
     ],
     solutionsLiees: ['eau', 'securisation'],
     imageAlt: 'Rouleaux Floriroll en laine de roche pour toitures et grandes surfaces végétalisées',
+    img: '/images/produit-floriroll.png',
   },
   {
     slug: 'miscanthus',
