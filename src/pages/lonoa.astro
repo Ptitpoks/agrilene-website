@@ -2,7 +2,6 @@
 import Layout from '../layouts/Layout.astro';
 import Eyebrow from '../components/ui/Eyebrow.astro';
 import Button from '../components/ui/Button.astro';
-import ImagePlaceholder from '../components/ui/ImagePlaceholder.astro';
 import BandeauCTA from '../components/sections/BandeauCTA.astro';
 import Icon from '../components/ui/Icon.astro';
 import { appLinks } from '../config/links';
@@ -170,7 +169,7 @@ const calcConfig = dosageModes.map((key) => ({
     <div class="container">
       <div class="grid lg:grid-cols-2 gap-12 items-center">
         <div class="reveal">
-          <ImagePlaceholder ratio="3/2" alt="Comparaison plante stressée vs plante vigoureuse avec LONOA" label="Visuel comparatif sans/avec LONOA" />
+          <img src="/images/lonoa-sans-et-avec.png" alt="Comparaison sans et avec LONOA — plante stressée vs plante vigoureuse" class="w-full rounded-2xl" loading="lazy" decoding="async" />
         </div>
 
         <div class="reveal">
