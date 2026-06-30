@@ -1,0 +1,153 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Eyebrow from '../components/ui/Eyebrow.astro';
+import Button from '../components/ui/Button.astro';
+import ImagePlaceholder from '../components/ui/ImagePlaceholder.astro';
+import BandeauCTA from '../components/sections/BandeauCTA.astro';
+
+const chiffres = [
+  { valeur: '−40 %', detail: "d'eau d'irrigation", note: 'Essai terrain, Koweït' },
+  { valeur: '×3', detail: 'système racinaire', note: 'Université de Ljubljana' },
+  { valeur: '+50 %', detail: 'de croissance des pousses', note: 'Étude 2019' },
+  { valeur: '5 ans', detail: 'sans perte de performance', note: 'Durabilité des matériaux' },
+];
+
+const essais = [
+  {
+    eyebrow: 'Essai terrain · Koweït',
+    eyebrowColor: 'orange' as const,
+    titre: "Autoroute #40 — Koweït : jusqu'à 40 % d'eau économisée",
+    description: "Comparaison sur un an de parcelles paysagères équipées de Floriroll face à une parcelle témoin (50 cm de terre). Les rouleaux de laine de roche retiennent l'eau près des racines et espacent fortement les arrosages.",
+    resultats: [
+      "Parcelle témoin : arrosage quotidien, 1 825 gallons/m²/an",
+      "Floriroll 2 cm : 1 arrosage/semaine, 20 à 30 % d'économie d'eau",
+      "Floriroll 4 cm : jusqu'à 40 % d'économie d'eau",
+    ],
+    visuelNote: "Graphique : consommation d'eau cumulée (gallons/m²) — Floriroll (104 et 85) vs témoin (140)",
+    visuelAlt: "Graphique Sum Gallon/M2 — comparaison Floriroll 2cm, Floriroll 4cm et parcelle témoin, essai Koweït",
+    encart: null,
+  },
+  {
+    eyebrow: 'Essai terrain · Abu Dhabi',
+    eyebrowColor: 'orange' as const,
+    titre: "Pépinière TDIC, Abu Dhabi : un gazon vert avec moins d'eau",
+    description: "En milieu désertique, le Floriroll absorbe immédiatement l'eau d'irrigation, sans perte par évaporation ni drainage dans le sable. Capacité de rétention et de réabsorption très élevées et stables.",
+    resultats: [
+      "Jusqu'à 30 % d'économie d'eau",
+      "Aucune perte d'eau par évaporation ou drainage",
+      "Performances stables dans la durée",
+    ],
+    visuelNote: "Photos : parcelle témoin / avec Floriroll",
+    visuelAlt: "Photos avant/après de la pépinière TDIC Abu Dhabi avec et sans Floriroll — gazon vert en milieu désertique",
+    encart: null,
+  },
+  {
+    eyebrow: 'Étude scientifique · Université de Ljubljana (2019)',
+    eyebrowColor: 'green' as const,
+    titre: "Florilène à l'université : des plantes plus vigoureuses",
+    description: "Essais de culture menés par la Faculté biotechnique de l'Université de Ljubljana sur 8 semaines (pélargoniums), avec ajout de flocons de laine de roche au substrat (0 %, 25 %, 50 %) à arrosage identique.",
+    resultats: [
+      "Jusqu'à +50 % de croissance des pousses",
+      "Système racinaire jusqu'à 3 fois plus lourd",
+      "Floraison plus précoce, plantes plus vigoureuses",
+      "Capacité de rétention d'eau du substrat jusqu'à +62 %",
+    ],
+    visuelNote: "Photos : systèmes racinaires (témoin / 25 % / 50 % flocons) et pots comparés",
+    visuelAlt: "Comparaison systèmes racinaires pélargoniums avec 0 %, 25 % et 50 % de Florilène — étude Université de Ljubljana 2019",
+    encart: "Dosage recommandé : jusqu'à 25 % de flocons Florilène en volume dans le substrat.",
+  },
+];
+---
+
+<Layout
+  title="Essais & études — Résultats validés sur le terrain | AGRILENE"
+  description="Essais terrain au Koweït et Abu Dhabi, étude scientifique à l'Université de Ljubljana : découvrez les résultats chiffrés de nos substrats et supports de culture AGRILENE."
+>
+
+  <!-- HERO -->
+  <section class="bg-paper py-16 md:py-24">
+    <div class="container">
+      <div class="max-w-3xl">
+        <div class="flex items-center gap-3 mb-4">
+          <Eyebrow color="green">Tests terrain</Eyebrow>
+          <span class="text-xl" aria-hidden="true">🧪</span>
+        </div>
+        <h1 class="text-4xl md:text-5xl font-extrabold text-ink mb-6" style="font-family: var(--font-display)">
+          Des résultats validés sur le terrain
+        </h1>
+        <p class="text-lg text-muted max-w-2xl">
+          Nos produits sont validés par des essais en conditions réelles et des études scientifiques indépendantes. Voici une sélection de résultats concrets.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHIFFRES CLÉS -->
+  <section class="py-16 bg-cream">
+    <div class="container">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        {chiffres.map((c) => (
+          <div class="text-center bg-paper rounded-2xl p-8 reveal card-lift">
+            <div class="text-5xl font-extrabold mb-2" style="font-family: var(--font-display); color: var(--color-green)">{c.valeur}</div>
+            <div class="font-semibold text-ink mb-1">{c.detail}</div>
+            <div class="text-xs text-muted">{c.note}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ESSAIS DÉTAILLÉS -->
+  {essais.map((e, i) => (
+    <section class={`py-20 ${i % 2 === 0 ? 'bg-paper' : 'bg-cream'}`}>
+      <div class="container">
+        <div class={`grid lg:grid-cols-2 gap-12 items-start ${i % 2 !== 0 ? 'lg:grid-flow-dense' : ''}`}>
+
+          <!-- Visuel -->
+          <div class={`reveal ${i % 2 !== 0 ? 'lg:col-start-2' : ''}`}>
+            <ImagePlaceholder
+              ratio="4/3"
+              alt={e.visuelAlt}
+              label={e.visuelNote}
+            />
+          </div>
+
+          <!-- Texte -->
+          <div class={`reveal ${i % 2 !== 0 ? 'lg:col-start-1 lg:row-start-1' : ''}`}>
+            <Eyebrow color={e.eyebrowColor} class="mb-3">{e.eyebrow}</Eyebrow>
+            <h2 class="text-2xl md:text-3xl font-bold text-ink mb-4" style="font-family: var(--font-display)">
+              {e.titre}
+            </h2>
+            <p class="text-muted mb-5 leading-relaxed">{e.description}</p>
+
+            <h3 class="font-semibold text-ink mb-3 text-sm uppercase tracking-wide">Résultats</h3>
+            <ul class="space-y-2 mb-5">
+              {e.resultats.map((r) => (
+                <li class="flex gap-3 text-sm text-ink">
+                  <span class="shrink-0 w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold text-white mt-0.5" style="background-color: var(--color-green)">✓</span>
+                  {r}
+                </li>
+              ))}
+            </ul>
+
+            {e.encart && (
+              <div class="bg-sage rounded-xl p-4 text-sm text-ink">
+                <span class="font-semibold">💡 </span>{e.encart}
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <!-- BANDEAU CTA -->
+  <BandeauCTA
+    titre="Faire tester sur votre site"
+    sousTitre="Un projet à valider ? Nos équipes vous accompagnent et partagent les études détaillées correspondant à votre application."
+    ctaLabel="Nous contacter"
+    ctaHref="/contact"
+    ctaVariant="orange"
+  />
+
+</Layout>

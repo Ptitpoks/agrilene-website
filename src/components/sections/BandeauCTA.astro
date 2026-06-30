@@ -1,0 +1,40 @@
+---
+import Button from '../ui/Button.astro';
+
+interface Props {
+  titre: string;
+  sousTitre?: string;
+  ctaLabel: string;
+  ctaHref: string;
+  ctaVariant?: 'primary' | 'orange' | 'outline';
+  bg?: 'green' | 'brown';
+}
+
+const {
+  titre,
+  sousTitre,
+  ctaLabel,
+  ctaHref,
+  ctaVariant = 'orange',
+  bg = 'green',
+} = Astro.props;
+
+const bgMap = {
+  green: 'bg-green',
+  brown: 'bg-brown',
+};
+---
+
+<section class={`${bgMap[bg]} py-20`}>
+  <div class="container text-center">
+    <h2 class="text-3xl md:text-4xl font-bold text-white mb-4" style="font-family: var(--font-display)">
+      {titre}
+    </h2>
+    {sousTitre && (
+      <p class="text-white/80 text-lg mb-8 max-w-2xl mx-auto">{sousTitre}</p>
+    )}
+    <Button href={ctaHref} variant={ctaVariant} size="lg" arrow>
+      {ctaLabel}
+    </Button>
+  </div>
+</section>

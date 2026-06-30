@@ -1,0 +1,49 @@
+---
+interface Props {
+  href?: string;
+  variant?: 'primary' | 'secondary' | 'outline' | 'orange';
+  size?: 'sm' | 'md' | 'lg';
+  class?: string;
+  type?: 'button' | 'submit' | 'reset';
+  arrow?: boolean;
+}
+
+const {
+  href,
+  variant = 'primary',
+  size = 'md',
+  class: className = '',
+  type = 'button',
+  arrow = false,
+} = Astro.props;
+
+const base =
+  'inline-flex items-center gap-2 font-semibold rounded-full transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2';
+
+const sizeMap = {
+  sm: 'px-4 py-2 text-sm',
+  md: 'px-6 py-3 text-sm',
+  lg: 'px-8 py-4 text-base',
+};
+
+const variantMap = {
+  primary: 'bg-green text-white hover:bg-green-dark active:bg-green-dark',
+  secondary: 'bg-orange text-white hover:bg-orange-600 active:bg-orange-700',
+  outline: 'border-2 border-green text-green hover:bg-green hover:text-white',
+  orange: 'bg-orange text-white hover:opacity-90',
+};
+
+const classes = `${base} ${sizeMap[size]} ${variantMap[variant]} ${className}`;
+---
+
+{href ? (
+  <a href={href} class={classes}>
+    <slot />
+    {arrow && <span aria-hidden="true">→</span>}
+  </a>
+) : (
+  <button type={type} class={classes}>
+    <slot />
+    {arrow && <span aria-hidden="true">→</span>}
+  </button>
+)}

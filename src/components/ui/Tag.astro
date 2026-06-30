@@ -1,0 +1,22 @@
+---
+interface Props {
+  href?: string;
+  color?: 'green' | 'orange' | 'blue' | 'muted';
+}
+const { href, color = 'green' } = Astro.props;
+
+const colorMap = {
+  green: 'bg-sage text-green-dark border-green/20',
+  orange: 'bg-orange/10 text-orange border-orange/20',
+  blue: 'bg-blue/10 text-blue border-blue/20',
+  muted: 'bg-cream text-muted border-cream',
+};
+
+const classes = `inline-block text-xs font-semibold px-3 py-1 rounded-full border ${colorMap[color]} transition-opacity hover:opacity-80`;
+---
+
+{href ? (
+  <a href={href} class={classes}><slot /></a>
+) : (
+  <span class={classes}><slot /></span>
+)}

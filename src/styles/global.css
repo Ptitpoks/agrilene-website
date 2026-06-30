@@ -1,0 +1,128 @@
+@import "tailwindcss";
+
+@import "@fontsource/bricolage-grotesque/700.css";
+@import "@fontsource/bricolage-grotesque/800.css";
+@import "@fontsource/figtree/400.css";
+@import "@fontsource/figtree/500.css";
+@import "@fontsource/figtree/600.css";
+
+@theme {
+  /* Brand colors */
+  --color-ink: #25241F;
+  --color-muted: #6E665A;
+  --color-green: #3C8A3E;
+  --color-green-bright: #79B83F;
+  --color-green-dark: #2C6A30;
+  --color-orange: #E07A1E;
+  --color-blue: #3E9BC0;
+  --color-paper: #FBFAF6;
+  --color-cream: #F4EFE5;
+  --color-sage: #EAF1E5;
+  --color-brown: #463A2E;
+
+  /* Typography */
+  --font-display: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Figtree", ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Base */
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+/* Container */
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding-inline: 2rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    padding-inline: 2.5rem;
+  }
+}
+
+/* Reveal animation — content always visible; JS adds entrance effect */
+.reveal-hidden {
+  opacity: 0;
+  transform: translateY(1.25rem);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+
+.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-hidden,
+  .reveal-visible {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .particle {
+    animation: none !important;
+  }
+}
+
+/* Card hover lift */
+.card-lift {
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.card-lift:hover {
+  box-shadow: 0 8px 32px rgba(37, 36, 31, 0.12);
+  transform: translateY(-2px);
+}
+
+/* Particles */
+@keyframes drift1 {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  33% { transform: translate(6px, -10px) rotate(12deg); }
+  66% { transform: translate(-4px, 8px) rotate(-8deg); }
+}
+@keyframes drift2 {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  33% { transform: translate(-8px, 6px) rotate(-15deg); }
+  66% { transform: translate(5px, -7px) rotate(10deg); }
+}
+@keyframes drift3 {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  50% { transform: translate(4px, -12px) rotate(20deg); }
+}
+
+.particle-1 { animation: drift1 12s ease-in-out infinite; }
+.particle-2 { animation: drift2 16s ease-in-out infinite; }
+.particle-3 { animation: drift3 10s ease-in-out infinite; }
+
+/* Focus visible */
+:focus-visible {
+  outline: 2px solid var(--color-green);
+  outline-offset: 3px;
+  border-radius: 4px;
+}

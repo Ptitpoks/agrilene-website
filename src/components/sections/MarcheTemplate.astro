@@ -1,0 +1,152 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Eyebrow from '../ui/Eyebrow.astro';
+import Button from '../ui/Button.astro';
+import Tag from '../ui/Tag.astro';
+import ImagePlaceholder from '../ui/ImagePlaceholder.astro';
+import BandeauCTA from './BandeauCTA.astro';
+import type { Marche } from '../../data/marches';
+
+interface Props {
+  marche: Marche;
+}
+
+const { marche } = Astro.props;
+
+const seoTitles: Record<string, string> = {
+  'production-vegetale': 'Production végétale — Substrats pour producteurs de plants et pépiniéristes | AGRILENE',
+  'paysagisme': 'Paysagisme — Matériaux pour garantir la reprise et réduire l\'entretien | AGRILENE',
+  'collectivites': 'Collectivités — Solutions pour végétaliser durablement les espaces publics | AGRILENE',
+};
+
+const seoDescriptions: Record<string, string> = {
+  'production-vegetale': 'Perlite, vermiculite, Florilène, Floricubes : des substrats et supports de culture pour les producteurs de plants, pépiniéristes et maraîchers.',
+  'paysagisme': "Florilène, Floriroll, perlite : des matériaux pour garantir la reprise de vos plantations, réduire l'entretien et sécuriser vos chantiers paysagers.",
+  'collectivites': "Floriroll, Florilène, perlite, miscanthus : des solutions éprouvées pour végétaliser durablement les espaces publics et réduire les coûts d'entretien.",
+};
+
+const produitHref: Record<string, string> = {
+  'Perlite': '/produits#perlite',
+  'Vermiculite': '/produits#vermiculite',
+  'Florilène': '/produits#florilene',
+  'Floricubes': '/produits#floricubes',
+  'Floriroll': '/produits#floriroll',
+  'Miscanthus': '/produits#miscanthus',
+};
+---
+
+<Layout
+  title={seoTitles[marche.slug] ?? `${marche.nom} | AGRILENE`}
+  description={seoDescriptions[marche.slug] ?? marche.heroSousTitre}
+>
+
+  <!-- HERO -->
+  <section class="relative bg-ink text-white py-24 md:py-32 overflow-hidden">
+    <div class="absolute inset-0 opacity-20" aria-hidden="true">
+      <ImagePlaceholder
+        ratio="16/9"
+        alt={marche.imageAlt}
+        class="w-full h-full rounded-none border-0"
+      />
+    </div>
+    <div class="container relative">
+      <Eyebrow color="orange" class="mb-4">Marché</Eyebrow>
+      <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-tight" style="font-family: var(--font-display)">
+        {marche.nom}
+      </h1>
+      <p class="text-lg text-white/75 max-w-2xl">
+        {marche.heroSousTitre}
+      </p>
+    </div>
+  </section>
+
+  <!-- VOS ENJEUX -->
+  <section class="py-20 bg-paper">
+    <div class="container">
+      <div class="text-center mb-12 reveal">
+        <h2 class="text-3xl md:text-4xl font-bold text-ink mb-4" style="font-family: var(--font-display)">
+          {marche.labelEnjeux}
+        </h2>
+        <p class="text-muted max-w-2xl mx-auto">{marche.introEnjeux}</p>
+      </div>
+
+      <div class={`grid sm:grid-cols-2 ${marche.enjeux.length === 4 ? 'lg:grid-cols-4' : 'lg:grid-cols-3'} gap-5`}>
+        {marche.enjeux.map((e) => (
+          <div class="bg-sage rounded-2xl p-6 reveal card-lift">
+            <div class="text-3xl mb-3" aria-hidden="true">{e.icone}</div>
+            <h3 class="font-bold text-ink mb-2" style="font-family: var(--font-display)">{e.titre}</h3>
+            <p class="text-sm text-muted">{e.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CAS D'UTILISATION -->
+  <section class="py-20 bg-cream">
+    <div class="container">
+      <div class="text-center mb-12 reveal">
+        <h2 class="text-3xl md:text-4xl font-bold text-ink mb-4" style="font-family: var(--font-display)">
+          Cas d'utilisation concrets
+        </h2>
+        <p class="text-muted max-w-2xl mx-auto">{marche.introCasUsage}</p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-2 gap-5">
+        {marche.casUsage.map((c) => (
+          <article class="bg-paper rounded-2xl p-6 reveal card-lift">
+            <h3 class="font-bold text-ink mb-2" style="font-family: var(--font-display)">{c.titre}</h3>
+            <p class="text-sm text-muted mb-4">{c.description}</p>
+            <div class="flex flex-wrap gap-2">
+              {c.produits.map((p) => (
+                <Tag href={produitHref[p] ?? '/produits'} color="orange">{p}</Tag>
+              ))}
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- BÉNÉFICES -->
+  <section class="py-20 bg-paper">
+    <div class="container">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div class="reveal">
+          <h2 class="text-3xl md:text-4xl font-bold text-ink mb-8" style="font-family: var(--font-display)">
+            {marche.labelBenefices}
+          </h2>
+          <div class="grid sm:grid-cols-2 gap-3">
+            {marche.benefices.map((b) => (
+              <div class="flex gap-3 text-sm text-ink items-start">
+                <span class="shrink-0 w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold text-white mt-0.5" style="background-color: var(--color-green)">✓</span>
+                {b}
+              </div>
+            ))}
+          </div>
+          <div class="mt-8">
+            <Button href="/produits" variant="primary" arrow>Voir nos produits</Button>
+          </div>
+        </div>
+
+        <div class="reveal">
+          <ImagePlaceholder
+            ratio="4/3"
+            alt={`Bénéfices des solutions AGRILENE pour le marché ${marche.nom}`}
+            label="Image à venir"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BANDEAU CTA -->
+  <BandeauCTA
+    titre={`Un projet en ${marche.nom.toLowerCase()} ?`}
+    sousTitre="Notre équipe vous accompagne et partage les études techniques correspondant à votre application."
+    ctaLabel="Nous contacter"
+    ctaHref="/contact"
+    ctaVariant="orange"
+  />
+
+</Layout>

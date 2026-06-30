@@ -1,0 +1,177 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Eyebrow from '../components/ui/Eyebrow.astro';
+import Tag from '../components/ui/Tag.astro';
+import ImagePlaceholder from '../components/ui/ImagePlaceholder.astro';
+import BandeauCTA from '../components/sections/BandeauCTA.astro';
+import { produits } from '../data/produits';
+
+const marcheHref: Record<string, string> = {
+  'Production végétale': '/marches/production-vegetale',
+  'Paysagisme': '/marches/paysagisme',
+  'Collectivités': '/marches/collectivites',
+};
+
+const solutionHref: Record<string, string> = {
+  eau: '/solutions#eau',
+  enracinement: '/solutions#enracinement',
+  securisation: '/solutions#securisation',
+};
+
+const solutionLabel: Record<string, string> = {
+  eau: "Gestion de l'eau",
+  enracinement: "Enracinement",
+  securisation: "Sécurisation",
+};
+
+const jsonLd = produits.map((p) => ({
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  name: p.nom,
+  description: p.ceQueCest,
+  brand: { '@type': 'Brand', name: 'AGRILENE' },
+}));
+---
+
+<Layout
+  title="Produits — Perlite, vermiculite, Florilène, Floricubes, Floriroll & miscanthus | AGRILENE"
+  description="Découvrez toute la gamme AGRILENE : perlite, vermiculite, Florilène (flocons de laine de roche), Floricubes, Floriroll (rouleaux) et miscanthus pour améliorer vos substrats."
+  jsonLd={jsonLd}
+>
+
+  <!-- HERO -->
+  <section class="bg-paper py-16 md:py-24">
+    <div class="container">
+      <div class="max-w-3xl">
+        <Eyebrow color="green" class="mb-4">Produits</Eyebrow>
+        <h1 class="text-4xl md:text-5xl font-extrabold text-ink mb-6" style="font-family: var(--font-display)">
+          Nos produits
+        </h1>
+        <p class="text-lg text-muted max-w-2xl">
+          Des matériaux sélectionnés pour leur efficacité agronomique, disponibles en plusieurs conditionnements adaptés à chaque usage professionnel.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCT LISTING -->
+  <section class="pb-24 bg-paper">
+    <div class="container">
+      <div class="space-y-6">
+        {produits.map((p) => (
+          <article id={p.slug} class="bg-white rounded-2xl overflow-hidden shadow-sm border border-ink/5 reveal card-lift">
+            <div class="grid md:grid-cols-[280px_1fr] lg:grid-cols-[320px_1fr]">
+
+              <!-- Image -->
+              <div class="relative">
+                <ImagePlaceholder
+                  ratio="1/1"
+                  alt={p.imageAlt}
+                  label={`Photo ${p.nom} à venir`}
+                  class="rounded-none h-full"
+                />
+              </div>
+
+              <!-- Content -->
+              <div class="p-6 lg:p-8">
+                <!-- Header -->
+                <div class="mb-4">
+                  <div class="flex flex-wrap items-start justify-between gap-3 mb-2">
+                    <div>
+                      <h2 class="text-2xl font-bold text-ink" style="font-family: var(--font-display)">{p.nom}</h2>
+                      <p class="text-sm font-medium text-muted">{p.sousTitre} — <span class="italic">{p.nature}</span></p>
+                    </div>
+                    {p.variantes && (
+                      <div class="flex flex-wrap gap-1.5">
+                        {p.variantes.map((v) => (
+                          <span class="text-xs font-medium px-2.5 py-1 rounded-full border" style="border-color: var(--color-green); color: var(--color-green)">{v}</span>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+
+                  <!-- Market tags -->
+                  <div class="flex flex-wrap gap-1.5 mt-3">
+                    {p.marches.map((m) => (
+                      <Tag href={marcheHref[m]} color="muted">{m}</Tag>
+                    ))}
+                  </div>
+                </div>
+
+                <!-- Usages -->
+                <div class="mb-5">
+                  <Eyebrow color="green" class="mb-2">Usages</Eyebrow>
+                  <ul class="flex flex-wrap gap-x-4 gap-y-1">
+                    {p.usages.map((u) => (
+                      <li class="text-sm text-muted flex gap-1.5 items-start">
+                        <span class="mt-0.5 shrink-0" style="color: var(--color-orange)">·</span>
+                        {u}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <!-- Three columns -->
+                <div class="grid md:grid-cols-3 gap-5 text-sm">
+                  <!-- Ce que c'est -->
+                  <div>
+                    <Eyebrow color="green" class="mb-2">Ce que c'est</Eyebrow>
+                    <p class="text-muted leading-relaxed">{p.ceQueCest}</p>
+                  </div>
+
+                  <!-- Apporte -->
+                  <div>
+                    <Eyebrow color="green" class="mb-2">Ce que le matériau apporte</Eyebrow>
+                    <ul class="space-y-1.5">
+                      {p.apporte.map((a) => (
+                        <li class="flex gap-2 text-ink">
+                          <span class="shrink-0 font-bold" style="color: var(--color-green)">✓</span>
+                          {a}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <!-- Ne fait pas -->
+                  <div>
+                    <Eyebrow color="orange" class="mb-2">Ce qu'il ne fait pas</Eyebrow>
+                    <ul class="space-y-1.5">
+                      {p.neFaitPas.map((n) => (
+                        <li class="flex gap-2 text-muted">
+                          <span class="shrink-0 font-medium" style="color: var(--color-muted)">–</span>
+                          {n}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+
+                <!-- Solutions liées -->
+                {p.solutionsLiees.length > 0 && (
+                  <div class="mt-5 pt-4 border-t border-ink/5">
+                    <Eyebrow color="green" class="mb-2">Solutions associées</Eyebrow>
+                    <div class="flex flex-wrap gap-2">
+                      {p.solutionsLiees.map((s) => (
+                        <Tag href={solutionHref[s]} color="green">{solutionLabel[s] ?? s}</Tag>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- BANDEAU CTA -->
+  <BandeauCTA
+    titre="Questions sur nos produits ?"
+    sousTitre="Notre équipe vous conseille sur le choix et le dosage des matériaux selon votre projet."
+    ctaLabel="Contactez-nous"
+    ctaHref="/contact"
+    ctaVariant="orange"
+  />
+
+</Layout>

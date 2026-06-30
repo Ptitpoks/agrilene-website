@@ -1,0 +1,77 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Eyebrow from '../../components/ui/Eyebrow.astro';
+import Button from '../../components/ui/Button.astro';
+import ImagePlaceholder from '../../components/ui/ImagePlaceholder.astro';
+import BandeauCTA from '../../components/sections/BandeauCTA.astro';
+
+const cartes = [
+  {
+    nom: 'Production végétale',
+    href: '/marches/production-vegetale',
+    description: 'Producteurs de plants, pépiniéristes, maraîchers. Substrats et supports de culture pour optimiser chaque étape de la production.',
+    alt: 'Production végétale professionnelle — semis et jeunes plants',
+  },
+  {
+    nom: 'Paysagisme',
+    href: '/marches/paysagisme',
+    description: "Paysagistes et aménageurs. Des matériaux pour garantir la reprise des plantations et réduire l'entretien de vos chantiers.",
+    alt: "Paysagisme — plantation d'arbres et aménagements durables",
+  },
+  {
+    nom: 'Collectivités',
+    href: '/marches/collectivites',
+    description: "Communes, métropoles et gestionnaires d'espaces verts. Végétalisation durable, économie d'eau et maîtrise des coûts.",
+    alt: 'Collectivités — espaces verts publics et fosses urbaines',
+  },
+];
+---
+
+<Layout
+  title="Marchés — Production végétale, paysagisme, collectivités | AGRILENE"
+  description="AGRILENE propose des substrats et supports de culture adaptés aux professionnels de la production végétale, du paysagisme et des collectivités territoriales."
+>
+
+  <!-- HERO -->
+  <section class="bg-paper py-16 md:py-24">
+    <div class="container">
+      <div class="max-w-3xl">
+        <Eyebrow color="orange" class="mb-4">Marchés</Eyebrow>
+        <h1 class="text-4xl md:text-5xl font-extrabold text-ink mb-6" style="font-family: var(--font-display)">
+          Nos marchés
+        </h1>
+        <p class="text-lg text-muted max-w-2xl">
+          Des solutions adaptées à chaque métier du végétal. Qu'il s'agisse de production, d'aménagement ou de gestion d'espaces publics, nos matériaux répondent à des problématiques concrètes.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CARTES MARCHÉS -->
+  <section class="py-16 bg-cream">
+    <div class="container">
+      <div class="grid md:grid-cols-3 gap-6">
+        {cartes.map((c) => (
+          <article class="bg-paper rounded-2xl overflow-hidden card-lift reveal">
+            <ImagePlaceholder ratio="3/2" alt={c.alt} />
+            <div class="p-6">
+              <h2 class="text-xl font-bold text-ink mb-3" style="font-family: var(--font-display)">{c.nom}</h2>
+              <p class="text-sm text-muted mb-5">{c.description}</p>
+              <Button href={c.href} variant="outline" arrow size="sm">Découvrir</Button>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- BANDEAU CTA -->
+  <BandeauCTA
+    titre="Parlons de votre projet"
+    sousTitre="Nos équipes vous conseillent sur les matériaux adaptés à votre activité et votre contexte."
+    ctaLabel="Nous contacter"
+    ctaHref="/contact"
+    ctaVariant="orange"
+  />
+
+</Layout>

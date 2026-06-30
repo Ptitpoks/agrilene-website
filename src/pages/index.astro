@@ -1,0 +1,376 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Button from '../components/ui/Button.astro';
+import Eyebrow from '../components/ui/Eyebrow.astro';
+import ImagePlaceholder from '../components/ui/ImagePlaceholder.astro';
+import BandeauCTA from '../components/sections/BandeauCTA.astro';
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': ['Organization', 'LocalBusiness'],
+    name: 'AGRILENE',
+    url: 'https://www.agrilene.fr',
+    logo: 'https://www.agrilene.fr/favicon.svg',
+    description:
+      'Entreprise familiale depuis 1980, AGRILENE fournit des substrats et supports de culture (perlite, vermiculite, laine de roche, miscanthus) aux professionnels du végétal.',
+    foundingDate: '1980',
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Maule',
+      postalCode: '78580',
+      addressRegion: 'Île-de-France',
+      addressCountry: 'FR',
+    },
+    telephone: '+33682077693',
+    email: 'contact@agrilene.fr',
+    areaServed: 'FR',
+  },
+];
+
+const problemes = [
+  {
+    icone: '💧',
+    titre: "Gestion de l'eau",
+    texte: "Sols trop drainants ou trop compacts, stress hydrique et arrosages fréquents",
+    couleur: 'bg-blue/10',
+  },
+  {
+    icone: '🌱',
+    titre: 'Enracinement difficile',
+    texte: 'Racines asphyxiées, croissance limitée, reprise laborieuse des jeunes plants',
+    couleur: 'bg-sage',
+  },
+  {
+    icone: '🛡️',
+    titre: 'Pertes à la plantation',
+    texte: 'Mortalité élevée des plants, coûts de remplacement, retards de croissance',
+    couleur: 'bg-orange/10',
+  },
+  {
+    icone: '🌲',
+    titre: 'Durabilité',
+    texte: 'Plantations fragiles face aux contraintes climatiques et urbaines',
+    couleur: 'bg-sage',
+  },
+];
+
+const solutionsCards = [
+  {
+    titre: "Rétention et disponibilité de l'eau",
+    texte: "Nos matériaux retiennent l'eau et la restituent progressivement aux racines, réduisant le stress hydrique et les besoins en arrosage.",
+    href: '/solutions#eau',
+    alt: "Schéma illustrant la rétention d'eau dans les substrats Florilène et Floricubes",
+  },
+  {
+    titre: 'Structure et aération du sol',
+    texte: "Ils améliorent la structure du substrat, favorisant un enracinement profond et une meilleure circulation de l'air et de l'eau.",
+    href: '/solutions#enracinement',
+    alt: 'Racines développées grâce à la perlite et aux supports de culture AGRILENE',
+  },
+  {
+    titre: 'Protection des plantations',
+    texte: "En optimisant les conditions de reprise, ils réduisent les pertes et assurent une meilleure résilience des végétaux.",
+    href: '/solutions#securisation',
+    alt: 'Plantation sécurisée avec Floricubes et Florilène pour réduire les pertes',
+  },
+];
+
+const chiffres = [
+  { valeur: '−40 %', detail: "d'eau d'irrigation", note: 'Essai terrain, Koweït' },
+  { valeur: '×3', detail: 'système racinaire', note: 'Université de Ljubljana' },
+  { valeur: '+50 %', detail: 'de croissance des pousses', note: 'Étude indépendante 2019' },
+];
+
+const domaines = [
+  {
+    nom: 'Production végétale',
+    description: "Substrats, semis, bouturage et culture de jeunes plants en pépinière",
+    href: '/marches/production-vegetale',
+    alt: "Production végétale — semis et pépinière",
+  },
+  {
+    nom: 'Paysagisme',
+    description: "Plantation d'arbres, massifs, jardinières et aménagements durables",
+    href: '/marches/paysagisme',
+    alt: "Paysagisme professionnel — plantation d'arbres et massifs",
+  },
+  {
+    nom: 'Collectivités',
+    description: "Espaces verts publics, fosses d'arbres urbains et économie d'eau",
+    href: '/marches/collectivites',
+    alt: "Collectivités — espaces verts publics et végétalisation urbaine",
+  },
+];
+---
+
+<Layout
+  title="AGRILENE — Substrats et supports de culture pour optimiser vos plantations"
+  description="Perlite, vermiculite, laine de roche (Florilène, Floricubes, Floriroll) et miscanthus pour améliorer la rétention d'eau, l'enracinement et la reprise des plantations. Professionnels du végétal depuis 1980."
+  jsonLd={jsonLd}
+>
+
+  <!-- HERO -->
+  <section class="relative overflow-hidden bg-paper pt-16 pb-20 md:pt-24 md:pb-28">
+
+    <!-- Background particles -->
+    <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
+      <svg class="particle particle-1 absolute top-16 left-[8%] opacity-[0.06]" width="40" height="40" viewBox="0 0 40 40" fill="none">
+        <circle cx="20" cy="20" r="18" fill="#3C8A3E"/>
+        <circle cx="13" cy="14" r="3" fill="#79B83F"/>
+        <circle cx="27" cy="12" r="2" fill="#79B83F"/>
+        <circle cx="20" cy="28" r="4" fill="#79B83F"/>
+      </svg>
+      <svg class="particle particle-2 absolute top-32 right-[10%] opacity-[0.05]" width="32" height="42" viewBox="0 0 32 42" fill="none">
+        <ellipse cx="16" cy="10" rx="10" ry="10" fill="#3E9BC0"/>
+        <path d="M16 20 L10 42 M16 20 L22 42" stroke="#3E9BC0" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      <svg class="particle particle-3 absolute bottom-24 left-[20%] opacity-[0.05]" width="28" height="28" viewBox="0 0 28 28" fill="none">
+        <circle cx="14" cy="14" r="12" fill="#E07A1E"/>
+        <circle cx="9" cy="10" r="2" fill="#FBFAF6"/>
+        <circle cx="18" cy="10" r="2" fill="#FBFAF6"/>
+        <circle cx="14" cy="20" r="3" fill="#FBFAF6"/>
+      </svg>
+      <svg class="absolute bottom-0 right-0 opacity-[0.04] w-72 h-72" viewBox="0 0 200 200" fill="none">
+        <path d="M100 200 C100 200 100 120 100 80 M100 80 C100 50 70 20 40 10 M100 80 C100 50 130 20 160 10 M100 110 C80 100 55 110 40 130 M100 150 C120 140 145 150 160 170" stroke="#3C8A3E" stroke-width="3" stroke-linecap="round"/>
+      </svg>
+    </div>
+
+    <div class="container relative">
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+
+        <div>
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-ink mb-6 leading-tight" style="font-family: var(--font-display)">
+            Des solutions de culture pour
+            <span style="color: var(--color-green-bright)"> optimiser vos plantations</span>
+          </h1>
+          <p class="text-lg text-muted mb-8 leading-relaxed max-w-xl">
+            Depuis 1980, AGRILENE accompagne les professionnels du végétal avec des solutions éprouvées pour améliorer la rétention d'eau, l'enracinement et la reprise des plantations.
+          </p>
+
+          <div class="flex flex-wrap gap-3 mb-10">
+            <Button href="/solutions" variant="primary" size="lg" arrow>
+              Découvrir nos solutions
+            </Button>
+            <Button href="/contact" variant="outline" size="lg">
+              Nous contacter
+            </Button>
+          </div>
+
+          <div class="flex flex-col sm:flex-row gap-4 sm:gap-6">
+            {[
+              { icon: '🏆', label: "Minéraux de qualité professionnelle" },
+              { icon: '📅', label: "40+ ans d'expertise (depuis 1980)" },
+              { icon: '🌍', label: "Éprouvé en conditions extrêmes" },
+            ].map((item) => (
+              <div class="flex items-center gap-2 text-sm text-muted">
+                <span class="text-base" aria-hidden="true">{item.icon}</span>
+                <span>{item.label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div class="relative">
+          <ImagePlaceholder
+            ratio="4/3"
+            alt="Pot en coupe montrant le système racinaire sans et avec substrats AGRILENE — racines vigoureuses et eau retenue"
+            label="Visuel à venir : pot/motte en coupe sans/avec"
+          />
+          <div class="absolute bottom-4 left-4 bg-white/95 backdrop-blur-sm rounded-xl p-4 shadow-lg border border-ink/8 max-w-[180px]">
+            <div class="flex items-center gap-2 mb-1">
+              <span class="text-lg">🌱</span>
+              <span class="text-xs font-bold text-ink" style="font-family: var(--font-display)">AGRILENE</span>
+            </div>
+            <p class="text-xs text-muted leading-tight">Substrats éprouvés. Racines plus fortes.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEUX PUBLICS -->
+  <section class="py-16 bg-cream">
+    <div class="container">
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-paper rounded-2xl p-8 card-lift reveal">
+          <Eyebrow color="green" class="mb-3">Professionnels</Eyebrow>
+          <h2 class="text-2xl font-bold text-ink mb-3" style="font-family: var(--font-display)">
+            Solutions professionnelles pour améliorer la performance des plantations
+          </h2>
+          <p class="text-muted mb-6">
+            Substrats et supports de culture éprouvés pour les producteurs, paysagistes et collectivités.
+          </p>
+          <Button href="/solutions" variant="primary" arrow>Découvrir les solutions</Button>
+        </div>
+
+        <div class="bg-paper rounded-2xl p-8 card-lift reveal">
+          <Eyebrow color="blue" class="mb-3">Particuliers</Eyebrow>
+          <h2 class="text-2xl font-bold text-ink mb-3" style="font-family: var(--font-display)">
+            Des plantes qui tiennent, même quand vous n'y pensez pas
+          </h2>
+          <p class="text-muted mb-6">
+            Moins d'arrosage, moins d'entretien, des plantes qui tiennent plus longtemps.
+          </p>
+          <a
+            href="/lonoa"
+            class="inline-flex items-center gap-2 text-sm font-semibold px-6 py-3 rounded-full text-white transition-opacity hover:opacity-90"
+            style="background-color: var(--color-blue)"
+          >
+            Découvrir LONOA →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROBLÈMES TERRAIN -->
+  <section class="py-20 bg-paper">
+    <div class="container">
+      <div class="text-center mb-12 reveal">
+        <h2 class="text-3xl md:text-4xl font-bold text-ink mb-4" style="font-family: var(--font-display)">
+          Ce que rencontrent nos clients sur le terrain
+        </h2>
+        <p class="text-muted max-w-2xl mx-auto">
+          Les professionnels du végétal font face à des défis concrets. Nos substrats et supports de culture y répondent.
+        </p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        {problemes.map((p) => (
+          <div class={`${p.couleur} rounded-2xl p-6 reveal card-lift`}>
+            <div class="text-3xl mb-3" aria-hidden="true">{p.icone}</div>
+            <h3 class="font-bold text-ink mb-2" style="font-family: var(--font-display)">{p.titre}</h3>
+            <p class="text-sm text-muted">{p.texte}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- SOLUTIONS ÉPROUVÉES -->
+  <section class="py-20 bg-cream">
+    <div class="container">
+      <div class="text-center mb-12 reveal">
+        <h2 class="text-3xl md:text-4xl font-bold text-ink mb-4" style="font-family: var(--font-display)">
+          Des solutions techniques <span style="color: var(--color-orange)">éprouvées</span>
+        </h2>
+        <p class="text-muted max-w-2xl mx-auto">
+          Après plus de 40 ans de collaboration avec les producteurs, paysagistes et collectivités, nous sélectionnons des matériaux naturels très efficaces.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        {solutionsCards.map((s) => (
+          <article class="bg-paper rounded-2xl overflow-hidden card-lift reveal">
+            <ImagePlaceholder ratio="4/3" alt={s.alt} />
+            <div class="p-6">
+              <h3 class="font-bold text-ink mb-2 text-lg" style="font-family: var(--font-display)">{s.titre}</h3>
+              <p class="text-sm text-muted mb-4">{s.texte}</p>
+              <a href={s.href} class="text-sm font-semibold hover:opacity-80 transition-opacity" style="color: var(--color-green)">
+                En savoir plus →
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- PREUVES CHIFFRÉES -->
+  <section class="py-20 bg-paper">
+    <div class="container">
+      <div class="text-center mb-12 reveal">
+        <Eyebrow color="green" class="mb-3">Tests terrain</Eyebrow>
+        <h2 class="text-3xl md:text-4xl font-bold text-ink mb-4" style="font-family: var(--font-display)">
+          Des résultats prouvés sur le terrain
+        </h2>
+        <p class="text-muted max-w-2xl mx-auto">
+          Essais en conditions réelles et études scientifiques indépendantes : nos supports de culture démontrent concrètement leur efficacité.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6 mb-10">
+        {chiffres.map((c) => (
+          <div class="text-center bg-sage rounded-2xl p-8 reveal card-lift">
+            <div class="text-5xl font-extrabold mb-2" style="font-family: var(--font-display); color: var(--color-green)">{c.valeur}</div>
+            <div class="font-semibold text-ink mb-1">{c.detail}</div>
+            <div class="text-xs text-muted">{c.note}</div>
+          </div>
+        ))}
+      </div>
+
+      <div class="text-center">
+        <Button href="/essais" variant="outline" arrow>Voir les tests terrain</Button>
+      </div>
+    </div>
+  </section>
+
+  <!-- DOMAINES D'APPLICATION -->
+  <section class="py-20 bg-cream">
+    <div class="container">
+      <div class="text-center mb-12 reveal">
+        <h2 class="text-3xl md:text-4xl font-bold text-ink mb-4" style="font-family: var(--font-display)">
+          Nos domaines d'application
+        </h2>
+        <p class="text-muted max-w-xl mx-auto">
+          Des solutions adaptées à chaque métier et à chaque usage.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        {domaines.map((d) => (
+          <a href={d.href} class="relative group block rounded-2xl overflow-hidden card-lift reveal" style="aspect-ratio: 4/3">
+            <div class="absolute inset-0 bg-gradient-to-br from-sage to-cream flex items-center justify-center">
+              <p class="text-xs text-muted/50 italic px-6 text-center">{d.alt}</p>
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/20 to-transparent">
+              <div class="absolute bottom-0 left-0 p-6 text-white">
+                <h3 class="text-xl font-bold mb-1" style="font-family: var(--font-display)">{d.nom}</h3>
+                <p class="text-sm text-white/80">{d.description}</p>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- HISTOIRE FAMILIALE -->
+  <section class="py-20 bg-paper">
+    <div class="container">
+      <div class="max-w-3xl mx-auto text-center reveal">
+        <Eyebrow color="green" class="mb-4">Depuis 1980</Eyebrow>
+        <h2 class="text-3xl md:text-4xl font-bold text-ink mb-6" style="font-family: var(--font-display)">
+          Une entreprise familiale au service du végétal
+        </h2>
+        <p class="text-muted text-lg leading-relaxed mb-8">
+          AGRILENE est fondée en 1980. Entreprise à vocation familiale, elle est progressivement reprise par la seconde génération à partir de 2000. Depuis 2018, la troisième génération assure la continuité de l'entreprise tout en l'inscrivant dans une dynamique d'évolution, attentive aux nouvelles pratiques, aux innovations et aux attentes actuelles du marché.
+        </p>
+
+        <div class="flex justify-center gap-12 mb-8">
+          <div class="text-center">
+            <div class="text-4xl font-extrabold" style="font-family: var(--font-display); color: var(--color-green)">3</div>
+            <div class="text-sm text-muted mt-1">générations</div>
+          </div>
+          <div class="text-center">
+            <div class="text-4xl font-extrabold" style="font-family: var(--font-display); color: var(--color-green)">40+</div>
+            <div class="text-sm text-muted mt-1">ans d'expertise</div>
+          </div>
+        </div>
+
+        <Button href="/a-propos" variant="outline" arrow>En savoir plus</Button>
+      </div>
+    </div>
+  </section>
+
+  <!-- BANDEAU CTA -->
+  <BandeauCTA
+    titre="Besoin d'informations techniques ou commerciales ?"
+    sousTitre="Notre équipe est à votre disposition pour vous conseiller sur les matériaux adaptés à vos besoins."
+    ctaLabel="Contactez-nous"
+    ctaHref="/contact"
+    ctaVariant="orange"
+  />
+
+</Layout>

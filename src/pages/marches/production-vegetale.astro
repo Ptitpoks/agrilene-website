@@ -1,0 +1,8 @@
+---
+import MarcheTemplate from '../../components/sections/MarcheTemplate.astro';
+import { marches } from '../../data/marches';
+
+const marche = marches.find((m) => m.slug === 'production-vegetale')!;
+---
+
+<MarcheTemplate marche={marche} />

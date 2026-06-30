@@ -1,0 +1,139 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Eyebrow from '../components/ui/Eyebrow.astro';
+import Button from '../components/ui/Button.astro';
+import Tag from '../components/ui/Tag.astro';
+import ImagePlaceholder from '../components/ui/ImagePlaceholder.astro';
+import BandeauCTA from '../components/sections/BandeauCTA.astro';
+import { solutions } from '../data/solutions';
+
+const marcheHref: Record<string, string> = {
+  'Production végétale': '/marches/production-vegetale',
+  'Paysagisme': '/marches/paysagisme',
+  'Collectivités': '/marches/collectivites',
+};
+
+const produitHref: Record<string, string> = {
+  'Perlite': '/produits#perlite',
+  'Vermiculite': '/produits#vermiculite',
+  'Florilène': '/produits#florilene',
+  'Floricubes': '/produits#floricubes',
+  'Floriroll': '/produits#floriroll',
+  'Miscanthus': '/produits#miscanthus',
+};
+---
+
+<Layout
+  title="Solutions — Gestion de l'eau, enracinement et protection des plantations | AGRILENE"
+  description="Nos solutions par fonction agronomique : gestion et disponibilité de l'eau, qualité de l'enracinement, sécurisation des plantations. Perlite, vermiculite, Florilène, Floricubes, Floriroll."
+>
+
+  <!-- HERO -->
+  <section class="bg-paper py-16 md:py-24">
+    <div class="container">
+      <div class="max-w-3xl">
+        <Eyebrow color="green" class="mb-4">Solutions</Eyebrow>
+        <h1 class="text-4xl md:text-5xl font-extrabold text-ink mb-6" style="font-family: var(--font-display)">
+          Nos solutions
+        </h1>
+        <p class="text-lg text-muted max-w-2xl">
+          Des réponses techniques à des problématiques concrètes. Nous abordons les solutions par leurs <strong class="text-ink">fonctions agronomiques et paysagères</strong>, pas simplement par les produits.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOLUTION BLOCS -->
+  {solutions.map((sol, i) => (
+    <section id={sol.id} class={`py-20 ${i % 2 === 0 ? 'bg-paper' : 'bg-cream'}`}>
+      <div class="container">
+        <div class={`grid lg:grid-cols-2 gap-14 items-start ${i % 2 !== 0 ? 'lg:grid-flow-dense' : ''}`}>
+
+          <!-- Visual -->
+          <div class={i % 2 !== 0 ? 'lg:col-start-2' : ''}>
+            <ImagePlaceholder
+              ratio="4/3"
+              alt={`Illustration de la solution "${sol.titre}" — matériaux AGRILENE`}
+              label={`Illustration : ${sol.titre}`}
+            />
+          </div>
+
+          <!-- Content -->
+          <div class={i % 2 !== 0 ? 'lg:col-start-1 lg:row-start-1' : ''}>
+            <!-- Icon + title -->
+            <div class="flex items-center gap-4 mb-6">
+              <div class={`w-14 h-14 rounded-2xl flex items-center justify-center text-2xl ${sol.bgIcone}`} aria-hidden="true">
+                {sol.icone}
+              </div>
+              <h2 class="text-2xl md:text-3xl font-bold text-ink" style="font-family: var(--font-display)">
+                {sol.titre}
+              </h2>
+            </div>
+
+            <!-- Problématiques -->
+            <div class="mb-6">
+              <Eyebrow color="orange" class="mb-3">Problématiques rencontrées</Eyebrow>
+              <ul class="space-y-2">
+                {sol.problematiques.map((p) => (
+                  <li class="flex gap-2 text-sm text-muted">
+                    <span class="mt-1 w-4 h-4 shrink-0 rounded-full flex items-center justify-center text-[10px]" style="background-color: var(--color-orange); color: white">•</span>
+                    {p}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <!-- Rôle des matériaux -->
+            <div class="bg-sage rounded-xl p-5 mb-6">
+              <Eyebrow color="green" class="mb-2">Rôle des matériaux</Eyebrow>
+              <p class="text-sm text-ink leading-relaxed">{sol.roleMateriaux}</p>
+            </div>
+
+            <!-- Bénéfices -->
+            <div class="mb-6">
+              <Eyebrow color="green" class="mb-3">Bénéfices concrets</Eyebrow>
+              <div class="grid sm:grid-cols-2 gap-2">
+                {sol.benefices.map((b) => (
+                  <div class="flex gap-2 text-sm text-ink">
+                    <span class="shrink-0 font-bold" style="color: var(--color-green)">✓</span>
+                    {b}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <!-- Marchés concernés -->
+            <div class="mb-5">
+              <Eyebrow color="green" class="mb-3">Marchés concernés</Eyebrow>
+              <div class="flex flex-wrap gap-2">
+                {sol.marches.map((m) => (
+                  <Tag href={marcheHref[m]} color="green">{m}</Tag>
+                ))}
+              </div>
+            </div>
+
+            <!-- Produits recommandés -->
+            <div>
+              <Eyebrow color="orange" class="mb-3">Produits recommandés</Eyebrow>
+              <div class="flex flex-wrap gap-2">
+                {sol.produitsRecommandes.map((p) => (
+                  <Tag href={produitHref[p] ?? '/produits'} color="orange">{p}</Tag>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <!-- BANDEAU CTA -->
+  <BandeauCTA
+    titre="Un projet à valider ?"
+    sousTitre="Notre équipe vous accompagne et vous conseille sur les matériaux adaptés à vos besoins."
+    ctaLabel="Contactez-nous"
+    ctaHref="/contact"
+    ctaVariant="orange"
+  />
+
+</Layout>

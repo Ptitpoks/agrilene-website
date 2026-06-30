@@ -1,0 +1,378 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Eyebrow from '../components/ui/Eyebrow.astro';
+import Button from '../components/ui/Button.astro';
+import ImagePlaceholder from '../components/ui/ImagePlaceholder.astro';
+import BandeauCTA from '../components/sections/BandeauCTA.astro';
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Brand',
+    name: 'LONOA',
+    description: "Marque grand public d'AGRILENE — amendements minéraux pour réguler l'eau dans les substrats des particuliers.",
+    url: 'https://www.agrilene.fr/lonoa',
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'MobileApplication',
+    name: 'Mana',
+    description: "Application mobile de diagnostic des plantes — reconnaissance par photo, diagnostic de santé, conseils et produits LONOA.",
+    operatingSystem: 'iOS, Android',
+  },
+];
+
+const etapes = [
+  {
+    num: '1',
+    titre: 'Vous mélangez',
+    texte: 'Incorporez LONOA à votre terreau lors du rempotage ou de la plantation.',
+  },
+  {
+    num: '2',
+    titre: 'Le matériau stocke',
+    texte: "LONOA agit comme une éponge minérale — il absorbe l'eau lors de l'arrosage et la conserve.",
+  },
+  {
+    num: '3',
+    titre: 'La plante puise',
+    texte: "La plante prélève l'eau selon ses besoins — vous arrosez moins, et vos plantes tiennent mieux.",
+  },
+];
+
+const benefices = [
+  { texte: "L'eau reste disponible plus longtemps", icon: '💧' },
+  { texte: "Meilleures conditions racinaires", icon: '🌱' },
+  { texte: "Moins de pression d'entretien", icon: '✅' },
+];
+
+const gamme = [
+  { nom: 'LONOA Rempotage', usage: 'Rempotage et culture en pot', benefice: "Régule l'humidité au cœur de la motte" },
+  { nom: 'LONOA Semis', usage: 'Semis et jeunes plants', benefice: "Germination homogène, moins de stress" },
+  { nom: 'LONOA Gazon', usage: 'Gazon et engazonnement', benefice: "Pelouse plus résiliente, arrosage espacé" },
+  { nom: 'LONOA Plantation', usage: 'Plantation en pleine terre', benefice: "Meilleure reprise, moins de pertes" },
+];
+---
+
+<Layout
+  title="LONOA — Des plantes qui tiennent, même quand vous n'y pensez pas"
+  description="LONOA se mélange à votre terreau pour stocker l'eau et la redonner à vos plantes au bon moment. Moins d'arrosage, des racines plus fortes. Application mobile Mana pour diagnostiquer vos plantes."
+  jsonLd={jsonLd}
+>
+
+  <!-- HERO -->
+  <section class="relative overflow-hidden bg-paper pt-16 pb-20 md:pt-24 md:pb-28">
+    <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
+      <svg class="particle particle-2 absolute top-20 right-[8%] opacity-[0.06]" width="36" height="48" viewBox="0 0 36 48" fill="none">
+        <ellipse cx="18" cy="12" rx="12" ry="12" fill="#3E9BC0"/>
+        <path d="M18 24 L12 48 M18 24 L24 48" stroke="#3E9BC0" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      <svg class="particle particle-1 absolute bottom-20 left-[12%] opacity-[0.05]" width="40" height="40" viewBox="0 0 40 40" fill="none">
+        <circle cx="20" cy="20" r="18" fill="#3E9BC0"/>
+        <circle cx="14" cy="15" r="3" fill="#FBFAF6"/>
+        <circle cx="26" cy="13" r="2" fill="#FBFAF6"/>
+        <circle cx="20" cy="27" r="4" fill="#FBFAF6"/>
+      </svg>
+    </div>
+
+    <div class="container relative">
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+
+        <div>
+          <div class="inline-flex items-center gap-2 mb-4 px-3 py-1.5 rounded-full text-xs font-semibold text-white" style="background-color: var(--color-blue)">
+            LONOA — Par AGRILENE
+          </div>
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-ink mb-6 leading-tight" style="font-family: var(--font-display)">
+            La façon la plus simple de garder vos plantes <span style="color: var(--color-blue)">bien hydratées</span>
+          </h1>
+          <p class="text-lg text-muted mb-8 leading-relaxed max-w-xl">
+            LONOA se mélange à votre terreau pour stocker l'eau et la redonner à vos plantes au bon moment — moins d'arrosage, des racines plus fortes.
+          </p>
+
+          <div class="flex flex-wrap gap-3 mb-10">
+            <a href="#gamme" class="inline-flex items-center gap-2 text-sm font-semibold px-6 py-3 rounded-full text-white transition-opacity hover:opacity-90" style="background-color: var(--color-blue)">
+              Voir la gamme
+            </a>
+            <a href="#comment-ca-marche" class="inline-flex items-center gap-2 text-sm font-semibold px-6 py-3 rounded-full border-2 text-ink transition-colors hover:bg-ink hover:text-white" style="border-color: var(--color-ink)">
+              Comment ça marche
+            </a>
+          </div>
+
+          <div class="flex flex-col sm:flex-row gap-4">
+            {[
+              { icon: '🏆', label: "Minéraux de qualité pro" },
+              { icon: '📅', label: "40+ ans d'expertise" },
+              { icon: '🌍', label: "Éprouvé en conditions extrêmes" },
+            ].map((item) => (
+              <div class="flex items-center gap-2 text-sm text-muted">
+                <span class="text-base" aria-hidden="true">{item.icon}</span>
+                <span>{item.label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div class="relative">
+          <ImagePlaceholder
+            ratio="4/3"
+            alt="Pot en coupe avec et sans LONOA — racines vigoureuses et eau bien retenue"
+            label="Visuel à venir : pot en coupe sans/avec LONOA"
+          />
+          <div class="absolute bottom-4 left-4 bg-white/95 backdrop-blur-sm rounded-xl p-4 shadow-lg border border-blue/10 max-w-[190px]">
+            <div class="flex items-center gap-2 mb-1">
+              <span class="text-lg">💧</span>
+              <span class="text-xs font-bold" style="color: var(--color-blue); font-family: var(--font-display)">LONOA</span>
+            </div>
+            <p class="text-xs text-muted leading-tight">Un sol plus malin. Des racines plus fortes. Moins d'approximation.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SANS / AVEC LONOA -->
+  <section class="py-20 bg-cream">
+    <div class="container">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div class="reveal">
+          <ImagePlaceholder
+            ratio="3/2"
+            alt="Comparaison plante stressée vs plante vigoureuse avec LONOA"
+            label="Visuel comparatif sans/avec LONOA"
+          />
+        </div>
+
+        <div class="reveal">
+          <Eyebrow color="blue" class="mb-4">La différence LONOA</Eyebrow>
+          <h2 class="text-3xl font-bold text-ink mb-6" style="font-family: var(--font-display)">
+            Sans et avec LONOA
+          </h2>
+          <div class="space-y-4">
+            {benefices.map((b) => (
+              <div class="flex gap-4 items-start">
+                <div class="text-2xl shrink-0" aria-hidden="true">{b.icon}</div>
+                <p class="text-ink font-medium">{b.texte}</p>
+              </div>
+            ))}
+          </div>
+          <p class="mt-6 text-sm text-muted italic">
+            LONOA n'est pas un engrais : c'est un <strong class="text-ink">régulateur d'eau minéral</strong> qui améliore les conditions racinaires.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMMENT ÇA MARCHE -->
+  <section id="comment-ca-marche" class="py-20 bg-paper">
+    <div class="container">
+      <div class="text-center mb-12 reveal">
+        <Eyebrow color="blue" class="mb-3">Mode d'emploi</Eyebrow>
+        <h2 class="text-3xl md:text-4xl font-bold text-ink mb-4" style="font-family: var(--font-display)">
+          Comment ça marche
+        </h2>
+        <p class="text-muted max-w-xl mx-auto">Simple comme un mélange.</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        {etapes.map((e) => (
+          <div class="text-center reveal card-lift bg-sage rounded-2xl p-8">
+            <div class="w-12 h-12 rounded-full flex items-center justify-center text-lg font-bold text-white mx-auto mb-4" style="background-color: var(--color-blue)">
+              {e.num}
+            </div>
+            <h3 class="font-bold text-ink mb-2" style="font-family: var(--font-display)">{e.titre}</h3>
+            <p class="text-sm text-muted">{e.texte}</p>
+          </div>
+        ))}
+      </div>
+
+      <p class="text-center text-sm text-muted mt-8 italic">
+        LONOA n'est pas un engrais, c'est un régulateur d'eau.
+      </p>
+    </div>
+  </section>
+
+  <!-- LA GAMME -->
+  <section id="gamme" class="py-20 bg-cream">
+    <div class="container">
+      <div class="text-center mb-12 reveal">
+        <Eyebrow color="blue" class="mb-3">Gamme</Eyebrow>
+        <h2 class="text-3xl md:text-4xl font-bold text-ink mb-4" style="font-family: var(--font-display)">
+          La gamme LONOA
+        </h2>
+        <p class="text-muted max-w-xl mx-auto">Un produit adapté à chaque usage.</p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        {gamme.map((s) => (
+          <article class="bg-paper rounded-2xl overflow-hidden card-lift reveal">
+            <ImagePlaceholder ratio="1/1" alt={`Sac ${s.nom}`} label="Visuel sac à venir" />
+            <div class="p-5">
+              <h3 class="font-bold text-ink mb-1" style="font-family: var(--font-display)">{s.nom}</h3>
+              <p class="text-xs text-muted mb-2">{s.usage}</p>
+              <p class="text-sm font-medium" style="color: var(--color-blue)">{s.benefice}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- APP MANA -->
+  <section class="py-20 bg-paper">
+    <div class="container">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div class="reveal">
+          <Eyebrow color="blue" class="mb-4">Application mobile</Eyebrow>
+          <h2 class="text-3xl md:text-4xl font-bold text-ink mb-4" style="font-family: var(--font-display)">
+            Mana — l'appli qui veille sur vos plantes
+          </h2>
+          <p class="text-muted mb-6 leading-relaxed">
+            Prenez votre plante en photo : <strong class="text-ink">Mana</strong> la reconnaît, établit un <strong class="text-ink">diagnostic de santé</strong> et propose des <strong class="text-ink">solutions à court terme</strong> et des <strong class="text-ink">conseils d'entretien</strong> — avec le bon produit LONOA si besoin.
+          </p>
+
+          <div class="flex flex-wrap gap-3">
+            <a
+              href="#"
+              aria-label="Télécharger Mana sur l'App Store (lien à venir)"
+              class="inline-flex items-center gap-2 bg-ink text-white text-sm font-semibold px-5 py-3 rounded-xl hover:opacity-90 transition-opacity"
+            >
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M13.5 9a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0z" fill="white" opacity="0.3"/><path d="M9 2v14M2 9h14" stroke="white" stroke-width="1.5"/></svg>
+              App Store
+            </a>
+            <a
+              href="#"
+              aria-label="Télécharger Mana sur Google Play (lien à venir)"
+              class="inline-flex items-center gap-2 bg-ink text-white text-sm font-semibold px-5 py-3 rounded-xl hover:opacity-90 transition-opacity"
+            >
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M13.5 9a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0z" fill="white" opacity="0.3"/><path d="M9 2v14M2 9h14" stroke="white" stroke-width="1.5"/></svg>
+              Google Play
+            </a>
+          </div>
+          <p class="text-xs text-muted mt-3 italic">Liens de téléchargement à venir</p>
+        </div>
+
+        <div class="reveal">
+          <ImagePlaceholder ratio="3/4" alt="Captures d'écran de l'application Mana — diagnostic de plante par photo" label="Captures Mana à venir" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CALCULATEUR -->
+  <section class="py-20 bg-sage">
+    <div class="container max-w-2xl">
+      <div class="text-center mb-8 reveal">
+        <Eyebrow color="blue" class="mb-3">Dosage</Eyebrow>
+        <h2 class="text-3xl font-bold text-ink mb-3" style="font-family: var(--font-display)">
+          Quel dosage pour votre pot ?
+        </h2>
+        <p class="text-muted">Estimez la quantité de LONOA selon le volume de votre pot.</p>
+      </div>
+
+      <div class="bg-paper rounded-2xl p-6 reveal" id="calc-lonoa">
+        <div class="grid sm:grid-cols-2 gap-4 mb-5">
+          <div>
+            <label for="vol-pot" class="block text-sm font-medium text-ink mb-1.5">Volume du pot (litres)</label>
+            <input
+              type="number"
+              id="vol-pot"
+              min="1"
+              max="500"
+              value="10"
+              class="w-full border border-ink/20 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2"
+              style="--tw-ring-color: var(--color-blue)"
+            />
+          </div>
+          <div>
+            <label for="mix-taux" class="block text-sm font-medium text-ink mb-1.5">Intensité du mélange</label>
+            <select
+              id="mix-taux"
+              class="w-full border border-ink/20 rounded-xl px-4 py-2.5 text-sm bg-white focus:outline-none focus:ring-2"
+              style="--tw-ring-color: var(--color-blue)"
+            >
+              <option value="10">10 % — Léger (entretien courant)</option>
+              <option value="20" selected>20 % — Standard (recommandé)</option>
+              <option value="25">25 % — Haute résilience (zones sèches)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="bg-blue/10 rounded-xl p-5 text-center">
+          <p class="text-sm text-muted mb-1">Quantité de LONOA conseillée</p>
+          <p id="calc-result" class="text-3xl font-extrabold" style="font-family: var(--font-display); color: var(--color-blue)">2 L</p>
+          <p class="text-xs text-muted mt-1">soit 20 % du volume du pot</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OÙ TROUVER LONOA -->
+  <section class="py-20 bg-paper">
+    <div class="container text-center reveal">
+      <Eyebrow color="blue" class="mb-4">Distribution</Eyebrow>
+      <h2 class="text-3xl font-bold text-ink mb-4" style="font-family: var(--font-display)">Où trouver LONOA</h2>
+      <p class="text-muted mb-8 max-w-xl mx-auto">
+        LONOA est disponible dans les jardineries, pépinières et enseignes spécialisées partenaires. Boutique en ligne à venir.
+      </p>
+      <div class="inline-block bg-sage rounded-xl px-8 py-4 text-muted text-sm italic">
+        Liste des points de vente et boutique en ligne à compléter
+      </div>
+    </div>
+  </section>
+
+  <!-- BLOC DISTRIBUTEURS -->
+  <section class="py-20 bg-cream">
+    <div class="container">
+      <div class="max-w-3xl mx-auto bg-paper rounded-2xl p-8 md:p-10 reveal">
+        <Eyebrow color="orange" class="mb-4">Pour les professionnels</Eyebrow>
+        <h2 class="text-2xl md:text-3xl font-bold text-ink mb-4" style="font-family: var(--font-display)">
+          Vous êtes une enseigne ou un distributeur ?
+        </h2>
+        <p class="text-muted mb-6 leading-relaxed">
+          LONOA est un produit différenciant avec une forte demande grand public. Nous accompagnons nos distributeurs avec du matériel de communication, une application mobile incluse (Mana) et un support technique dédié.
+        </p>
+        <ul class="space-y-2 mb-8 text-sm text-ink">
+          {['Produit différenciant sur le marché', 'Application Mana incluse pour vos clients', 'Accompagnement commercial et technique', 'Formation et matériel de vente fournis'].map((item) => (
+            <li class="flex gap-2">
+              <span class="font-bold" style="color: var(--color-green)">✓</span>
+              {item}
+            </li>
+          ))}
+        </ul>
+        <Button href="/contact?type=distribution" variant="primary" arrow>Devenir distributeur</Button>
+      </div>
+    </div>
+  </section>
+
+  <!-- BANDEAU CTA -->
+  <BandeauCTA
+    titre="Des questions sur LONOA ?"
+    sousTitre="Notre équipe est disponible pour vous renseigner sur les produits, les dosages et les points de vente."
+    ctaLabel="Nous contacter"
+    ctaHref="/contact"
+    ctaVariant="orange"
+    bg="brown"
+  />
+
+</Layout>
+
+<script>
+  const volInput = document.getElementById('vol-pot') as HTMLInputElement | null;
+  const tauxSelect = document.getElementById('mix-taux') as HTMLSelectElement | null;
+  const result = document.getElementById('calc-result');
+
+  function calcLonoa() {
+    if (!volInput || !tauxSelect || !result) return;
+    const vol = parseFloat(volInput.value) || 0;
+    const taux = parseFloat(tauxSelect.value) || 20;
+    const qty = Math.round(vol * (taux / 100) * 10) / 10;
+    result.textContent = `${qty} L`;
+    const note = result.nextElementSibling;
+    if (note) note.textContent = `soit ${taux} % du volume du pot`;
+  }
+
+  volInput?.addEventListener('input', calcLonoa);
+  tauxSelect?.addEventListener('change', calcLonoa);
+  calcLonoa();
+</script>

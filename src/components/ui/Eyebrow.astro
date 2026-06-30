@@ -1,0 +1,19 @@
+---
+interface Props {
+  color?: 'green' | 'orange' | 'blue';
+  class?: string;
+}
+const { color = 'green', class: className = '' } = Astro.props;
+
+const colorMap = {
+  green: 'text-green-bright',
+  orange: 'text-orange',
+  blue: 'text-blue',
+};
+---
+<span
+  class={`font-body text-xs font-600 tracking-widest uppercase ${colorMap[color]} ${className}`}
+  style="font-family: var(--font-body)"
+>
+  <slot />
+</span>

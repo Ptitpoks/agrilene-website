@@ -1,0 +1,201 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Eyebrow from '../components/ui/Eyebrow.astro';
+import Button from '../components/ui/Button.astro';
+import BandeauCTA from '../components/sections/BandeauCTA.astro';
+
+const timeline = [
+  {
+    annee: '1980',
+    titre: "Création d'AGRILENE",
+    texte: "Fondation de l'entreprise familiale avec une spécialisation dans les substrats et supports de culture pour l'horticulture.",
+  },
+  {
+    annee: '1990',
+    titre: 'Développement national',
+    texte: "Extension de l'activité à l'ensemble du territoire français, avec un réseau de distribution professionnel établi.",
+  },
+  {
+    annee: '2000',
+    titre: 'Deuxième génération',
+    texte: "Transmission familiale et modernisation de l'offre avec de nouvelles gammes adaptées aux évolutions du marché.",
+  },
+  {
+    annee: '2018',
+    titre: 'Troisième génération',
+    texte: "Reprise par la troisième génération avec un engagement renforcé sur les enjeux de durabilité et d'économie de ressources.",
+  },
+  {
+    annee: '2025',
+    titre: 'Lancement de LONOA',
+    texte: "Création de la marque dédiée aux particuliers, distribuée via les réseaux spécialisés.",
+  },
+];
+
+const valeurs = [
+  {
+    icone: '🤝',
+    titre: 'Proximité terrain',
+    texte: "Nous travaillons main dans la main avec nos clients pour comprendre leurs besoins réels et adapter nos solutions.",
+  },
+  {
+    icone: '🔬',
+    titre: 'Rigueur technique',
+    texte: "Chaque matériau est sélectionné, testé et validé avant d'être proposé. Pas de promesses, des résultats.",
+  },
+  {
+    icone: '🌿',
+    titre: 'Engagement durable',
+    texte: "Nous privilégions des matériaux pérennes et des solutions qui réduisent l'impact environnemental des plantations.",
+  },
+  {
+    icone: '🏛️',
+    titre: 'Vision long terme',
+    texte: "Entreprise familiale, nous construisons des relations durables avec nos clients et partenaires.",
+  },
+];
+
+const equipe = [
+  { prenom: 'Théo', nom: 'KARM', role: 'Gérant' },
+  { prenom: 'Sidonie', nom: 'KARM', role: 'Responsable des opérations' },
+  { prenom: 'Sandrine', nom: 'GAYRAL', role: 'Développement commercial' },
+  { prenom: 'Maël', nom: 'KARM', role: 'Développement commercial' },
+  { prenom: 'Stéphane', nom: 'KARM', role: 'Développement international' },
+  { prenom: 'Ophélie', nom: 'KARM', role: 'Géologue' },
+];
+---
+
+<Layout
+  title="À propos — Une entreprise familiale au service du végétal depuis 1980 | AGRILENE"
+  description="AGRILENE, entreprise familiale fondée en 1980, accompagne depuis trois générations les professionnels du végétal avec des substrats et supports de culture éprouvés."
+>
+
+  <!-- HERO -->
+  <section class="bg-paper py-16 md:py-24">
+    <div class="container">
+      <div class="max-w-3xl">
+        <Eyebrow color="green" class="mb-4">Depuis 1980</Eyebrow>
+        <h1 class="text-4xl md:text-5xl font-extrabold text-ink mb-6" style="font-family: var(--font-display)">
+          Une entreprise familiale au service du végétal
+        </h1>
+        <p class="text-lg text-muted max-w-2xl">
+          Trois générations unies par la même passion : accompagner les professionnels du végétal avec des substrats et supports de culture qui font la différence sur le terrain.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIMELINE -->
+  <section class="py-20 bg-cream">
+    <div class="container">
+      <h2 class="text-3xl md:text-4xl font-bold text-ink mb-12 text-center reveal" style="font-family: var(--font-display)">
+        Notre histoire
+      </h2>
+
+      <div class="relative max-w-3xl mx-auto">
+        <!-- Line -->
+        <div class="absolute left-6 md:left-1/2 top-0 bottom-0 w-px bg-green/20 -translate-x-px" aria-hidden="true"></div>
+
+        <div class="space-y-10">
+          {timeline.map((t, i) => (
+            <div class={`relative flex gap-8 reveal ${i % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
+              <!-- Dot -->
+              <div class="relative flex items-start md:w-1/2 md:justify-end">
+                <div class="absolute left-6 md:left-auto md:right-[-1.25rem] w-5 h-5 rounded-full border-2 border-white z-10 shrink-0 mt-1" style="background-color: var(--color-green)"></div>
+                <div class={`pl-16 md:pl-0 ${i % 2 === 0 ? 'md:pr-10 md:text-right' : 'md:pl-10 md:text-left md:order-2'}`}>
+                  <div class="text-2xl font-extrabold mb-1" style="font-family: var(--font-display); color: var(--color-green-bright)">{t.annee}</div>
+                  <h3 class="font-bold text-ink mb-1" style="font-family: var(--font-display)">{t.titre}</h3>
+                  <p class="text-sm text-muted">{t.texte}</p>
+                </div>
+              </div>
+              <div class="hidden md:block md:w-1/2"></div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALEURS -->
+  <section class="py-20 bg-paper">
+    <div class="container">
+      <div class="text-center mb-12 reveal">
+        <h2 class="text-3xl md:text-4xl font-bold text-ink mb-4" style="font-family: var(--font-display)">
+          Nos valeurs
+        </h2>
+        <p class="text-muted max-w-2xl mx-auto">
+          Des principes qui guident notre action au quotidien et fondent notre relation avec nos clients.
+        </p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        {valeurs.map((v) => (
+          <div class="bg-sage rounded-2xl p-6 reveal card-lift">
+            <div class="text-3xl mb-3" aria-hidden="true">{v.icone}</div>
+            <h3 class="font-bold text-ink mb-2" style="font-family: var(--font-display)">{v.titre}</h3>
+            <p class="text-sm text-muted">{v.texte}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ÉQUIPE -->
+  <section class="py-20 bg-cream">
+    <div class="container">
+      <div class="text-center mb-12 reveal">
+        <h2 class="text-3xl md:text-4xl font-bold text-ink mb-4" style="font-family: var(--font-display)">
+          Notre équipe
+        </h2>
+        <p class="text-muted max-w-2xl mx-auto">
+          Une équipe passionnée au service du végétal et de nos clients professionnels.
+        </p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-5">
+        {equipe.map((m) => (
+          <article class="bg-paper rounded-2xl p-6 flex items-center gap-4 reveal card-lift">
+            <div
+              class="w-14 h-14 rounded-full flex items-center justify-center text-xl font-bold text-white shrink-0"
+              style="background-color: var(--color-green)"
+              aria-hidden="true"
+            >
+              {m.prenom[0]}{m.nom[0]}
+            </div>
+            <div>
+              <div class="font-bold text-ink" style="font-family: var(--font-display)">{m.prenom} {m.nom}</div>
+              <div class="text-sm text-muted">{m.role}</div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- POSITIONNEMENT -->
+  <section class="py-20 bg-paper">
+    <div class="container max-w-3xl reveal">
+      <h2 class="text-3xl md:text-4xl font-bold text-ink mb-6 text-center" style="font-family: var(--font-display)">
+        Notre positionnement
+      </h2>
+      <div class="space-y-5 text-muted leading-relaxed">
+        <p>
+          Notre force réside dans notre expérience terrain. Depuis 1980, nous accompagnons les producteurs de plants, les paysagistes et les collectivités. Cette proximité nous permet de comprendre leurs besoins réels et de proposer des solutions adaptées, sans promesses excessives.
+        </p>
+        <p>
+          Nous croyons en la simplicité et en l'efficacité. Un bon matériau, bien utilisé, fait souvent plus qu'un produit sophistiqué mal adapté. C'est cette philosophie qui guide notre travail au quotidien.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- BANDEAU CTA -->
+  <BandeauCTA
+    titre="Travaillons ensemble"
+    sousTitre="Vous avez un projet, une question ou souhaitez en savoir plus sur nos solutions ? Notre équipe est à votre écoute."
+    ctaLabel="Contactez-nous"
+    ctaHref="/contact"
+    ctaVariant="orange"
+  />
+
+</Layout>
